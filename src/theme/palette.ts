@@ -55,15 +55,15 @@ export const palette = {
   grey: GREY,
 
   text: {
-    primary: GREY[800],
-    secondary: GREY[600],
-    disabled: GREY[500],
-    light: GREY[500],
+    primary: "#545454", // dark-grey/ black color
+    secondary: "#292929", // Grey color
+    light: "#CDCDCD", // White color
+    accent: "F1CDB3",
   },
 
   background: {
     paper: "#fff",
-    default: "#fafafa",
+    secondary: "#fafafa",
   },
 
   divider: alpha(GREY[500], 0.24),

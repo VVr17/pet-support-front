@@ -9,7 +9,8 @@ export const globalStyles = css`
     height: 100vh;
     margin: 0;
     padding: 0;
-    font-family: '"Sharp Sans",sans-serif';
+    font-family: "Public Sans, sans-serif";
+    color: "#292929";
   }
 
   #root {

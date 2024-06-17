@@ -1,16 +1,35 @@
-import { Container, Box } from "@mui/material";
+import { Container, Box, Typography, CardMedia, Grid } from "@mui/material";
+import ImgUrl from "@/assets/footer/footer-puppy.png";
 
-const Header = () => {
+const Footer = () => {
   return (
-    <Box component="footer"
+    <Box
+      component="footer"
       pt={5}
-      pb={{ xs: 2.5, md: 4.25 }}>
+      sx={{
+        background:
+          "radial-gradient(circle at top left, #513D2F 0%, #1A1A1C 100%)",
+      }}
+    >
       <Container>
-        Footer
+        <Grid container spacing={{ md: 1, lg: 2 }}>
+          <Grid item md={6}>
+            <Typography variant="h2" color="white">
+              Contacts
+            </Typography>
+          </Grid>
+          <Grid item md={6}>
+            <CardMedia
+              component="img"
+              image={ImgUrl}
+              alt="puppy"
+              sx={{ width: 300, height: 310 }}
+            />
+          </Grid>
+        </Grid>
       </Container>
-
     </Box>
-  )
-}
+  );
+};
 
-export default Header
+export default Footer;

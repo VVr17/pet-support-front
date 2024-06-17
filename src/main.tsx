@@ -1,4 +1,3 @@
-
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { GlobalStyles, ThemeProvider } from "@mui/material";
@@ -8,6 +7,9 @@ import { globalStyles } from "./theme/globalStyles";
 import { router } from "./router";
 import { theme } from "./theme";
 import "./theme/style.css";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>

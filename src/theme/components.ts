@@ -10,6 +10,7 @@ export const components: Components<Omit<Theme, "components">> = {
         borderRadius: "8px",
         textDecoration: "none",
         textTransform: "capitalize",
+        fontSize: "1rem",
       },
     },
     variants: [
@@ -17,26 +18,23 @@ export const components: Components<Omit<Theme, "components">> = {
         props: { variant: "contained", color: "primary" },
         style: {
           borderRadius: "100px",
-          minWidth: "200px",
-          color: palette.common.black,
+          minWidth: "160px",
           border: `2px solid ${palette.button.primary.main}`,
           backgroundColor: palette.button.primary.main,
           boxShadow: "none",
 
           ":hover": {
-            color: palette.common.black,
             border: `2px solid ${palette.button.primary.light}`,
             backgroundColor: palette.button.primary.light,
             boxShadow: "none",
           },
           ":focus": {
-            color: palette.common.black,
             border: `2px solid ${palette.button.primary.light}`,
             backgroundColor: palette.button.primary.light,
             outline: "none",
           },
           ":disabled": {
-            color: palette.common.black,
+            color: palette.text.primary,
             backgroundColor: "transparent",
             opacity: 0.5,
           },
@@ -46,43 +44,28 @@ export const components: Components<Omit<Theme, "components">> = {
         props: { variant: "outlined", color: "primary" },
         style: {
           borderRadius: "100px",
-          minWidth: "200px",
-          color: palette.common.black,
+          minWidth: "160px",
+          color: palette.text.primary,
           border: `2px solid ${palette.button.primary.main}`,
           backgroundColor: "transparent",
           ":hover": {
-            color: palette.common.black,
+            color: palette.text.primary,
             border: `2px solid ${palette.button.primary.light}`,
             backgroundColor: palette.button.primary.light,
           },
           ":focus": {
-            color: palette.common.black,
+            color: palette.text.primary,
             border: `2px solid ${palette.button.primary.light}`,
             backgroundColor: palette.button.primary.light,
             outline: "none",
           },
           ":disabled": {
-            color: palette.common.black,
+            color: palette.text.primary,
             backgroundColor: "transparent",
             opacity: 0.5,
           },
         },
       },
     ],
-  },
-
-  MuiLink: {
-    styleOverrides: {
-      root: {
-        color: palette.grey[800],
-        textDecoration: "none",
-        "&:hover": {
-          color: palette.primary.dark,
-        },
-        "&:focus": {
-          color: palette.primary.dark,
-        },
-      },
-    },
   },
 };

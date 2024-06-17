@@ -1,5 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import MainLayout from "./layouts/MainLayout";
+import { ROUTES } from "./utils/constants/routes";
 
 export const router = createBrowserRouter([
   {
@@ -13,11 +14,33 @@ export const router = createBrowserRouter([
           return { Component: Home.default };
         },
       },
+
       {
-        path: "/pets",
+        path: ROUTES.pets,
         lazy: async () => {
-          const Solutions = await import("./pages/Pets");
-          return { Component: Solutions.default };
+          const Pets = await import("./pages/Pets");
+          return { Component: Pets.default };
+        },
+      },
+      {
+        path: ROUTES.aboutUs,
+        lazy: async () => {
+          const AboutUs = await import("./pages/AboutUs");
+          return { Component: AboutUs.default };
+        },
+      },
+      {
+        path: ROUTES.partners,
+        lazy: async () => {
+          const Partners = await import("./pages/Partners");
+          return { Component: Partners.default };
+        },
+      },
+      {
+        path: ROUTES.contacts,
+        lazy: async () => {
+          const Contacts = await import("./pages/Contacts");
+          return { Component: Contacts.default };
         },
       },
     ],

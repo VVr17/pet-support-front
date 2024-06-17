@@ -1,33 +1,28 @@
-import { Box, Container, AppBar, Toolbar, Link } from "@mui/material";
+import { AppBar, Toolbar, Container } from "@mui/material";
+
+import DesktopNav from "./components/DesktopNav";
+import MobileNav from "./components/MobileNav";
+import { useLocation } from "react-router";
 
 const Header = () => {
+  const { pathname } = useLocation();
+
   return (
-    <Box>
+    <AppBar
+      position={pathname === "/" ? "absolute" : "static"}
+      sx={{
+        background: "transparent",
+        boxShadow: "none",
+        color: "black",
+      }}
+    >
       <Container>
-        <AppBar
-          position="relative"
-          sx={{
-            background: "white",
-            border: "none",
-            boxShadow: "none",
-            zIndex: 100,
-          }}
-        >
-          <Toolbar
-            disableGutters
-            sx={{
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-            }}
-          >
-
-            <Link>Navigation</Link>
-          </Toolbar>
-        </AppBar>
+        <Toolbar disableGutters>
+          <MobileNav type={pathname === "/" ? "dark" : "light"} />
+          <DesktopNav type={pathname === "/" ? "dark" : "light"} />
+        </Toolbar>
       </Container>
-    </Box>
-  )
-}
-
-export default Header
+    </AppBar>
+  );
+};
+export default Header;
