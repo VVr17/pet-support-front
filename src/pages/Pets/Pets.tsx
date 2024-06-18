@@ -1,12 +1,7 @@
-import Section from "@/components/Section";
-import { Typography } from "@mui/material";
+import Notices from "@/components/Notices";
 
 const Pets = () => {
-  return (
-    <Section>
-      <Typography variant="h1">Pets</Typography>
-    </Section>
-  );
+  return <Notices />;
 };
 
 export default Pets;

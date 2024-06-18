@@ -1,13 +1,14 @@
 import {
   Box,
-  Typography,
+  Button,
+  CardMedia,
   Container,
   Grid,
-  CardMedia,
-  Button,
+  Typography,
 } from "@mui/material";
-import ImgUrl from "@/assets/home/hero-puppy.png";
 import { Link } from "react-router-dom";
+
+import ImgUrl from "@/assets/home/hero-puppy.png";
 import { ROUTES } from "@/utils/constants/routes";
 
 const Hero = () => {
@@ -25,7 +26,7 @@ const Hero = () => {
           <Grid item md={12} lg={6}>
             <Box display="flex" height="100%" flexDirection="column">
               <Typography variant="h1" color="white" mb={2}>
-                Not only people need a house
+                Not only people need a home
               </Typography>
               <Typography variant="subtitle1" color="text.light" mb={6}>
                 Our vision is a world where every pet has a home and every pet

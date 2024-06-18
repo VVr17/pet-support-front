@@ -1,19 +1,21 @@
-import { useState } from "react";
-
 import {
-  Typography,
-  Menu,
-  MenuItem,
   Avatar,
-  Tooltip,
   Box,
   IconButton,
+  Menu,
+  MenuItem,
+  Tooltip,
+  Typography,
 } from "@mui/material";
+import { useState } from "react";
+import { useNavigate } from "react-router";
 
-const settings = ["Account", "Logout"];
+import { ROUTES } from "@/utils/constants/routes";
 
 const UserMenu = () => {
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
+
+  const navigate = useNavigate();
 
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElUser(event.currentTarget);
@@ -23,11 +25,21 @@ const UserMenu = () => {
     setAnchorElUser(null);
   };
 
+  const handleOpenAccount = () => {
+    navigate(ROUTES.account);
+    handleCloseUserMenu();
+  };
+
+  const signOut = () => {
+    console.log("sign out");
+    handleCloseUserMenu();
+  };
+
   return (
     <Box>
-      <Tooltip title="Open settings">
+      <Tooltip title="Open user menu">
         <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-          <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+          <Avatar alt="Avatar" src="#" />
         </IconButton>
       </Tooltip>
       <Menu
@@ -46,11 +58,13 @@ const UserMenu = () => {
         open={Boolean(anchorElUser)}
         onClose={handleCloseUserMenu}
       >
-        {settings.map((setting) => (
-          <MenuItem key={setting} onClick={handleCloseUserMenu}>
-            <Typography textAlign="center">{setting}</Typography>
-          </MenuItem>
-        ))}
+        <MenuItem onClick={handleOpenAccount}>
+          <Typography textAlign="center">Account</Typography>
+        </MenuItem>
+
+        <MenuItem onClick={signOut}>
+          <Typography textAlign="center">Sign Out</Typography>
+        </MenuItem>
       </Menu>
     </Box>
   );

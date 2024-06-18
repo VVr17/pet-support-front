@@ -1,4 +1,5 @@
 import { createBrowserRouter } from "react-router-dom";
+
 import MainLayout from "./layouts/MainLayout";
 import { ROUTES } from "./utils/constants/routes";
 
@@ -37,10 +38,17 @@ export const router = createBrowserRouter([
         },
       },
       {
-        path: ROUTES.contacts,
+        path: ROUTES.login,
         lazy: async () => {
-          const Contacts = await import("./pages/Contacts");
-          return { Component: Contacts.default };
+          const Login = await import("./pages/Login");
+          return { Component: Login.default };
+        },
+      },
+      {
+        path: ROUTES.account,
+        lazy: async () => {
+          const Account = await import("./pages/Account");
+          return { Component: Account.default };
         },
       },
     ],

@@ -1,5 +1,5 @@
+import { Box, BoxProps, Container } from "@mui/material";
 import { ReactNode } from "react";
-import { Box, Container, BoxProps } from "@mui/material";
 
 interface ISectionProps extends BoxProps {
   children?: ReactNode;

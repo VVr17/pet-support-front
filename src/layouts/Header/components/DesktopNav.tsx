@@ -1,20 +1,25 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import Logo from "@/components/ui-kit/Logo";
-import { mainNavigation } from "@/utils/constants/routes";
 import { Box, Button, Link as MUILink, Typography } from "@mui/material";
-import UserMenu from "./UserMenu";
 import { Link } from "react-router-dom";
+
+import Logo from "@/components/ui-kit/Logo";
+import { useUserStore } from "@/store/useUserStore";
+import { mainNavigation, ROUTES } from "@/utils/constants/routes";
+
+import UserMenu from "./UserMenu";
 
 interface IDesktopNavProps {
   type: "dark" | "light";
 }
 const DesktopNav: React.FC<IDesktopNavProps> = ({ type }) => {
+  const { user } = useUserStore();
+
   return (
     <Box
       display={{ xs: "none", md: "flex" }}
       width="100%"
       justifyContent="space-between"
       alignItems="center"
+      py={{ md: 3 }}
     >
       <Box
         mr={4}
@@ -29,6 +34,7 @@ const DesktopNav: React.FC<IDesktopNavProps> = ({ type }) => {
         <Box display="flex" gap={2} mr={4}>
           {mainNavigation.map(({ href, label }) => (
             <MUILink
+              key={href}
               component={Link}
               to={href}
               sx={{
@@ -50,10 +56,15 @@ const DesktopNav: React.FC<IDesktopNavProps> = ({ type }) => {
           ))}
         </Box>
 
-        <Box pt={0.5}>
-          <Button variant="contained">Log in</Button>
-        </Box>
-        {/* <UserMenu /> */}
+        {user ? (
+          <UserMenu />
+        ) : (
+          <Box pt={0.5}>
+            <Button variant="contained" component={Link} to={ROUTES.login}>
+              Log in
+            </Button>
+          </Box>
+        )}
       </Box>
     </Box>
   );

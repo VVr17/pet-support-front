@@ -1,5 +1,6 @@
-import Section from "@/components/Section";
 import { Typography } from "@mui/material";
+
+import Section from "@/components/Section";
 
 const Partners = () => {
   return (

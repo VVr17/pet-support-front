@@ -1,8 +1,8 @@
-import { Link } from "react-router-dom";
 import { CardMedia, Link as MuiLink } from "@mui/material";
+import { Link } from "react-router-dom";
 
-import logoLightUrl from "@/assets/images/logo-light.png";
 import logoDarkUrl from "@/assets/images/logo-dark.png";
+import logoLightUrl from "@/assets/images/logo-light.png";
 
 interface IProps {
   type: "light" | "dark";

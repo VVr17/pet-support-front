@@ -48,17 +48,24 @@ export const PRIMARY = {
   dark: "#edc1a1",
 };
 
+export const SECONDARY = {
+  light: "#7d6859",
+  main: "#5B483A",
+  dark: "#453529",
+};
+
 export const palette = {
   common: { black: "#000", white: "#fff" },
 
   primary: PRIMARY,
+  secondary: SECONDARY,
   grey: GREY,
 
   text: {
     primary: "#545454", // dark-grey/ black color
     secondary: "#292929", // Grey color
     light: "#CDCDCD", // White color
-    accent: "F1CDB3",
+    accent: "#F1CDB3",
   },
 
   background: {

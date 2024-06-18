@@ -1,28 +1,30 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
+import CloseIcon from "@mui/icons-material/Close";
+import MenuIcon from "@mui/icons-material/Menu";
 import {
   Box,
-  IconButton,
   Button,
   Drawer,
+  IconButton,
   List,
   ListItem,
   ListItemButton,
   ListItemText,
 } from "@mui/material";
-
-import MenuIcon from "@mui/icons-material/Menu";
-import CloseIcon from "@mui/icons-material/Close";
-
-import { mainNavigation } from "@/utils/constants/routes";
-import Logo from "@/components/ui-kit/Logo";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+
+import Logo from "@/components/ui-kit/Logo";
+import { useUserStore } from "@/store/useUserStore";
+import { mainNavigation, ROUTES } from "@/utils/constants/routes";
+
+import UserMenu from "./UserMenu";
 
 interface IMobileNavProps {
   type: "dark" | "light";
 }
 
 const MobileNav: React.FC<IMobileNavProps> = ({ type }) => {
+  const { user } = useUserStore();
   const [open, setOpen] = useState(false);
 
   const toggleDrawer = (newOpen: boolean) => () => {
@@ -44,16 +46,20 @@ const MobileNav: React.FC<IMobileNavProps> = ({ type }) => {
         >
           <Logo type={type === "light" ? "dark" : "light"} onClick={() => {}} />
         </Box>
-        <IconButton
-          size="large"
-          aria-label="account of current user"
-          aria-controls="menu-appbar"
-          aria-haspopup="true"
-          onClick={toggleDrawer(true)}
-          sx={{ color: type === "light" ? "text.primary" : "primary.main" }}
-        >
-          <MenuIcon />
-        </IconButton>
+        <Box display="flex" gap={3}>
+          {user && <UserMenu />}
+
+          <IconButton
+            size="large"
+            aria-label="account of current user"
+            aria-controls="menu-appbar"
+            aria-haspopup="true"
+            onClick={toggleDrawer(true)}
+            sx={{ color: type === "light" ? "text.primary" : "primary.main" }}
+          >
+            <MenuIcon />
+          </IconButton>
+        </Box>
       </Box>
       <Drawer
         open={open}
@@ -118,13 +124,17 @@ const MobileNav: React.FC<IMobileNavProps> = ({ type }) => {
           ))}
         </List>
 
-        <Button
-          onClick={toggleDrawer(false)}
-          variant="contained"
-          sx={{ width: 240, mx: "auto" }}
-        >
-          Log in
-        </Button>
+        {!user && (
+          <Button
+            onClick={toggleDrawer(false)}
+            variant="contained"
+            sx={{ width: 240, mx: "auto" }}
+            component={Link}
+            to={ROUTES.login}
+          >
+            Log in
+          </Button>
+        )}
       </Drawer>
     </>
   );
