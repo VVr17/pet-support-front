@@ -25,7 +25,7 @@ export const globalStyles = css`
     flex-grow: 1;
   }
 
-  //--------------SCROLL-BAR
+  //--------------SCROLL-BAR--------------------
 
   body::-webkit-scrollbar {
     width: 6px;

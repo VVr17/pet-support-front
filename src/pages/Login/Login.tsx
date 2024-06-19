@@ -1,38 +1,41 @@
-import { Button, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
 
-import { api, authHeader } from "@/api/config";
+import LoginForm from "@/components/Auth/LoginForm";
 import Section from "@/components/Section";
-import { useUserStore } from "@/store/useUserStore";
 
 const Login = () => {
-  const { setUser, setToken } = useUserStore();
+  // const { setUser, setToken } = useUserStore();
 
-  const logIn = async () => {
-    try {
-      const response = await api.post("/auth/login", {
-        email: "********",
-        password: "*******",
-      });
+  // TODO: for development \ tests only
+  // const logIn = async () => {
+  //   try {
+  //     const response = await api.post("/auth/login", {
+  //       email: "vira_test@gmail.com",
+  //       password: "Voronova1",
+  //     });
 
-      const token = response.data.access_token as string;
-      const user = response.data.data as User;
+  //     const token = response.data.access_token as string;
+  //     const user = response.data.data as User;
 
-      setToken(token);
-      setUser(user);
+  //     setToken(token);
+  //     setUser(user);
 
-      // Set token in axios headers
-      authHeader.setAuthToken(token);
-    } catch (error) {
-      console.error("Login failed:", error);
-    }
-  };
+  //     // Set token in axios headers
+  //     authHeader.setAuthToken(token);
+  //   } catch (error) {
+  //     console.error("Login failed:", error);
+  //   }
+  // };
 
   return (
     <Section>
-      <Typography variant="h1">Log in</Typography>
-      <Button variant="contained" onClick={logIn}>
+      <Typography variant="h2" textAlign="center">
         Log in
-      </Button>
+      </Typography>
+      {/* <Button variant="contained" onClick={logIn}>
+        Log in
+      </Button> */}
+      <LoginForm />
     </Section>
   );
 };

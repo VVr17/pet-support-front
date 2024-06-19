@@ -8,23 +8,25 @@ import {
 } from "@mui/material";
 import { Link } from "react-router-dom";
 
-import ImgUrl from "@/assets/home/hero-puppy.png";
+import ImgUrl from "@/assets/images/home/hero-puppy.png";
 import { ROUTES } from "@/utils/constants/routes";
+
+import { buttonStyles, imgStyles, sectionStyles } from "./styles";
 
 const Hero = () => {
   return (
-    <Box
-      component="section"
-      pt={{ xs: 12, md: 16, lg: 20 }}
-      sx={{
-        background:
-          "radial-gradient(circle at top left, #513D2F 0%, #1A1A1C 100%)",
-      }}
-    >
+    <Box component="section" pt={{ xs: 12, md: 16, lg: 20 }} sx={sectionStyles}>
       <Container>
-        <Grid container spacing={{ xs: 12, md: 4, lg: 5 }}>
-          <Grid item md={12} lg={6}>
-            <Box display="flex" height="100%" flexDirection="column">
+        <Grid container spacing={{ xs: 10, md: 12.5, lg: 5 }}>
+          <Grid item xs={12} lg={6} width="100%">
+            <Box
+              display="flex"
+              height="100%"
+              flexDirection="column"
+              maxWidth={{ xs: "100%", sm: 460 }}
+              textAlign={{ xs: "center", sm: "start" }}
+              mx="auto"
+            >
               <Typography variant="h1" color="white" mb={2}>
                 Not only people need a home
               </Typography>
@@ -40,25 +42,18 @@ const Hero = () => {
                 component={Link}
                 to={ROUTES.pets}
                 variant="contained"
-                sx={{
-                  maxWidth: "208px",
-                  mx: { xs: "auto", lg: 0 },
-                  textTransform: "none",
-                }}
+                sx={buttonStyles}
               >
                 Find a friend
               </Button>
             </Box>
           </Grid>
-          <Grid item md={6}>
+          <Grid item xs={12} lg={6} width="100%">
             <CardMedia
               component="img"
               image={ImgUrl}
               alt="puppy"
-              sx={{
-                width: { xs: "100%", md: 569, xl: 650 },
-                height: { xs: "auto", md: 593, xl: 680 },
-              }}
+              sx={imgStyles}
             />
           </Grid>
         </Grid>

@@ -1,10 +1,12 @@
 import { Box, Button, Link as MUILink, Typography } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 import Logo from "@/components/ui-kit/Logo";
+import { useUser } from "@/hooks/useQuery/useUser";
 import { useUserStore } from "@/store/useUserStore";
 import { mainNavigation, ROUTES } from "@/utils/constants/routes";
 
+import { getDesktopNavLinkStyles } from "./styles";
 import UserMenu from "./UserMenu";
 
 interface IDesktopNavProps {
@@ -12,6 +14,7 @@ interface IDesktopNavProps {
 }
 const DesktopNav: React.FC<IDesktopNavProps> = ({ type }) => {
   const { user } = useUserStore();
+  const { isPending } = useUser();
 
   return (
     <Box
@@ -27,21 +30,20 @@ const DesktopNav: React.FC<IDesktopNavProps> = ({ type }) => {
         justifyContent="center"
         flexDirection="column"
         alignItems="center"
+        pt={1.5}
+        pb={2.5}
       >
-        <Logo type={type === "light" ? "dark" : "light"} onClick={() => {}} />
+        <Logo type={type === "light" ? "dark" : "light"} />
       </Box>
       <Box display="flex" alignItems="center">
-        <Box display="flex" gap={2} mr={4}>
+        <Box display="flex" gap={4} mr={4}>
           {mainNavigation.map(({ href, label }) => (
             <MUILink
               key={href}
-              component={Link}
+              component={NavLink}
               to={href}
-              sx={{
-                color: type === "light" ? "text.primary" : "common.white",
-                pt: 2.5,
-                pb: 2,
-              }}
+              underline="none"
+              sx={getDesktopNavLinkStyles(type)}
             >
               <Typography
                 color="inherit"
@@ -56,9 +58,9 @@ const DesktopNav: React.FC<IDesktopNavProps> = ({ type }) => {
           ))}
         </Box>
 
-        {user ? (
-          <UserMenu />
-        ) : (
+        {/* Show user menu if user is logged in, otherwise show log in button */}
+        {!isPending && user && <UserMenu />}
+        {!isPending && !user && (
           <Box pt={0.5}>
             <Button variant="contained" component={Link} to={ROUTES.login}>
               Log in

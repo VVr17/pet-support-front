@@ -1,21 +1,19 @@
 import { Grid } from "@mui/material";
 
-import PetCard from "../PetCard";
+import PetCard from "./PetCard";
 
 interface IPetListProps {
-  pets: Notice[];
+  notices: Notice[];
 }
-const PetList: React.FC<IPetListProps> = ({ pets }) => {
+const PetList: React.FC<IPetListProps> = ({ notices }) => {
   return (
-    <>
-      <Grid container spacing={{ xs: 2, md: 4 }}>
-        {pets.map((notice) => (
-          <Grid key={notice.id} item xs={12} sm={6} lg={3}>
-            <PetCard pet={notice} />
-          </Grid>
-        ))}
-      </Grid>
-    </>
+    <Grid container spacing={{ xs: 2, md: 4 }}>
+      {notices.map((notice) => (
+        <Grid key={notice.id} item xs={12} sm={6} lg={3}>
+          <PetCard notice={notice} />
+        </Grid>
+      ))}
+    </Grid>
   );
 };
 

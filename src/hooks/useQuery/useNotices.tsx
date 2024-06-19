@@ -10,7 +10,7 @@ export const useNotices = ({
   page = FIRST_PAGE,
   limit = DEFAULT_PER_PAGE,
 }: {
-  categoryId: string | undefined;
+  categoryId: string | undefined | null;
   page?: number;
   limit?: number;
 }) => {
@@ -18,6 +18,6 @@ export const useNotices = ({
     queryKey: [QUERY_KEYS.notices, categoryId, page],
     queryFn: () =>
       categoryId ? fetchNotices(categoryId, page, limit) : undefined,
-    enabled: !!categoryId,
+    enabled: !!categoryId, // Enables only when category id provided
   });
 };

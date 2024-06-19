@@ -1,13 +1,7 @@
-import { Typography } from "@mui/material";
-
-import Section from "@/components/Section";
+import OurPartners from "@/components/OurPartners";
 
 const Partners = () => {
-  return (
-    <Section>
-      <Typography variant="h1">Partners</Typography>
-    </Section>
-  );
+  return <OurPartners />;
 };
 
 export default Partners;

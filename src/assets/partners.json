@@ -1,0 +1,49 @@
+{
+  "shelters": [
+    {
+      "name_uk": "Притулок \"SOS\"",
+      "name_en": "Shelter \"SOS\"",
+      "website": "sos-shelter.org.ua",
+      "address": {
+        "uk": "Київська область, с. Пирогів, вул. Притулкова, 5",
+        "en": "Kyiv region, Pyrohiv village, Prytulkova Street, 5"
+      }
+    },
+    {
+      "name_uk": "Притулок \"Щасливий берег\"",
+      "name_en": "Shelter \"Happy Shore\"",
+      "website": "happyshore-shelter.org",
+      "address": {
+        "uk": "Одеська область, м. Одеса, вул. Левадна, 16",
+        "en": "Odesa region, Odesa city, Levadna Street, 16"
+      }
+    },
+    {
+      "name_uk": "Притулок \"Милосердя\"",
+      "name_en": "Shelter \"Mercy\"",
+      "website": "mercy-shelter.org.ua",
+      "address": {
+        "uk": "Львівська область, м. Львів, вул. Шевченка, 101",
+        "en": "Lviv region, Lviv city, Shevchenka Street, 101"
+      }
+    },
+    {
+      "name_uk": "Притулок \"Захист\"",
+      "name_en": "Shelter \"Protection\"",
+      "website": "protection-shelter.org.ua",
+      "address": {
+        "uk": "Запорізька область, м. Запоріжжя, вул. Незалежної України, 22",
+        "en": "Zaporizhzhia region, Zaporizhzhia city, Nezalezhnoi Ukrainy Street, 22"
+      }
+    },
+    {
+      "name_uk": "Притулок \"Добрий дім\"",
+      "name_en": "Shelter \"Good Home\"",
+      "website": "goodhome-shelter.org",
+      "address": {
+        "uk": "Київська область, м. Бровари, вул. Київська, 11",
+        "en": "Kyiv region, Brovary city, Kyivska Street, 11"
+      }
+    }
+  ]
+}

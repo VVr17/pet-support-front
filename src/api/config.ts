@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const BASE_URL = "https://petly-support.up.railway.app/api";
+const BASE_URL = "https://petly-support.up.railway.app/api";
 
 const api = axios.create({
   baseURL: BASE_URL,

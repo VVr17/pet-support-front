@@ -1,17 +1,17 @@
 import { Box, Pagination, useTheme } from "@mui/material";
-import React from "react";
+import React, { ChangeEvent } from "react";
 
 import useResponsive from "@/hooks/useResponsive";
 
 import { getPaginationStyles } from "./styles";
 
-interface PaginationProps {
+interface IPaginationProps {
   count: number;
   currentPage: number;
-  handleChange: (event: React.ChangeEvent<unknown>, page: number) => void;
+  handleChange: (event: ChangeEvent<unknown>, page: number) => void;
 }
 
-const CustomPagination: React.FC<PaginationProps> = ({
+const CustomPagination: React.FC<IPaginationProps> = ({
   count,
   currentPage,
   handleChange,

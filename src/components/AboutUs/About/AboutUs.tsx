@@ -1,8 +1,10 @@
 import { Box, CardMedia, Grid, Typography } from "@mui/material";
 
-import ImgUrl from "@/assets/home/about-us-pets.png";
+import ImgUrl from "@/assets/images/about/about-us-pets.png";
 import Section from "@/components/Section";
 import useResponsive from "@/hooks/useResponsive";
+
+import { imgStyles } from "./styles";
 
 const AboutUs = () => {
   const isDesktop = useResponsive("up", "lg");
@@ -16,7 +18,7 @@ const AboutUs = () => {
               component="img"
               image={ImgUrl}
               alt="pets"
-              sx={{ width: 300, height: 408 }}
+              sx={imgStyles}
             />
           </Grid>
         )}
@@ -60,7 +62,7 @@ const AboutUs = () => {
               component="img"
               image={ImgUrl}
               alt="pets"
-              sx={{ width: 300, height: 408, mx: "auto" }}
+              sx={imgStyles}
             />
           </Grid>
         )}

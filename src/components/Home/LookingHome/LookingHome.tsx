@@ -9,12 +9,12 @@ import { Link } from "react-router-dom";
 import { Navigation, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 
-import PetCard from "@/components/Pets/PetCard";
+import PetCard from "@/components/Pets/PetList/PetCard";
 import Section from "@/components/Section";
 import { useCategories } from "@/hooks/useQuery/useCategories";
 import { useNotices } from "@/hooks/useQuery/useNotices";
+import { FIRST_PAGE, MAX_SHOWN_NOTICES } from "@/utils/constants/notices";
 import { ROUTES } from "@/utils/constants/routes";
-import { sliceNotices } from "@/utils/sliceNotices";
 
 import { navButtonStyles, paginationStyles } from "./styles";
 
@@ -27,9 +27,10 @@ const LookingHome = () => {
     categoryId: categoriesData?.data?.find(
       (category) => category.slug === "in-good-hands"
     )?.id,
+    page: FIRST_PAGE,
+    limit: MAX_SHOWN_NOTICES,
   });
 
-  const slicedNotices = sliceNotices(noticesData?.data);
   const isLoading = categoriesLoading || noticesLoading;
 
   const renderPaginationBullets = (_index: number, className: string) => {
@@ -45,7 +46,7 @@ const LookingHome = () => {
       </Typography>
 
       {/* Slider */}
-      {!isLoading && slicedNotices.length > 0 && (
+      {!isLoading && noticesData?.data && noticesData.data.length > 0 && (
         <Box
           component={Swiper}
           ref={swiperRef}
@@ -70,14 +71,14 @@ const LookingHome = () => {
           slidesPerView="auto"
         >
           {categoriesData?.data &&
-            slicedNotices &&
-            slicedNotices.map((notice) => (
+            noticesData?.data &&
+            noticesData?.data.map((notice) => (
               <SwiperSlide key={notice.id}>
-                <PetCard pet={notice} />
+                <PetCard notice={notice} />
               </SwiperSlide>
             ))}
 
-          {/* Navigation */}
+          {/* Navigation - Pagination */}
           <Box
             display="flex"
             gap={{ xs: 1, md: 3 }}

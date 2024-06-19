@@ -10,6 +10,7 @@ import {
 import { useState } from "react";
 import { useNavigate } from "react-router";
 
+import fallbackAvatarUrl from "@/assets/images/avatar.jpg";
 import { ROUTES } from "@/utils/constants/routes";
 
 const UserMenu = () => {
@@ -38,8 +39,12 @@ const UserMenu = () => {
   return (
     <Box>
       <Tooltip title="Open user menu">
-        <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-          <Avatar alt="Avatar" src="#" />
+        <IconButton
+          aria-label="user menu"
+          onClick={handleOpenUserMenu}
+          sx={{ p: 0 }}
+        >
+          <Avatar alt="Avatar" src={fallbackAvatarUrl} />
         </IconButton>
       </Tooltip>
       <Menu

@@ -1,94 +1,65 @@
 import CloseIcon from "@mui/icons-material/Close";
 import {
+  Box,
   Card,
-  CardContent,
   CardMedia,
+  Dialog,
+  DialogContent,
+  DialogProps,
+  DialogTitle,
+  Typography,
   useMediaQuery,
   useTheme,
 } from "@mui/material";
-import { Dialog, DialogContent, DialogTitle } from "@mui/material";
 import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
-import * as React from "react";
+import React from "react";
 
-export interface IPetProps {
-  pet: Notice;
-  keepMounted: boolean;
-  open: boolean;
+import PetInfoTable from "./components/PetInfoTable";
+import {
+  cardStyles,
+  cardWrapperStyles,
+  dialogStyles,
+  iconButtonStyles,
+  imgStyles,
+} from "./styles";
+
+export interface IPetDialogProps extends DialogProps {
+  notice: Notice;
   onClose: () => void;
 }
 
-const PetDialog: React.FC<IPetProps> = (props) => {
-  const { onClose, open, pet, ...other } = props;
+const PetDialog: React.FC<IPetDialogProps> = ({
+  notice,
+  onClose,
+  ...other
+}) => {
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down("md"));
 
   return (
     <Dialog
-      onClose={onClose}
-      aria-labelledby="customized-dialog-title"
-      open={open}
+      aria-labelledby="pet card dialog"
       fullScreen={fullScreen}
+      onClose={onClose}
       {...other}
-      sx={{
-        "& .MuiDialogContent-root": {
-          padding: theme.spacing(2),
-        },
-        "& .MuiDialogActions-root": {
-          padding: theme.spacing(1),
-        },
-        "& .MuiDialog-paper": {
-          width: { xs: "100%", md: "80%" },
-          maxWidth: "80%",
-          maxHeight: "80%",
-        },
-      }}
+      sx={dialogStyles}
     >
-      <DialogTitle sx={{ m: 0, p: 2 }} id="customized-dialog-title">
-        Modal title
-      </DialogTitle>
-      <IconButton
-        aria-label="close"
-        onClick={onClose}
-        sx={{
-          position: "absolute",
-          right: 8,
-          top: 8,
-          color: (theme) => theme.palette.grey[500],
-        }}
-      >
+      <DialogTitle sx={{ m: 0, p: 2 }}>{notice.title}</DialogTitle>
+      <IconButton aria-label="close" onClick={onClose} sx={iconButtonStyles}>
         <CloseIcon />
       </IconButton>
       <DialogContent dividers>
-        <Card
-          sx={{
-            borderRadius: 3,
-            display: "flex",
-            flexDirection: { xs: "column", md: "row" },
-            gap: 2,
-          }}
-        >
-          <CardMedia
-            component="img"
-            src={pet.photoURL}
-            sx={{
-              width: 300,
-              height: 300,
-              objectFit: "cover",
-            }}
-          />
-
-          <CardContent sx={{ textAlign: "center", px: 2, pb: 3 }}>
-            <Typography variant="h5" mb={4} fontWeight={600}>
-              {pet.name}
+        <Card sx={cardStyles}>
+          <Box sx={cardWrapperStyles}>
+            <CardMedia component="img" src={notice.photoURL} sx={imgStyles} />
+            <PetInfoTable notice={notice} />
+          </Box>
+          <Typography variant="subtitle2" fontSize={"1rem"}>
+            <Typography component="span" fontWeight={600}>
+              Comments:{" "}
             </Typography>
-            <Typography variant="h5" mb={4} fontWeight={600}>
-              {pet.Owner.email}
-            </Typography>
-            <Typography variant="h5" mb={4} fontWeight={600}>
-              {pet.Owner.phone}
-            </Typography>
-          </CardContent>
+            {notice.comments}
+          </Typography>
         </Card>
       </DialogContent>
     </Dialog>

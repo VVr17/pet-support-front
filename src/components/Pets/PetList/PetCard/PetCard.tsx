@@ -7,43 +7,33 @@ import {
 } from "@mui/material";
 import { useState } from "react";
 
-import PetDialog from "../PetDialog";
+import PetDialog from "../../PetDialog";
+import { imgStyles } from "./styles";
 
 interface IPetProps {
-  pet: Notice;
+  notice: Notice;
 }
 
-const PetCard: React.FC<IPetProps> = ({ pet }) => {
-  const [open, setOpen] = useState(false);
+const PetCard: React.FC<IPetProps> = ({ notice }) => {
+  const [isModalOpened, setIsModalOpened] = useState(false);
 
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-  const handleClose = () => {
-    setOpen(false);
+  const toggleModal = () => {
+    setIsModalOpened((prevState) => !prevState);
   };
 
   return (
     <>
       <Card sx={{ borderRadius: 3 }}>
-        <CardMedia
-          component="img"
-          src={pet.photoURL}
-          sx={{
-            width: "100%",
-            height: 270,
-            objectFit: "cover",
-          }}
-        />
+        <CardMedia component="img" src={notice.photoURL} sx={imgStyles} />
 
         <CardContent sx={{ textAlign: "center", px: 2, pb: 3 }}>
           <Typography variant="h5" mb={4} fontWeight={600}>
-            {pet.name}
+            {notice.name}
           </Typography>
           <Button
             variant="outlined"
             sx={{ width: "100%" }}
-            onClick={handleClickOpen}
+            onClick={toggleModal}
           >
             Learn more
           </Button>
@@ -51,9 +41,9 @@ const PetCard: React.FC<IPetProps> = ({ pet }) => {
       </Card>
 
       <PetDialog
-        open={open}
-        onClose={handleClose}
-        pet={pet}
+        open={isModalOpened}
+        onClose={toggleModal}
+        notice={notice}
         keepMounted={false}
       />
     </>

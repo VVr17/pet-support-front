@@ -11,12 +11,20 @@ import {
   ListItemText,
 } from "@mui/material";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 import Logo from "@/components/ui-kit/Logo";
+import { useUser } from "@/hooks/useQuery/useUser";
 import { useUserStore } from "@/store/useUserStore";
 import { mainNavigation, ROUTES } from "@/utils/constants/routes";
 
+import {
+  closeIconButtonStyles,
+  linkListStyles,
+  mobileMenuDrawerStyles,
+  mobileMenuLinkStyles,
+  mobileMenuLinkTextStyles,
+} from "./styles";
 import UserMenu from "./UserMenu";
 
 interface IMobileNavProps {
@@ -25,6 +33,7 @@ interface IMobileNavProps {
 
 const MobileNav: React.FC<IMobileNavProps> = ({ type }) => {
   const { user } = useUserStore();
+  const { isPending } = useUser();
   const [open, setOpen] = useState(false);
 
   const toggleDrawer = (newOpen: boolean) => () => {
@@ -34,7 +43,7 @@ const MobileNav: React.FC<IMobileNavProps> = ({ type }) => {
   return (
     <>
       <Box
-        sx={{ display: { xs: "flex", md: "none" } }}
+        display={{ xs: "flex", md: "none" }}
         justifyContent="space-between"
         width="100%"
       >
@@ -47,8 +56,10 @@ const MobileNav: React.FC<IMobileNavProps> = ({ type }) => {
           <Logo type={type === "light" ? "dark" : "light"} onClick={() => {}} />
         </Box>
         <Box display="flex" gap={3}>
-          {user && <UserMenu />}
+          {/* Show User menu if user is logged in */}
+          {!isPending && user && <UserMenu />}
 
+          {/* Burger menu button */}
           <IconButton
             size="large"
             aria-label="account of current user"
@@ -61,6 +72,8 @@ const MobileNav: React.FC<IMobileNavProps> = ({ type }) => {
           </IconButton>
         </Box>
       </Box>
+
+      {/* Mobile nav menu */}
       <Drawer
         open={open}
         onClose={toggleDrawer(false)}
@@ -68,63 +81,33 @@ const MobileNav: React.FC<IMobileNavProps> = ({ type }) => {
           keepMounted: false,
         }}
         anchor="right"
-        sx={{
-          "& .MuiDrawer-paper": {
-            backgroundColor: "text.secondary",
-            color: "white",
-            position: "fixed",
-            right: 0,
-            width: "100%",
-            maxWidth: 320,
-            py: 10,
-            px: 3,
-          },
-        }}
+        sx={mobileMenuDrawerStyles}
       >
         <IconButton
           aria-label="close"
           onClick={toggleDrawer(false)}
-          sx={{
-            position: "absolute",
-            top: 8,
-            right: 8,
-            color: "white",
-          }}
+          sx={closeIconButtonStyles}
         >
           <CloseIcon />
         </IconButton>
 
-        <List
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            gap: 3,
-            mb: 5,
-          }}
-        >
+        <List sx={linkListStyles}>
           {mainNavigation.map(({ href, label }) => (
             <ListItem key={href} disablePadding>
               <ListItemButton
                 onClick={toggleDrawer(false)}
-                component={Link}
+                component={NavLink}
                 to={href}
+                sx={mobileMenuLinkStyles}
               >
-                <ListItemText
-                  primary={label}
-                  sx={{
-                    "& .MuiTypography-root": {
-                      color: "text.light",
-                      fontSize: "1.5rem",
-                      textAlign: "center",
-                    },
-                  }}
-                />
+                <ListItemText primary={label} sx={mobileMenuLinkTextStyles} />
               </ListItemButton>
             </ListItem>
           ))}
         </List>
 
-        {!user && (
+        {/* Show log in button if user isn't logged in */}
+        {!isPending && !user && (
           <Button
             onClick={toggleDrawer(false)}
             variant="contained"

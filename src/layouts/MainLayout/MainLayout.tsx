@@ -1,4 +1,4 @@
-import { Box, Typography } from "@mui/material";
+import { Box } from "@mui/material";
 import { Suspense, useEffect } from "react";
 import { Outlet } from "react-router";
 
@@ -11,7 +11,7 @@ import Footer from "../Footer";
 import Header from "../Header";
 
 const MainLayout = () => {
-  const { refetch, isLoading } = useUser();
+  const { refetch } = useUser();
   const { setUser, setToken } = useUserStore();
 
   // Fetch current User is there is token and it is valid
@@ -25,23 +25,23 @@ const MainLayout = () => {
 
         if (token) {
           authHeader.setAuthToken(token); // Add Auth token to axios headers
-
-          try {
-            const user = await refetch();
-            setUser(user.data);
-
-            if (!user.data) {
-              throw new Error("Invalid token");
-            }
-          } catch (error) {
-            // If there is no User data (in case Token is expired) delete Auth token from Axios Config and Local Storage
-            console.error("Token is invalid or expired", error);
-            localStorage.removeItem(JWT_TOKEN_KEY); // Remove token from Local Storage
-            authHeader.deleteAuthToken(); // Delete Auth token from axios headers
-            setUser(null);
-            setToken(null);
-          }
         }
+      }
+
+      try {
+        const user = await refetch();
+
+        if (!user.data) {
+          throw new Error("Invalid token");
+        }
+        setUser(user.data);
+      } catch (error) {
+        // If there is no User data (in case there is not Token or it is expired) delete Auth token from Axios Config and Local Storage
+        console.error("Token is invalid or expired", error);
+        localStorage.removeItem(JWT_TOKEN_KEY); // Remove token from Local Storage
+        authHeader.deleteAuthToken(); // Delete Auth token from axios headers
+        setUser(null);
+        setToken(null);
       }
     };
 
@@ -50,21 +50,15 @@ const MainLayout = () => {
 
   return (
     <>
-      {isLoading && <Typography variant="h1">....Loading</Typography>}
+      <Header />
 
-      {!isLoading && (
-        <>
-          <Header />
+      <Box component="main">
+        <Suspense fallback={<div>Loading...</div>}>
+          <Outlet />
+        </Suspense>
+      </Box>
 
-          <Box component="main">
-            <Suspense fallback={<div>Loading...</div>}>
-              <Outlet />
-            </Suspense>
-          </Box>
-
-          <Footer />
-        </>
-      )}
+      <Footer />
     </>
   );
 };

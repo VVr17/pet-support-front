@@ -1,5 +1,3 @@
-// ----------------------------------------------------------------------
-
 import { palette } from "./palette";
 
 export function remToPx(value: string) {
@@ -43,7 +41,7 @@ export const typography = {
   },
   h2: {
     color: palette.text.primary,
-    fontWeight: 600,
+    fontWeight: 700,
     lineHeight: 64 / 48,
     fontSize: pxToRem(32),
     ...responsiveFontSizes({ sm: 40, md: 44, lg: 48 }),

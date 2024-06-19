@@ -8,6 +8,7 @@ export const ROUTES = {
 };
 
 export const mainNavigation = [
+  { label: "Home", href: "/" },
   { label: "Find pet", href: ROUTES.pets },
   { label: "About us", href: ROUTES.aboutUs },
   { label: "Partners", href: ROUTES.partners },

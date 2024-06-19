@@ -8,6 +8,7 @@ import { theme } from "./theme";
 import { globalStyles } from "./theme/globalStyles";
 
 const App = () => {
+  // React query client
   const [queryClient] = useState(() => new QueryClient());
 
   return (

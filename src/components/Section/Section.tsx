@@ -4,6 +4,7 @@ import { ReactNode } from "react";
 interface ISectionProps extends BoxProps {
   children?: ReactNode;
 }
+
 const Section: React.FC<ISectionProps> = ({ children, ...props }) => {
   return (
     <Box
