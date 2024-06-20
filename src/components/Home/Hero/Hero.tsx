@@ -42,6 +42,7 @@ const Hero = () => {
                 component={Link}
                 to={ROUTES.pets}
                 variant="contained"
+                size="large"
                 sx={buttonStyles}
               >
                 Find a friend

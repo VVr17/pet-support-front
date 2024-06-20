@@ -9,6 +9,6 @@ export const useUser = () => {
     queryKey: [QUERY_KEYS.user],
     queryFn: getCurrentUser,
     enabled: false, // Initially disable the query, will be manually triggered manually
-    retry: 1, // Retry one time before set error
+    retry: false, // Disable retry before set error - enable only one request
   });
 };

@@ -115,6 +115,7 @@ const LookingHome = () => {
         variant="contained"
         component={Link}
         to={ROUTES.pets}
+        size="large"
         sx={{ width: 300, maxWidth: "100%" }}
       >
         Get to know the rest

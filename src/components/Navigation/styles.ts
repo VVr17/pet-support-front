@@ -89,3 +89,22 @@ export const mobileMenuLinkTextStyles = {
     textAlign: "center",
   },
 };
+
+// ----------- Account side bar navigation --------------
+export const getAccountNavStyles = (fullTextShown: boolean) => {
+  return {
+    linkStyles: {
+      minHeight: 48,
+      justifyContent: fullTextShown ? "initial" : "center",
+      px: 2.5,
+    },
+    iconStyles: {
+      minWidth: 0,
+      mr: fullTextShown ? 3 : "auto",
+      justifyContent: "center",
+    },
+    textStyles: {
+      opacity: fullTextShown ? 1 : 0,
+    },
+  };
+};

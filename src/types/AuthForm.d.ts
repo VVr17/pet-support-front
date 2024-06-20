@@ -1,4 +1,4 @@
-interface ILoginForm {
+interface AuthForm {
   email: string;
   password: string;
 }

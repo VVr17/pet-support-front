@@ -1,15 +1,17 @@
-import { TextareaAutosize as BaseTextareaAutosize } from '@mui/base/TextareaAutosize';
-import { styled } from '@mui/system';
+import { TextareaAutosize as BaseTextareaAutosize } from "@mui/base/TextareaAutosize";
+import { styled } from "@mui/system";
 
 export const TextareaAutosize = styled(BaseTextareaAutosize)(
   ({ theme }) => `
-    padding: 12px;
+    padding-left: 16px;
+    padding-right: 16px;
+    padding-top: 12px;
+    padding-bottom: 12px;
     border-color: #e5e5e5;
-    font-weight: 500;
-    font-family: "Mulish",sans-serif;
+    font-family: Public Sans, sans-serif;
     line-height: 1.5;
     resize: none;
-    border-radius: 8px;
+    border-radius: 14px;
     font-size: inherit;
 
     &::placeholder {
@@ -22,8 +24,8 @@ export const TextareaAutosize = styled(BaseTextareaAutosize)(
 
     &:focus {
       border-color: ${theme.palette.primary.main};
-      outline: none; /* Remove default outline */
-      box-shadow: 0 0 0 0.075rem ${theme.palette.primary.main}; /* Add custom focus outline */
+      outline: none;
+      box-shadow: 0 0 0 0.075rem ${theme.palette.primary.main};
     }
-  `,
+  `
 );

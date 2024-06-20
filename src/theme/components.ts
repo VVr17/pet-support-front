@@ -8,7 +8,7 @@ export const components: Components<Omit<Theme, "components">> = {
     styleOverrides: {
       root: {
         ...typography.button,
-        borderRadius: "8px",
+        borderRadius: "12px",
         textDecoration: "none",
         textTransform: "capitalize",
         fontSize: "1rem",
@@ -18,7 +18,6 @@ export const components: Components<Omit<Theme, "components">> = {
       {
         props: { variant: "contained", color: "primary" },
         style: {
-          borderRadius: "100px",
           minWidth: "160px",
           border: `2px solid ${palette.button.primary.main}`,
           backgroundColor: palette.button.primary.main,
@@ -44,7 +43,6 @@ export const components: Components<Omit<Theme, "components">> = {
       {
         props: { variant: "outlined", color: "primary" },
         style: {
-          borderRadius: "100px",
           minWidth: "160px",
           color: palette.text.primary,
           border: `2px solid ${palette.button.primary.main}`,

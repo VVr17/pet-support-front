@@ -6,8 +6,8 @@ import { useUser } from "@/hooks/useQuery/useUser";
 import { useUserStore } from "@/store/useUserStore";
 import { mainNavigation, ROUTES } from "@/utils/constants/routes";
 
+import UserMenu from "../UserMenu";
 import { getDesktopNavLinkStyles } from "./styles";
-import UserMenu from "./UserMenu";
 
 interface IDesktopNavProps {
   type: "dark" | "light";

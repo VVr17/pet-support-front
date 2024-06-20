@@ -3,8 +3,8 @@ import { useEffect } from "react";
 import { useLocation } from "react-router";
 import { scroller } from "react-scroll";
 
-import DesktopNav from "./components/DesktopNav";
-import MobileNav from "./components/MobileNav";
+import DesktopNav from "@/components/Navigation/DesktopNav";
+import MobileNav from "@/components/Navigation/MobileNav";
 
 const Header = () => {
   const { pathname } = useLocation();

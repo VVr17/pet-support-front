@@ -1,5 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 
+import AccountLayout from "./layouts/AccountLayout";
 import MainLayout from "./layouts/MainLayout";
 import { ROUTES } from "./utils/constants/routes";
 
@@ -38,17 +39,45 @@ export const router = createBrowserRouter([
         },
       },
       {
+        path: ROUTES.signup,
+        lazy: async () => {
+          const SignUp = await import("./pages/SignUp");
+          return { Component: SignUp.default };
+        },
+      },
+      {
         path: ROUTES.login,
         lazy: async () => {
           const Login = await import("./pages/Login");
           return { Component: Login.default };
         },
       },
+    ],
+  },
+
+  {
+    path: ROUTES.account,
+    Component: AccountLayout,
+    children: [
       {
-        path: ROUTES.account,
+        index: true,
         lazy: async () => {
-          const Account = await import("./pages/Account");
-          return { Component: Account.default };
+          const Profile = await import("./pages/Profile");
+          return { Component: Profile.default };
+        },
+      },
+      {
+        path: ROUTES.myNotices,
+        lazy: async () => {
+          const MyNotices = await import("./pages/MyNotices");
+          return { Component: MyNotices.default };
+        },
+      },
+      {
+        path: ROUTES.myPets,
+        lazy: async () => {
+          const MyPets = await import("./pages/MyPets");
+          return { Component: MyPets.default };
         },
       },
     ],

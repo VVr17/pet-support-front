@@ -18,6 +18,7 @@ import { useUser } from "@/hooks/useQuery/useUser";
 import { useUserStore } from "@/store/useUserStore";
 import { mainNavigation, ROUTES } from "@/utils/constants/routes";
 
+import UserMenu from "../UserMenu";
 import {
   closeIconButtonStyles,
   linkListStyles,
@@ -25,7 +26,6 @@ import {
   mobileMenuLinkStyles,
   mobileMenuLinkTextStyles,
 } from "./styles";
-import UserMenu from "./UserMenu";
 
 interface IMobileNavProps {
   type: "dark" | "light";
@@ -55,7 +55,7 @@ const MobileNav: React.FC<IMobileNavProps> = ({ type }) => {
         >
           <Logo type={type === "light" ? "dark" : "light"} onClick={() => {}} />
         </Box>
-        <Box display="flex" gap={3}>
+        <Box display="flex" gap={{ xs: 1, sm: 2, md: 3 }}>
           {/* Show User menu if user is logged in */}
           {!isPending && user && <UserMenu />}
 

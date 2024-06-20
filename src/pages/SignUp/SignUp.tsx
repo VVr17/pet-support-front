@@ -5,31 +5,30 @@ import AuthForm from "@/components/Auth/AuthForm";
 import Section from "@/components/Section";
 import { ROUTES } from "@/utils/constants/routes";
 
-const Login = () => {
+const SignUp = () => {
   return (
     <Section>
       <Typography variant="h2" textAlign="center" mb={2}>
-        Log in
+        Sign up
       </Typography>
       <Typography variant="subtitle1" textAlign="center" mb={5}>
-        To ensure a personalized experience, we invite you to log in to your
-        account.
+        First time on our site? Please, sign up
       </Typography>
       <AuthForm />
 
       <Typography textAlign="center">
-        Don't have an account?{" "}
+        Already have an account?{" "}
         <MUILink
           component={Link}
-          to={ROUTES.signup}
+          to={ROUTES.login}
           underline="hover"
           sx={{ color: "info.main" }}
         >
-          Register
+          Login
         </MUILink>
       </Typography>
     </Section>
   );
 };
 
-export default Login;
+export default SignUp;

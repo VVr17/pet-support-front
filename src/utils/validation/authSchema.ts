@@ -2,7 +2,7 @@ import * as yup from "yup";
 
 import { emailRegEx, passwordRegEx } from "./RegEx";
 
-export const loginSchema = yup.object().shape({
+export const authSchema = yup.object().shape({
   email: yup
     .string()
     .matches(emailRegEx, "Should be valid email")

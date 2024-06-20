@@ -8,7 +8,7 @@ import { useUserStore } from "@/store/useUserStore";
 import { JWT_TOKEN_KEY } from "@/utils/constants/localStorageKeys";
 
 import Footer from "../Footer";
-import Header from "../Header";
+import Header from "../MainHeader";
 
 const MainLayout = () => {
   const { refetch } = useUser();

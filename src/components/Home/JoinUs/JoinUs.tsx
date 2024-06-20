@@ -26,6 +26,7 @@ const JoinUs = () => {
         variant="contained"
         component={Link}
         to={ROUTES.login}
+        size="large"
         sx={{ width: 300, maxWidth: "100%" }}
       >
         Join Us
