@@ -1,3 +1,4 @@
+
 export const wrapperStyles = {
   display: "flex",
   flexDirection: "column",
@@ -7,4 +8,5 @@ export const wrapperStyles = {
 export const containerStyles = {
   padding: { md: "0px !important" },
   display: "flex",
+  height:"100%"
 };
