@@ -5,7 +5,7 @@ interface Pet {
   name: string;
   breed: string;
   sex: string;
-  birthDate: string;
+  dateOfBirth: string;
   comments: string;
   Owner: Owner;
 }

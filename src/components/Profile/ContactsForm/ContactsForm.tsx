@@ -1,30 +1,33 @@
-import { LoadingButton } from "@mui/lab";
-import { Box, Paper, Typography } from "@mui/material";
-import { useEffect } from "react";
-import { SubmitHandler, useForm } from "react-hook-form";
+import { LoadingButton } from '@mui/lab';
+import { Box, Button, Paper, Typography } from '@mui/material';
+import { useEffect } from 'react';
+import { SubmitHandler, useForm } from 'react-hook-form';
 
-import Field from "@/components/RHFComponents/Field";
-import { useUser } from "@/hooks/useQuery/useUser";
+import Field from '@/components/RHFComponents/Field';
+import { useUpdateUser, useUser } from '@/hooks/useQuery/useUser';
 
-import { formConfig } from "./formConfig";
+import { formConfig } from './formConfig';
 
 const ContactsForm = () => {
-  const { data: user } = useUser();
+  const updateUser = useUpdateUser();
+  const { data: user, refetch } = useUser();
 
   // Form control using React Hook Form
   const { handleSubmit, control, reset } = useForm<ContactsForm>(formConfig);
 
   // Handle submit form data
-  const onSubmit: SubmitHandler<ContactsForm> = async (data) => {
-    console.log("data", data);
+  const onSubmit: SubmitHandler<ContactsForm> = async data => {
+    await updateUser.mutateAsync(data);
+    refetch();
+    reset(data);
   };
 
   useEffect(() => {
     if (user) {
       reset({
         email: user.email,
-        phone: user.phone || "",
-        city: user.city || "",
+        phone: user.phone || '',
+        location: user.location || '',
       });
     }
   }, [reset, user]);
@@ -33,11 +36,11 @@ const ContactsForm = () => {
     <>
       <Paper
         sx={{
-          height: { md: "100%" },
-          mx: "auto",
+          height: { md: '100%' },
+          mx: 'auto',
           p: { xs: 2, md: 3 },
-          display: "flex",
-          flexDirection: "column",
+          display: 'flex',
+          flexDirection: 'column',
           maxWidth: 700,
         }}
       >
@@ -45,10 +48,6 @@ const ContactsForm = () => {
           Contacts
         </Typography>
 
-        {/* //TODO: for development */}
-        {/* <Typography>Email: {user.email}</Typography>
-        <Typography>Phone: {user.phone}</Typography>
-        <Typography>Address: {user.city}</Typography> */}
         {user && (
           <Box
             component="form"
@@ -60,27 +59,47 @@ const ContactsForm = () => {
             sx={{ flexGrow: 1 }}
           >
             <Box gap={{ xs: 2, md: 2.5 }} display="flex" flexDirection="column">
-              <Field name="email" control={control} placeholder="Your email" />
-              <Field name="phone" control={control} placeholder="Your phone" />
-              <Field name="city" control={control} placeholder="Your address" />
+              <Field
+                name="email"
+                label="Email"
+                control={control}
+                placeholder="Your email"
+              />
+              <Field
+                name="phone"
+                label="Phone"
+                control={control}
+                placeholder="Your phone"
+              />
+              <Field
+                name="location"
+                label="Location"
+                control={control}
+                placeholder="City, region"
+              />
             </Box>
 
-            <LoadingButton
-              // loading={isLoading}
-              variant="contained"
-              type="submit"
-              size="large"
-              loadingPosition="start"
-              startIcon={<></>}
-              sx={{
-                mt: 5,
-                "& .MuiLoadingButton-loadingIndicator": {
-                  left: "42%",
-                },
-              }}
-            >
-              Save changes
-            </LoadingButton>
+            <Box display="flex" gap={2} mt={5}>
+              <LoadingButton
+                // loading={isLoading}
+                variant="contained"
+                type="submit"
+                size="large"
+                loadingPosition="start"
+                fullWidth
+                startIcon={<></>}
+                sx={{
+                  '& .MuiLoadingButton-loadingIndicator': {
+                    left: '42%',
+                  },
+                }}
+              >
+                Save changes
+              </LoadingButton>
+              <Button variant="outlined" size="large" fullWidth>
+                Cancel
+              </Button>
+            </Box>
           </Box>
         )}
       </Paper>

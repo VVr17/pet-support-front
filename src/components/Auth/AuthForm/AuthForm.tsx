@@ -1,17 +1,17 @@
-import { LoadingButton } from "@mui/lab";
-import { Box } from "@mui/material";
-import { useState } from "react";
-import { SubmitHandler, useForm } from "react-hook-form";
-import { useLocation, useNavigate } from "react-router";
+import { LoadingButton } from '@mui/lab';
+import { Box } from '@mui/material';
+import { useState } from 'react';
+import { SubmitHandler, useForm } from 'react-hook-form';
+import { useLocation, useNavigate } from 'react-router';
 
-import { logIn, signUp } from "@/api/auth";
-import Field from "@/components/RHFComponents/Field";
-import Toast from "@/components/ui-kit/Toast";
-import { useUserStore } from "@/store/useUserStore";
-import { ROUTES } from "@/utils/constants/routes";
+import { logIn, signUp } from '@/api/auth';
+import Field from '@/components/RHFComponents/Field';
+import Toast from '@/components/ui-kit/Toast';
+import { useUserStore } from '@/store/useUserStore';
+import { ROUTES } from '@/utils/constants/routes';
 
-import { logInButtonStyles } from "./styles";
-import { formConfig } from "./utils/formConfig";
+import { logInButtonStyles } from './styles';
+import { formConfig } from './utils/formConfig';
 
 const AuthForm = () => {
   const { pathname } = useLocation();
@@ -26,7 +26,7 @@ const AuthForm = () => {
   const { handleSubmit, control, reset } = useForm<AuthForm>(formConfig);
 
   // Handle submit form data
-  const onSubmit: SubmitHandler<AuthForm> = async (data) => {
+  const onSubmit: SubmitHandler<AuthForm> = async data => {
     try {
       setIsLoading(true);
       let response: LoginResponse;
@@ -44,9 +44,9 @@ const AuthForm = () => {
       reset();
     } catch (error) {
       if (pathname === ROUTES.login) {
-        setError("Email or password is not valid");
+        setError('Email or password is not valid');
       } else {
-        setError("Something went wrong. Please, try again later");
+        setError('Something went wrong. Please, try again later');
       }
       setIsLoading(false);
     }
@@ -64,8 +64,14 @@ const AuthForm = () => {
         maxWidth={700}
         mx="auto"
       >
-        <Field name="email" control={control} placeholder="Your email" />
         <Field
+          name="email"
+          label="Email"
+          control={control}
+          placeholder="Your email"
+        />
+        <Field
+          label="Password"
           name="password"
           type="password"
           control={control}
@@ -81,7 +87,7 @@ const AuthForm = () => {
           startIcon={<></>}
           sx={logInButtonStyles}
         >
-          <span>{pathname === ROUTES.login ? "Log in" : "Sign up"}</span>
+          <span>{pathname === ROUTES.login ? 'Log in' : 'Sign up'}</span>
         </LoadingButton>
       </Box>
 

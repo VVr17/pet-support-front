@@ -6,7 +6,7 @@ import { userContactSchema } from "@/utils/validation/userSchema";
 export const defaultValues = {
   email: "",
   phone: "",
-  city: "",
+  location: "",
 };
 
 export const formConfig = {

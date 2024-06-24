@@ -10,7 +10,7 @@ interface Notice {
   name: string;
   breed: string;
   sex: string;
-  birthDate: string;
+  dateOfBirth: string;
   location: string;
   comments: string;
   price: number;

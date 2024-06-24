@@ -1,18 +1,25 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { FormControl, TextField, TextFieldProps } from "@mui/material";
-import React from "react";
-import { Control, Controller } from "react-hook-form";
+import { FormControl, TextField, TextFieldProps } from '@mui/material';
+import React from 'react';
+import { Control, Controller } from 'react-hook-form';
 
-import ErrorMessage from "../ErrorMessage";
-import { inputStyles } from "./styles";
+import ErrorMessage from '../ErrorMessage';
+import { inputStyles } from './styles';
 
-interface IProp extends Omit<TextFieldProps, "name"> {
+interface IProp extends Omit<TextFieldProps, 'name'> {
   control: Control<any>;
   name: string;
+  label: string;
   placeholder: string;
 }
 
-const Field: React.FC<IProp> = ({ control, name, placeholder, ...props }) => {
+const Field: React.FC<IProp> = ({
+  control,
+  name,
+  label,
+  placeholder,
+  ...props
+}) => {
   return (
     <Controller
       name={name}
@@ -22,10 +29,11 @@ const Field: React.FC<IProp> = ({ control, name, placeholder, ...props }) => {
           <FormControl
             component="label"
             error={!!fieldState.error}
-            sx={{ position: "relative", width: "100%" }}
+            sx={{ position: 'relative', width: '100%' }}
           >
             <TextField
               {...field}
+              label={label}
               placeholder={placeholder}
               variant="outlined"
               sx={inputStyles}

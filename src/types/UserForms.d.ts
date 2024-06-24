@@ -1,11 +1,15 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+interface AvatarForm {
+  avatar: any;
+}
+
 interface AboutForm {
-  name: string;
-  birthday: string;
+  fullName: string;
+  birthday: Dayjs;
 }
 
 interface ContactsForm {
   email: string;
   phone: string;
-  city: string;
+  location: string;
 }

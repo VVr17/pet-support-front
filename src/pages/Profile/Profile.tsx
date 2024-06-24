@@ -1,16 +1,16 @@
-import { Grid } from "@mui/material";
+import { Grid } from '@mui/material';
 
-import AboutForm from "@/components/Profile/AboutForm";
-import ContactsForm from "@/components/Profile/ContactsForm";
+import ContactsForm from '@/components/Profile/ContactsForm';
+import AboutCard from '@/components/Profile/AboutCard';
 
 const Profile = () => {
   return (
     <Grid container spacing={2}>
-      <Grid item xs={12} md={6} height={{ md: "100%" }}>
-        <AboutForm />
+      <Grid item xs={12} md={6} height={{ md: '100%' }}>
+        <AboutCard />
       </Grid>
 
-      <Grid item xs={12} md={6} height={{ md: "100%" }}>
+      <Grid item xs={12} md={6} height={{ md: '100%' }}>
         <ContactsForm />
       </Grid>
     </Grid>

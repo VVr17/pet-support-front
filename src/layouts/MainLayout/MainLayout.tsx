@@ -1,14 +1,14 @@
-import { Box } from "@mui/material";
-import { Suspense, useEffect } from "react";
-import { Outlet } from "react-router";
+import { Box } from '@mui/material';
+import { Suspense, useEffect } from 'react';
+import { Outlet } from 'react-router';
 
-import { authHeader } from "@/api/config";
-import { useUser } from "@/hooks/useQuery/useUser";
-import { useUserStore } from "@/store/useUserStore";
-import { JWT_TOKEN_KEY } from "@/utils/constants/localStorageKeys";
+import { authHeader } from '@/api/config';
+import { useUser } from '@/hooks/useQuery/useUser';
+import { useUserStore } from '@/store/useUserStore';
+import { JWT_TOKEN_KEY } from '@/utils/constants/localStorageKeys';
 
-import Footer from "../Footer";
-import Header from "../MainHeader";
+import Footer from '../Footer';
+import Header from '../MainHeader';
 
 const MainLayout = () => {
   const { refetch } = useUser();
@@ -32,12 +32,12 @@ const MainLayout = () => {
         const user = await refetch();
 
         if (!user.data) {
-          throw new Error("Invalid token");
+          throw new Error('Invalid token');
         }
         setUser(user.data);
       } catch (error) {
         // If there is no User data (in case there is not Token or it is expired) delete Auth token from Axios Config and Local Storage
-        console.error("Token is invalid or expired", error);
+        console.error('Token is invalid or expired', error);
         localStorage.removeItem(JWT_TOKEN_KEY); // Remove token from Local Storage
         authHeader.deleteAuthToken(); // Delete Auth token from axios headers
         setUser(null);

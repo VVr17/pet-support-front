@@ -1,13 +1,13 @@
 interface AuthUser {
   id: string;
   email: string;
-  name: string;
+  fullName: string;
   isAdmin: boolean;
 }
 
 interface User extends AuthUser {
   birthday: string | null;
-  city: string | null;
+  location: string | null;
   phone: string | null;
   photoURL: string | null;
 }
