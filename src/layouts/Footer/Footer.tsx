@@ -6,27 +6,27 @@ import {
   Link,
   List,
   ListItem,
-} from "@mui/material";
-import { Link as RouterLink } from "react-router-dom";
+} from '@mui/material';
+import { Link as RouterLink } from 'react-router-dom';
 
-import ImgUrl from "@/assets/images/footer/footer-puppy.png";
-import Logo from "@/components/ui-kit/Logo";
-import { contacts } from "@/utils/constants/contacts";
-import { mainNavigation } from "@/utils/constants/routes";
+import ImgUrl from '@/assets/images/footer/footer-puppy.png';
+import Logo from '@/components/ui-kit/Logo';
+import { contacts } from '@/utils/constants/contacts';
+import { mainNavigation } from '@/utils/constants/routes';
 
-import { footerLinkStyles, footerStyles, imgStyles } from "./styles";
+import { footerLinkStyles, footerStyles, imgStyles } from './styles';
 
 const Footer = () => {
   return (
     <Box component="footer" pt={5} sx={footerStyles}>
-      <Container>
+      <Container maxWidth="xl">
         <Grid container spacing={{ xs: 3, md: 2, lg: 3 }}>
           <Grid item xs={12} sm={6} md={5}>
             <Box
               mb={{ xs: 1.5, lg: 3.75 }}
               px={2}
               py={1.5}
-              textAlign={{ xs: "center", md: "start" }}
+              textAlign={{ xs: 'center', md: 'start' }}
             >
               <Logo type="light" />
             </Box>

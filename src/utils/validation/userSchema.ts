@@ -10,7 +10,3 @@ export const userContactSchema = yup.object().shape({
   phone: yup.string(),
   location: yup.string(),
 });
-
-export const avatarSchema = yup.object().shape({
-  avatar: yup.mixed(),
-});

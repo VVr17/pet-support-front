@@ -17,6 +17,16 @@ const AboutForm = () => {
   // Form control using React Hook Form
   const { handleSubmit, control, reset } = useForm<AboutForm>(formConfig);
 
+  // Set user data as default from values
+  useEffect(() => {
+    if (user) {
+      reset({
+        fullName: user.fullName,
+        birthday: user.birthday ? dayjs(user.birthday) : null,
+      });
+    }
+  }, [reset, user]);
+
   // Handle submit form data
   const onSubmit: SubmitHandler<AboutForm> = async data => {
     const formattedData: Partial<User> = {
@@ -28,15 +38,6 @@ const AboutForm = () => {
     refetch();
     reset({ ...formattedData, birthday: dayjs(formattedData.birthday) });
   };
-
-  useEffect(() => {
-    if (user) {
-      reset({
-        fullName: user.fullName,
-        birthday: user.birthday ? dayjs(user.birthday) : null,
-      });
-    }
-  }, [reset, user]);
 
   return (
     <Box
@@ -72,11 +73,6 @@ const AboutForm = () => {
           loadingPosition="start"
           fullWidth
           startIcon={<></>}
-          sx={{
-            '& .MuiLoadingButton-loadingIndicator': {
-              left: '42%',
-            },
-          }}
         >
           Save changes
         </LoadingButton>

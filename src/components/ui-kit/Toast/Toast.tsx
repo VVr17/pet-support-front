@@ -1,5 +1,5 @@
-import { Alert, AlertProps, Snackbar } from "@mui/material";
-import Grow from "@mui/material/Grow";
+import { Alert, AlertProps, Snackbar } from '@mui/material';
+import Grow from '@mui/material/Grow';
 
 interface IToastProps extends AlertProps {
   open: boolean;
@@ -10,13 +10,13 @@ interface IToastProps extends AlertProps {
 const Toast: React.FC<IToastProps> = ({ message, open, onClose, ...props }) => {
   return (
     <Snackbar
-      anchorOrigin={{ vertical: "top", horizontal: "right" }}
+      anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
       open={open}
       onClose={onClose}
       autoHideDuration={3000}
       TransitionComponent={Grow}
     >
-      <Alert onClose={onClose} sx={{ width: "100%" }} {...props}>
+      <Alert onClose={onClose} sx={{ width: '100%' }} {...props}>
         {message}
       </Alert>
     </Snackbar>

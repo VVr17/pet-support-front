@@ -85,7 +85,7 @@ const AccountLayout = () => {
       />
       <Divider sx={{ display: { xs: 'none', md: 'block' } }} />
       <Box bgcolor="background.secondary" sx={wrapperStyles}>
-        <Container sx={containerStyles}>
+        <Container sx={containerStyles} maxWidth="xl">
           <AccountSideBar
             drawerWidth={drawerWidth}
             desktopOpen={desktopOpen}
@@ -93,7 +93,13 @@ const AccountLayout = () => {
             handleMobileDrawerClose={handleMobileDrawerClose}
             handleDrawerTransitionEnd={() => setIsClosing(false)}
           />
-          <Box component="main" sx={{ flexGrow: 1, p: { xs: 0, md: 3 } }}>
+          <Box
+            component="main"
+            sx={{
+              flexGrow: 1,
+              p: { xs: 0, md: 3 },
+            }}
+          >
             <Suspense fallback={<div>Loading...</div>}>
               <Outlet />
             </Suspense>

@@ -29,16 +29,18 @@ export const useUpdateUser = () => {
   });
 };
 
-export const useMyNotices = () => {
+export const useMyNotices = (userId?: string) => {
   return useQuery({
     queryKey: [QUERY_KEYS.myNotices],
     queryFn: getMyNotices,
+    enabled: !!userId,
   });
 };
 
-export const useMyPets = () => {
+export const useMyPets = (userId?: string) => {
   return useQuery({
     queryKey: [QUERY_KEYS.myPets],
     queryFn: getMyPets,
+    enabled: !!userId,
   });
 };

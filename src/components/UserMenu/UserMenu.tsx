@@ -6,17 +6,19 @@ import {
   MenuItem,
   Tooltip,
   Typography,
-} from "@mui/material";
-import { useState } from "react";
-import { useNavigate } from "react-router";
+} from '@mui/material';
+import { useState } from 'react';
+import { useNavigate } from 'react-router';
 
-import { authHeader } from "@/api/config";
-import fallbackAvatarUrl from "@/assets/images/avatar.jpg";
-import { useUserStore } from "@/store/useUserStore";
-import { ROUTES } from "@/utils/constants/routes";
+import { authHeader } from '@/api/config';
+import fallbackAvatarUrl from '@/assets/images/avatar.jpg';
+import { useUserStore } from '@/store/useUserStore';
+import { ROUTES } from '@/utils/constants/routes';
+import { useUser } from '@/hooks/useQuery/useUser';
 
 const UserMenu = () => {
   const { setUser, setToken } = useUserStore();
+  const { data: user } = useUser();
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
   const navigate = useNavigate();
 
@@ -44,7 +46,7 @@ const UserMenu = () => {
   return (
     <>
       <Box
-        sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}
+        sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
       >
         <Tooltip title="Open user menu">
           <IconButton
@@ -52,21 +54,24 @@ const UserMenu = () => {
             onClick={handleOpenUserMenu}
             sx={{ p: 0 }}
           >
-            <Avatar alt="Avatar" src={fallbackAvatarUrl} />
+            <Avatar
+              alt="Avatar"
+              src={user?.photoURL ? user?.photoURL : fallbackAvatarUrl}
+            />
           </IconButton>
         </Tooltip>
         <Menu
-          sx={{ mt: "45px" }}
+          sx={{ mt: '45px' }}
           id="menu-appbar"
           anchorEl={anchorElUser}
           anchorOrigin={{
-            vertical: "top",
-            horizontal: "right",
+            vertical: 'top',
+            horizontal: 'right',
           }}
           keepMounted
           transformOrigin={{
-            vertical: "top",
-            horizontal: "right",
+            vertical: 'top',
+            horizontal: 'right',
           }}
           open={Boolean(anchorElUser)}
           onClose={handleCloseUserMenu}

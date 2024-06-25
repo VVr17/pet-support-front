@@ -1,11 +1,11 @@
-import { Divider, Drawer, Toolbar } from "@mui/material";
-import * as React from "react";
+import { Divider, Drawer, Toolbar } from '@mui/material';
+import * as React from 'react';
 
-import AccountNav from "@/components/Navigation/AccountNav";
-import useResponsive from "@/hooks/useResponsive";
+import AccountNav from '@/components/Navigation/AccountNav';
+import useResponsive from '@/hooks/useResponsive';
 
-import { DesktopDrawerStyled } from "./AccountSideBar.styled";
-import { desktopDrawerStyles, mobileDrawerStyles } from "./styles";
+import { DesktopDrawerStyled } from './AccountSideBar.styled';
+import { desktopDrawerStyles, mobileDrawerStyles } from './styles';
 
 interface ISideBarProps {
   desktopOpen: boolean;
@@ -22,7 +22,7 @@ const AccountSideBar: React.FC<ISideBarProps> = ({
   mobileOpen,
   handleDrawerTransitionEnd,
 }) => {
-  const isLargeDesktop = useResponsive("up", "lg");
+  const isLargeDesktop = useResponsive('up', 'xl');
 
   return (
     <>

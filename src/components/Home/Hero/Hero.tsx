@@ -5,26 +5,26 @@ import {
   Container,
   Grid,
   Typography,
-} from "@mui/material";
-import { Link } from "react-router-dom";
+} from '@mui/material';
+import { Link } from 'react-router-dom';
 
-import ImgUrl from "@/assets/images/home/hero-puppy.png";
-import { ROUTES } from "@/utils/constants/routes";
+import ImgUrl from '@/assets/images/home/hero-puppy.png';
+import { ROUTES } from '@/utils/constants/routes';
 
-import { buttonStyles, imgStyles, sectionStyles } from "./styles";
+import { buttonStyles, imgStyles, sectionStyles } from './styles';
 
 const Hero = () => {
   return (
     <Box component="section" pt={{ xs: 12, md: 16, lg: 20 }} sx={sectionStyles}>
-      <Container>
+      <Container maxWidth="xl">
         <Grid container spacing={{ xs: 10, md: 12.5, lg: 5 }}>
           <Grid item xs={12} lg={6} width="100%">
             <Box
               display="flex"
               height="100%"
               flexDirection="column"
-              maxWidth={{ xs: "100%", sm: 460 }}
-              textAlign={{ xs: "center", sm: "start" }}
+              maxWidth={{ xs: '100%', sm: 460 }}
+              textAlign={{ xs: 'center', sm: 'start' }}
               mx="auto"
             >
               <Typography variant="h1" color="white" mb={2}>

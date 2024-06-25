@@ -1,26 +1,18 @@
 import { Paper, Typography } from '@mui/material';
 import AboutForm from './AboutForm';
 import { useUser } from '@/hooks/useQuery/useUser';
-import UpdateAvatarForm from './UpdateAvatarForm';
+import AvatarUpload from './AvatarUpload';
+import { wrapperStyles } from './styles';
 
 const AboutCard = () => {
   const { data: user } = useUser();
 
   return (
-    <Paper
-      sx={{
-        height: { md: '100%' },
-        mx: 'auto',
-        p: { xs: 2, md: 3 },
-        display: 'flex',
-        flexDirection: 'column',
-        maxWidth: 700,
-      }}
-    >
+    <Paper sx={wrapperStyles}>
       <Typography variant="h4" mb={4}>
         About
       </Typography>
-      {user && <UpdateAvatarForm />}
+      {user && <AvatarUpload />}
       {user && <AboutForm />}
     </Paper>
   );

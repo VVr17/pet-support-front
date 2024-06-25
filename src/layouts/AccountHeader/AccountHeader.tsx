@@ -1,17 +1,17 @@
-import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
-import MenuIcon from "@mui/icons-material/Menu";
-import { IconButton, Toolbar } from "@mui/material";
+import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
+import MenuIcon from '@mui/icons-material/Menu';
+import { IconButton, Toolbar } from '@mui/material';
 
-import DesktopNav from "@/components/Navigation/DesktopNav";
-import MobileNav from "@/components/Navigation/MobileNav";
-import useResponsive from "@/hooks/useResponsive";
+import DesktopNav from '@/components/Navigation/DesktopNav';
+import MobileNav from '@/components/Navigation/MobileNav';
+import useResponsive from '@/hooks/useResponsive';
 
-import { AppBarStyled } from "./AccountHeader.styled";
+import { AppBarStyled } from './AccountHeader.styled';
 import {
   desktopDrawerButtonStyles,
   getToolbarStyles,
   mobileDrawerButtonStyles,
-} from "./styles";
+} from './styles';
 
 interface IHeaderProps {
   drawerWidth: number;
@@ -26,8 +26,8 @@ const AccountHeader: React.FC<IHeaderProps> = ({
   toggleDesktopDrawer,
   desktopOpen,
 }) => {
-  const isTablet = useResponsive("between", "md", "lg");
-  const isDesktop = useResponsive("up", "lg");
+  const isTablet = useResponsive('between', 'md', 'xl');
+  const isDesktop = useResponsive('up', 'xl');
 
   return (
     <AppBarStyled
