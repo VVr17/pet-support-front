@@ -28,7 +28,7 @@ const FormTitle: React.FC<IProps> = ({
             sx={labelStyles}
             mb={{ xs: 2, md: 3 }}
           >
-            Let's create some new Notice
+            Let's create a new Notice
           </Typography>
         </>
       )}

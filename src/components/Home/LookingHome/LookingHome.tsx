@@ -1,22 +1,22 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import "./styles.css";
+import './styles.css';
 
-import EastIcon from "@mui/icons-material/East";
-import WestIcon from "@mui/icons-material/West";
-import { Box, Button, IconButton, Typography } from "@mui/material";
-import { useRef } from "react";
-import { Link } from "react-router-dom";
-import { Navigation, Pagination } from "swiper/modules";
-import { Swiper, SwiperSlide } from "swiper/react";
+import EastIcon from '@mui/icons-material/East';
+import WestIcon from '@mui/icons-material/West';
+import { Box, Button, IconButton, Typography } from '@mui/material';
+import { useRef } from 'react';
+import { Link } from 'react-router-dom';
+import { Navigation, Pagination } from 'swiper/modules';
+import { Swiper, SwiperSlide } from 'swiper/react';
 
-import PetCard from "@/components/Pets/PetList/PetCard";
-import Section from "@/components/Section";
-import { useCategories } from "@/hooks/useQuery/useCategories";
-import { useNotices } from "@/hooks/useQuery/useNotices";
-import { FIRST_PAGE, MAX_SHOWN_NOTICES } from "@/utils/constants/notices";
-import { ROUTES } from "@/utils/constants/routes";
+import PetCard from '@/components/Pets/PetList/PetCard';
+import Section from '@/components/Section';
+import { useCategories } from '@/hooks/useQuery/useCategories';
+import { useNotices } from '@/hooks/useQuery/useNotices';
+import { FIRST_PAGE, MAX_SHOWN_NOTICES } from '@/utils/constants/notices';
+import { ROUTES } from '@/utils/constants/routes';
 
-import { navButtonStyles, paginationStyles } from "./styles";
+import { navButtonStyles, paginationStyles } from './styles';
 
 const LookingHome = () => {
   const swiperRef = useRef<any>(null);
@@ -24,8 +24,8 @@ const LookingHome = () => {
   const { data: categoriesData, isLoading: categoriesLoading } =
     useCategories();
   const { data: noticesData, isLoading: noticesLoading } = useNotices({
-    categoryId: categoriesData?.data?.find(
-      (category) => category.slug === "in-good-hands"
+    categoryId: categoriesData?.find(
+      category => category.slug === 'in-good-hands',
     )?.id,
     page: FIRST_PAGE,
     limit: MAX_SHOWN_NOTICES,
@@ -52,11 +52,11 @@ const LookingHome = () => {
           ref={swiperRef}
           modules={[Navigation, Pagination]}
           navigation={{
-            prevEl: ".custom-swiper-button-prev",
-            nextEl: ".custom-swiper-button-next",
+            prevEl: '.custom-swiper-button-prev',
+            nextEl: '.custom-swiper-button-next',
           }}
           pagination={{
-            el: ".swiper-custom-pagination",
+            el: '.swiper-custom-pagination',
             clickable: true,
             renderBullet: renderPaginationBullets,
           }}
@@ -65,14 +65,14 @@ const LookingHome = () => {
           className="pets-swiper"
           grabCursor={true}
           mb={5}
-          sx={{ maxWidth: "100%" }}
+          sx={{ maxWidth: '100%' }}
           loop={true}
           centeredSlides={true}
           slidesPerView="auto"
         >
-          {categoriesData?.data &&
+          {categoriesData &&
             noticesData?.data &&
-            noticesData?.data.map((notice) => (
+            noticesData?.data.map(notice => (
               <SwiperSlide key={notice.id}>
                 <PetCard notice={notice} />
               </SwiperSlide>
@@ -92,7 +92,7 @@ const LookingHome = () => {
               className="custom-swiper-button-prev"
               sx={navButtonStyles}
             >
-              <WestIcon sx={{ color: "white" }} />
+              <WestIcon sx={{ color: 'white' }} />
             </IconButton>
             <Box
               display="flex"
@@ -105,7 +105,7 @@ const LookingHome = () => {
               className="custom-swiper-button-next"
               sx={navButtonStyles}
             >
-              <EastIcon sx={{ color: "white" }} />
+              <EastIcon sx={{ color: 'white' }} />
             </IconButton>
           </Box>
         </Box>
@@ -116,7 +116,7 @@ const LookingHome = () => {
         component={Link}
         to={ROUTES.pets}
         size="large"
-        sx={{ width: 300, maxWidth: "100%" }}
+        sx={{ width: 300, maxWidth: '100%' }}
       >
         Get to know the rest
       </Button>

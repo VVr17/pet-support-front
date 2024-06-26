@@ -1,11 +1,9 @@
 import { Box, Button, Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
 
-// import { formConfirmationData } from "@/utils/staticData/fleetInquiry";
-
-import { FormTitle } from '../components';
+import { ConfirmationCard, FormTitle } from '../components';
 import Logo from '@/components/ui-kit/Logo';
-// import Logo from "@/components/UI-Kit/Logo";
+import { noticeConfirmation } from '@/utils/staticData/noticeConfirmation';
 
 const Confirmation = () => {
   return (
@@ -42,11 +40,9 @@ const Confirmation = () => {
 
         {/* Next steps */}
         <Box display="flex" flexDirection="column" gap={{ xs: 4, md: 7.75 }}>
-          {/* //TODO : add confirmation card */}
-          {/* {formConfirmationData.map((item, index) => (
+          {noticeConfirmation.map((item, index) => (
             <ConfirmationCard key={index} {...item} />
-          ))} */}
-          <Typography variant="h3">Everything is fine!</Typography>
+          ))}
         </Box>
       </Box>
 

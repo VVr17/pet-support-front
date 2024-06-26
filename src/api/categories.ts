@@ -1,8 +1,8 @@
-import { api } from "./config";
+import { api } from './config';
 
-export const fetchCategories = async (): Promise<CategoryResponse> => {
-  const requestURL = "categories";
+export const fetchCategories = async (): Promise<Category[]> => {
+  const requestURL = 'categories';
 
   const response = await api.get(requestURL);
-  return response.data;
+  return response.data.data;
 };

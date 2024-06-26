@@ -1,14 +1,10 @@
-import { Box } from '@mui/material';
-import { Suspense, useEffect } from 'react';
+import { useEffect } from 'react';
 import { Outlet } from 'react-router';
 
 import { authHeader } from '@/api/config';
 import { useUser } from '@/hooks/useQuery/useUser';
 import { useUserStore } from '@/store/useUserStore';
 import { JWT_TOKEN_KEY } from '@/utils/constants/localStorageKeys';
-
-import Footer from '../Footer';
-import Header from '../MainHeader';
 
 const MainLayout = () => {
   const { refetch } = useUser();
@@ -48,19 +44,7 @@ const MainLayout = () => {
     checkToken();
   }, [refetch, setUser, setToken]);
 
-  return (
-    <>
-      <Header />
-
-      <Box component="main">
-        <Suspense fallback={<div>Loading...</div>}>
-          <Outlet />
-        </Suspense>
-      </Box>
-
-      <Footer />
-    </>
-  );
+  return <Outlet />;
 };
 
 export default MainLayout;

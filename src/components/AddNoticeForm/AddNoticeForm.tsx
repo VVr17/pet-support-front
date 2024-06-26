@@ -1,38 +1,56 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
-import { Box, Container } from '@mui/material';
-
+import { AlertColor, Box, Container } from '@mui/material';
 import { formSteps } from './steps';
-
 import Confirmation from './steps/Confirmation';
-
 import { formStyles, wrapperStyles } from './styles';
-import { formConfig } from './utils/formConfig';
+import { formConfig, noticeDefaultValues } from './utils/formConfig';
 import FormHeader from './components/FormHeader';
 import { FormButtons } from './components';
+import { stepFields } from './utils/stepFields';
+import { useCategories } from '@/hooks/useQuery/useCategories';
+import { getTransformedData } from './utils/getTransformedData';
+import Toast from '../ui-kit/Toast';
+import { useAddNotice } from '@/hooks/useQuery/useNotices';
+import { FIRST_STEP } from '@/utils/constants/formSteps';
+import { uploadImage } from '@/helpers/uploadImage';
 
 const AddNoticeForm = () => {
-  const [activeStep, setActiveStep] = useState(1);
+  const { data: categories } = useCategories();
+  const [activeStep, setActiveStep] = useState(FIRST_STEP);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const addNotice = useAddNotice();
+
+  const [toast, setToast] = useState<{
+    message: string;
+    type: AlertColor;
+  } | null>(null);
 
   // Form control using React Hook Form
   const methods = useForm<NoticeForm>(formConfig);
-  const { handleSubmit } = methods;
+  const { handleSubmit, trigger, reset } = methods;
+
+  useEffect(() => {
+    if (categories) {
+      reset({ ...noticeDefaultValues, categoryId: categories[1].id });
+    }
+  }, [categories]);
 
   // Checks whether current step fields are valid and go to the next step
   const handleNext = async () => {
     // Get fields to validate for the current step
-    // const fieldsToValidate = stepFields[activeStep - 1];
+    const fieldsToValidate = stepFields[activeStep - 1];
 
-    // // Trigger validation for fields in the current step
-    // let isValidStep = true;
-    // for (const field of fieldsToValidate) {
-    //   isValidStep = isValidStep && (await trigger(field));
-    // }
+    // Trigger validation for fields in the current step
+    let isValidStep = true;
+    for (const field of fieldsToValidate) {
+      isValidStep = isValidStep && (await trigger(field));
+    }
 
-    // if (isValidStep) {
-    //   setActiveStep(prevStep => prevStep + 1);
-    // }
-    setActiveStep(prevStep => prevStep + 1); // TODO: TEST
+    if (isValidStep) {
+      setActiveStep(prevStep => prevStep + 1);
+    }
   };
 
   // Handle back step
@@ -42,28 +60,35 @@ const AddNoticeForm = () => {
 
   // Handle submit form data
   const onSubmit: SubmitHandler<NoticeForm> = async data => {
-    console.log('submit', data);
+    setIsLoading(true);
+    try {
+      const imageUrl = await uploadImage(data.image);
 
-    // const response = await postFleetInquiry(transformedData);
+      if (!imageUrl) {
+        setIsLoading(false);
+        return;
+      }
 
-    // If response is successful, go to the final confirmation step after form submit
-    // if (response?.status === 200) {
-    //   setActiveStep((prevStep) => prevStep + 1);
-    //   reset();
-    // }
+      const transformedData = getTransformedData(data, imageUrl);
 
-    setActiveStep(prevStep => prevStep + 1); // TODO: TEST
+      await addNotice.mutateAsync(transformedData);
 
-    // // If there is an error, send error message
-    // if (response?.status === 400) {
-    //   // Send notification
-    //   setNotificationIsOpen(true);
-    //   setError(response.data);
+      // If response is successful, go to the final confirmation step after form submit
+      setToast({
+        message: 'Notice has been added successfully',
+        type: 'success',
+      });
+      setActiveStep(prevStep => prevStep + 1);
+      reset();
+    } catch (error) {
+      setToast({
+        message: 'Something went wrong. Please, try again later',
+        type: 'error',
+      });
+      return null;
+    }
 
-    //   setTimeout(() => {
-    //     setNotificationIsOpen(false);
-    //   }, 2500);
-    // }
+    setIsLoading(false);
   };
 
   return (
@@ -85,7 +110,8 @@ const AddNoticeForm = () => {
               onSubmit={handleSubmit(onSubmit)}
               display="flex"
               flexDirection="column"
-              maxWidth={662}
+              maxWidth={600}
+              width={{ xs: '100%', md: 600 }}
               mx="auto"
               sx={formStyles}
             >
@@ -105,6 +131,7 @@ const AddNoticeForm = () => {
                 handleBack={handleBack}
                 activeStep={activeStep}
                 totalSteps={formSteps.length}
+                isLoading={isLoading}
               />
             </Box>
           )}
@@ -113,6 +140,15 @@ const AddNoticeForm = () => {
           {activeStep > formSteps.length && <Confirmation />}
         </Container>
       </Box>
+
+      {toast && (
+        <Toast
+          open={!!toast}
+          onClose={() => setToast(null)}
+          message={toast.message}
+          severity={toast.type}
+        />
+      )}
     </>
   );
 };

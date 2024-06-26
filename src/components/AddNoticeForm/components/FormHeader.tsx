@@ -55,9 +55,7 @@ const FormHeader: React.FC<IProps> = ({ activeStep, totalSteps }) => {
                 component="p"
                 fontSize={{ xs: '1rem', md: '1.125rem', lg: '1.25rem' }}
                 fontWeight={700}
-                sx={{
-                  minWidth: 96,
-                }}
+                sx={{ minWidth: 96 }}
               >
                 <Typography
                   color="text.accent"

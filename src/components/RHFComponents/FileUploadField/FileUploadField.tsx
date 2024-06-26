@@ -1,8 +1,9 @@
 import { CloudUpload } from '@mui/icons-material';
 import {
   AlertColor,
-  Avatar,
   Box,
+  Button,
+  CardMedia,
   TextField,
   TextFieldProps,
 } from '@mui/material';
@@ -11,24 +12,35 @@ import { Cropper, ReactCropperElement } from 'react-cropper';
 import { dataURItoFile } from '@/helpers/dataURItoFile';
 import { Controller, UseFormReturn } from 'react-hook-form';
 
-import { avatarStyles, cropperStyles, newImagePreviewStyles } from './styles';
 import Toast from '@/components/ui-kit/Toast';
+import useResponsive from '@/hooks/useResponsive';
+import {
+  cardMediaStyles,
+  croppedImageStyles,
+  cropperWrapperStyles,
+  fallbackStyles,
+  getCropperStyles,
+  height,
+} from './styles';
+import ErrorMessage from '../ErrorMessage';
 
 interface IFileInputProps extends Omit<TextFieldProps, 'name'> {
-  methods: UseFormReturn<NoticeForm, unknown, undefined>;
+  methods: UseFormReturn<any, unknown, undefined>;
 }
 
 const FileUploadField: React.FC<IFileInputProps> = ({ methods }) => {
-  const { control, setValue } = methods;
-  // const { control, handleSubmit, setValue } = useForm<FormValues>({
-  //   defaultValues: { avatar: null },
-  // });
-  // const updateUser = useUpdateUser();
-  // const { data: user, refetch } = useUser();
+  const isLargeMobile = useResponsive('between', 'sm', 'md');
+  const isTablet = useResponsive('between', 'md', 'lg');
+  const isDesktop = useResponsive('up', 'lg');
+  const {
+    control,
+    setValue,
+    trigger,
+    formState: { errors },
+  } = methods;
 
   const [image, setImage] = useState<string>('');
   const [cropData, setCropData] = useState<string>('');
-  // const [isUploading, setIsUploading] = useState(false);
 
   const [toast, setToast] = useState<{
     message: string;
@@ -60,20 +72,32 @@ const FileUploadField: React.FC<IFileInputProps> = ({ methods }) => {
   };
 
   // Crops image according to specified dimensions
-  const handleCrop = () => {
+  const handleCrop = async () => {
+    const croppedImageDimensions = {
+      width: 800,
+      height: 800,
+    };
+
     if (cropperRef.current?.cropper) {
-      const canvas = cropperRef.current.cropper.getCroppedCanvas({
-        width: 200,
-        height: 200,
-      });
+      const canvas = cropperRef.current.cropper.getCroppedCanvas(
+        croppedImageDimensions,
+      );
       if (canvas) {
         const croppedImage = canvas.toDataURL();
         setCropData(croppedImage);
 
         const file = dataURItoFile(croppedImage, 'image.jpg');
-        setValue('image', file);
+        setValue('image', file, { shouldDirty: true });
+        await trigger('image');
       }
     }
+  };
+
+  // Removes image preview
+  const removeImagePreview = () => {
+    setCropData('');
+    setImage('');
+    setValue('image', '');
   };
 
   return (
@@ -82,10 +106,10 @@ const FileUploadField: React.FC<IFileInputProps> = ({ methods }) => {
         gap={{ xs: 2, md: 2.5 }}
         display="flex"
         flexDirection="column"
-        mb={{ xs: 3, md: 5 }}
+        mb={3}
       >
-        <Box position="relative" width={80} height={80}>
-          <Avatar sx={avatarStyles} component="label">
+        <Box position="relative" width="100%" height={height}>
+          <Box sx={fallbackStyles} component="label">
             <Controller
               name="image"
               control={control}
@@ -102,9 +126,19 @@ const FileUploadField: React.FC<IFileInputProps> = ({ methods }) => {
             />
 
             <CloudUpload fontSize={'large'} />
-          </Avatar>
 
-          <Box sx={cropperStyles}>
+            {errors?.image?.message && (
+              <ErrorMessage message={errors.image.message as string} />
+            )}
+          </Box>
+
+          <Box
+            sx={{
+              ...cropperWrapperStyles,
+              opacity: !cropData && image ? 1 : 0,
+              pointerEvents: !cropData && image ? 'auto' : 'none',
+            }}
+          >
             <Cropper
               ref={cropperRef}
               initialAspectRatio={1}
@@ -118,32 +152,48 @@ const FileUploadField: React.FC<IFileInputProps> = ({ methods }) => {
               autoCropArea={1}
               checkOrientation={false}
               guides={true}
-              crop={handleCrop}
+              style={getCropperStyles(isDesktop, isTablet, isLargeMobile)}
             />
           </Box>
 
           <Box
             sx={{
-              ...newImagePreviewStyles,
+              ...croppedImageStyles,
               opacity: cropData && image ? 1 : 0,
             }}
           >
-            <Avatar sx={{ width: 80, height: 80 }} src={cropData}></Avatar>
+            <CardMedia component="img" src={cropData} sx={cardMediaStyles} />
           </Box>
         </Box>
 
-        {/* {image && (
-        <Box display="flex" gap={2} height="fit-content">
-          <Button
-            variant="outlined"
-            size="large"
-            fullWidth
-            onClick={removeImagePreview}
+        {image && (
+          <Box
+            display="flex"
+            gap={2}
+            flexDirection={{ xs: 'column', sm: 'row' }}
+            height="fit-content"
           >
-            Remove
-          </Button>
-        </Box>
-      )} */}
+            {!cropData && (
+              <Button
+                variant="outlined"
+                size="large"
+                fullWidth
+                onClick={handleCrop}
+              >
+                Crop image
+              </Button>
+            )}
+
+            <Button
+              variant="outlined"
+              size="large"
+              fullWidth
+              onClick={removeImagePreview}
+            >
+              Remove
+            </Button>
+          </Box>
+        )}
       </Box>
 
       {toast && (

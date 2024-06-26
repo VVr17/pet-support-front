@@ -3,7 +3,7 @@ interface NoticeForm {
   title: string;
   name: string;
   breed: string;
-  dateOfBirth: string;
+  dateOfBirth: Dayjs;
 
   // Second step
   sex: Sex;

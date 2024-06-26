@@ -46,6 +46,7 @@ const PetTableHeader = (props: IPetTableProps) => {
             </TableSortLabel>
           </TableCell>
         ))}
+        <TableCell></TableCell>
       </TableRow>
     </TableHead>
   );

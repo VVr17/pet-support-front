@@ -7,12 +7,19 @@ import RangeField from '@/components/RHFComponents/RangeField';
 import CustomRadioGroup from '@/components/RHFComponents/CustomRadioGroup';
 import { getRadioGroupTestDriveStyles } from './styles';
 import useResponsive from '@/hooks/useResponsive';
+import { useCategories } from '@/hooks/useQuery/useCategories';
+import { getCategoriesOptions, sexOptions } from '../utils/selectOptions';
 
 interface IProp {
   methods: UseFormReturn<NoticeForm, unknown, undefined>;
 }
 
-const FormSecondStep: React.FC<IProp> = ({ methods: { control } }) => {
+const FormSecondStep: React.FC<IProp> = ({ methods: { control, watch } }) => {
+  const { data: categories } = useCategories();
+  const categoryOptions = getCategoriesOptions(categories);
+  const IsForSell =
+    categories?.find(({ slug }) => slug === 'sell')?.id === watch('categoryId');
+
   const isMobile = useResponsive('down', 'sm');
 
   return (
@@ -25,14 +32,7 @@ const FormSecondStep: React.FC<IProp> = ({ methods: { control } }) => {
       <Box display="flex" gap={4} flexDirection="column">
         <Box sx={getRadioGroupTestDriveStyles(isMobile)}>
           <FieldLabel label="Choose sex" mb={{ xs: 1, md: 2 }} />
-          <CustomRadioGroup
-            name="sex"
-            control={control}
-            options={[
-              { value: 0, label: 'Male' },
-              { value: 1, label: 'Female' },
-            ]}
-          />
+          <CustomRadioGroup name="sex" control={control} options={sexOptions} />
         </Box>
         <Box>
           <FieldLabel label="Select category" mb={{ xs: 1, md: 2 }} />
@@ -40,22 +40,18 @@ const FormSecondStep: React.FC<IProp> = ({ methods: { control } }) => {
             name="categoryId"
             control={control}
             placeholder="Choose category"
-            options={[
-              { value: '1', label: 'sell' },
-              { value: '2', label: 'i good hand' },
-              { value: '3', label: 'lost-found' },
-            ]}
+            options={categoryOptions}
           />
         </Box>
 
-        <Box>
+        <Box display={IsForSell ? 'block' : 'none'}>
           <FieldLabel label="Price" mb={{ xs: 1, md: 2 }} />
           <RangeField
             name="price"
             control={control}
             placeholder="Price"
             minRange={0}
-            maxRange={100}
+            maxRange={2000}
             label="UAH"
           />
         </Box>

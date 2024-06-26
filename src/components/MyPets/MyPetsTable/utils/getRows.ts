@@ -19,7 +19,7 @@ function createData(
  * @param pets - The pets array containing details
  * @returns Array of data rows
  */
-export const getRows = (pets?: Pet[]) => {
+export const getRows = (pets: Pet[]) => {
   return pets?.map(pet =>
     createData(pet.id, pet.name, pet.breed, pet.dateOfBirth, pet.comments),
   );

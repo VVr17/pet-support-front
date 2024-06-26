@@ -1,4 +1,4 @@
-import CloseIcon from "@mui/icons-material/Close";
+import CloseIcon from '@mui/icons-material/Close';
 import {
   Box,
   Card,
@@ -8,20 +8,20 @@ import {
   DialogProps,
   DialogTitle,
   Typography,
+  IconButton,
   useMediaQuery,
   useTheme,
-} from "@mui/material";
-import IconButton from "@mui/material/IconButton";
-import React from "react";
+} from '@mui/material';
+import React from 'react';
 
-import PetInfoTable from "./components/PetInfoTable";
+import PetInfoTable from './components/PetInfoTable';
 import {
   cardStyles,
   cardWrapperStyles,
   dialogStyles,
   iconButtonStyles,
   imgStyles,
-} from "./styles";
+} from './styles';
 
 export interface IPetDialogProps extends DialogProps {
   notice: Notice;
@@ -34,7 +34,7 @@ const PetDialog: React.FC<IPetDialogProps> = ({
   ...other
 }) => {
   const theme = useTheme();
-  const fullScreen = useMediaQuery(theme.breakpoints.down("md"));
+  const fullScreen = useMediaQuery(theme.breakpoints.down('md'));
 
   return (
     <Dialog
@@ -54,9 +54,9 @@ const PetDialog: React.FC<IPetDialogProps> = ({
             <CardMedia component="img" src={notice.photoURL} sx={imgStyles} />
             <PetInfoTable notice={notice} />
           </Box>
-          <Typography variant="subtitle2" fontSize={"1rem"}>
+          <Typography variant="subtitle2" fontSize={'1rem'}>
             <Typography component="span" fontWeight={600}>
-              Comments:{" "}
+              Comments:{' '}
             </Typography>
             {notice.comments}
           </Typography>

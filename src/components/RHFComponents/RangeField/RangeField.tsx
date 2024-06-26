@@ -43,10 +43,8 @@ const RangeField: React.FC<IProp> = ({
             variant="outlined"
             inputProps={{
               style: {
-                padding: '12px',
                 fontSize: `${isMobile ? '1rem' : '1.125rem'}`,
                 fontWeight: 500,
-                fontFamily: '"Mulish",sans-serif',
               },
             }}
             sx={inputStyles}

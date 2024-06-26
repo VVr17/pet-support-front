@@ -11,7 +11,7 @@ import { useUserStore } from '@/store/useUserStore';
 import { ROUTES } from '@/utils/constants/routes';
 
 import { logInButtonStyles } from './styles';
-import { formConfig } from './utils/formConfig';
+import { formConfig } from './formConfig';
 
 const AuthForm = () => {
   const { pathname } = useLocation();

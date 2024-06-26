@@ -14,4 +14,8 @@ export const inputStyles = {
       opacity: 1,
     },
   },
+
+  '& .MuiFormLabel-root.Mui-focused': {
+    color: (theme: Theme) => theme.palette.primary.darker,
+  },
 };

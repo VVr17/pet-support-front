@@ -1,13 +1,15 @@
-import { Backdrop, BackdropProps, CircularProgress } from "@mui/material";
+import { Backdrop, BackdropProps, CircularProgress } from '@mui/material';
+import { createPortal } from 'react-dom';
 
-const Loader: React.FC<BackdropProps> = (props) => {
-  return (
+const Loader: React.FC<BackdropProps> = props => {
+  return createPortal(
     <Backdrop
-      sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
+      sx={{ color: '#fff', zIndex: theme => theme.zIndex.drawer + 1 }}
       {...props}
     >
       <CircularProgress color="primary" />
-    </Backdrop>
+    </Backdrop>,
+    document.getElementById('loader-root')!,
   );
 };
 

@@ -1,14 +1,14 @@
-import { alpha } from "@mui/material/styles";
+import { alpha } from '@mui/material/styles';
 
 export type ColorSchema =
-  | "primary"
-  | "secondary"
-  | "info"
-  | "success"
-  | "warning"
-  | "error";
+  | 'primary'
+  | 'secondary'
+  | 'info'
+  | 'success'
+  | 'warning'
+  | 'error';
 
-declare module "@mui/material/styles/createPalette" {
+declare module '@mui/material/styles/createPalette' {
   interface Theme {
     button: {
       primary: {
@@ -26,51 +26,55 @@ declare module "@mui/material/styles/createPalette" {
   interface TypeBackground {
     neutral: string;
   }
+  interface PaletteColor {
+    darker: string;
+  }
 }
 
 // SETUP COLORS
 const GREY = {
-  0: "#FFFFFF",
-  100: "#F9FAFB",
-  200: "#F4F6F8",
-  300: "#DFE3E8",
-  400: "#C4CDD5",
-  500: "#919EAB",
-  600: "#637381",
-  700: "#454F5B",
-  800: "#212B36",
-  900: "#161C24",
+  0: '#FFFFFF',
+  100: '#F9FAFB',
+  200: '#F4F6F8',
+  300: '#DFE3E8',
+  400: '#C4CDD5',
+  500: '#919EAB',
+  600: '#637381',
+  700: '#454F5B',
+  800: '#212B36',
+  900: '#161C24',
 };
 
 export const PRIMARY = {
-  light: "#fddcc4",
-  main: "#F1CDB3",
-  dark: "#edc1a1",
+  light: '#fddcc4',
+  main: '#F1CDB3',
+  dark: '#edc1a1',
+  darker: '#de9b6a',
 };
 
 export const SECONDARY = {
-  light: "#7d6859",
-  main: "#5B483A",
-  dark: "#453529",
+  light: '#7d6859',
+  main: '#5B483A',
+  dark: '#453529',
 };
 
 export const palette = {
-  common: { black: "#000", white: "#fff" },
+  common: { black: '#000', white: '#fff' },
 
   primary: PRIMARY,
   secondary: SECONDARY,
   grey: GREY,
 
   text: {
-    primary: "#545454", // dark-grey/ black color
-    secondary: "#292929", // Grey color
-    light: "#CDCDCD", // White color
-    accent: "#F1CDB3",
+    primary: '#545454', // dark-grey/ black color
+    secondary: '#292929', // Grey color
+    light: '#CDCDCD', // White color
+    accent: '#de9b6a', // Dark orange
   },
 
   background: {
-    paper: "#fff",
-    secondary: "#fafafa",
+    paper: '#fff',
+    secondary: '#fafafa',
   },
 
   divider: alpha(GREY[500], 0.24),
@@ -82,9 +86,9 @@ export const palette = {
       dark: PRIMARY.dark,
     },
     secondary: {
-      light: "#fcdc58",
-      main: "#FFCC00",
-      dark: "#d4ab08",
+      light: '#fcdc58',
+      main: '#FFCC00',
+      dark: '#d4ab08',
     },
   },
 

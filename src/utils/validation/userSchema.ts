@@ -1,4 +1,5 @@
 import * as yup from 'yup';
+import { emailRegEx } from './RegEx';
 
 export const userAboutSchema = yup.object().shape({
   fullName: yup.string(),
@@ -6,7 +7,10 @@ export const userAboutSchema = yup.object().shape({
 });
 
 export const userContactSchema = yup.object().shape({
-  email: yup.string(),
+  email: yup
+    .string()
+    .matches(emailRegEx, 'Should be valid email')
+    .required('Email is required'),
   phone: yup.string(),
   location: yup.string(),
 });

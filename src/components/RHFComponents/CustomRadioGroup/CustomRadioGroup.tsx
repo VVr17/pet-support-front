@@ -1,9 +1,10 @@
 import { FormControl, RadioGroup } from '@mui/material';
-import { CustomRadioCroupProps } from './types';
+
 import CustomRadio from './components/CustomRadio';
 import { Controller } from 'react-hook-form';
 import ErrorMessage from '../ErrorMessage';
-import { radioGroupStyles } from './utils';
+import { radioGroupStyles } from './styles';
+import { CustomRadioCroupProps } from './types';
 
 const CustomRadioGroup = ({
   options,
@@ -16,6 +17,7 @@ const CustomRadioGroup = ({
       control={control}
       render={({ field, fieldState }) => {
         const { onChange, value, ...other } = field;
+
         return (
           <FormControl
             component="label"

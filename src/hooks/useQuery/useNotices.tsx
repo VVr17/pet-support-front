@@ -1,9 +1,9 @@
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
-import { fetchNotices } from "@/api/notices";
-import { DEFAULT_PER_PAGE, FIRST_PAGE } from "@/utils/constants/notices";
+import { fetchNotices, postNotice } from '@/api/notices';
+import { DEFAULT_PER_PAGE, FIRST_PAGE } from '@/utils/constants/notices';
 
-import { QUERY_KEYS } from "./queryKeys";
+import { QUERY_KEYS } from './queryKeys';
 
 export const useNotices = ({
   categoryId,
@@ -19,5 +19,16 @@ export const useNotices = ({
     queryFn: () =>
       categoryId ? fetchNotices(categoryId, page, limit) : undefined,
     enabled: !!categoryId, // Enables only when category id provided
+  });
+};
+
+export const useAddNotice = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: postNotice,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.notices] });
+    },
   });
 };

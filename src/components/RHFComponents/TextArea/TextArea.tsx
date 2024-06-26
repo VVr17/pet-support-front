@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { FormControl } from "@mui/material";
-import React from "react";
-import { Control, Controller } from "react-hook-form";
+import { FormControl } from '@mui/material';
+import React from 'react';
+import { Control, Controller } from 'react-hook-form';
 
-import ErrorMessage from "../ErrorMessage";
-import { TextareaAutosize } from "./TextareaAutosize.styled";
+import ErrorMessage from '../ErrorMessage';
+import { TextareaAutosize } from './TextareaAutosize.styled';
 
 interface IProp {
   control: Control<any>;
@@ -21,7 +21,7 @@ const TextArea: React.FC<IProp> = ({ control, name, placeholder }) => {
         <FormControl
           component="label"
           error={!!fieldState.error}
-          sx={{ position: "relative", width: "100%" }}
+          sx={{ position: 'relative', width: '100%' }}
         >
           <TextareaAutosize
             {...field}

@@ -4,8 +4,3 @@ interface Category {
   titleEn: string;
   slug: string;
 }
-
-interface CategoryResponse {
-  message: string;
-  data: Category[];
-}

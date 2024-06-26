@@ -1,22 +1,25 @@
-import AddIcon from "@mui/icons-material/Add";
-import { Box, IconButton, Tooltip, Typography } from "@mui/material";
-import { ChangeEvent, SyntheticEvent, useEffect, useState } from "react";
+import AddIcon from '@mui/icons-material/Add';
+import { Box, IconButton, Tooltip, Typography } from '@mui/material';
+import { ChangeEvent, SyntheticEvent, useEffect, useState } from 'react';
 
-import { useCategories } from "@/hooks/useQuery/useCategories";
-import { useNotices } from "@/hooks/useQuery/useNotices";
-import { useUserStore } from "@/store/useUserStore";
-import { FIRST_PAGE, LIMIT_PER_PAGE } from "@/utils/constants/notices";
+import { useCategories } from '@/hooks/useQuery/useCategories';
+import { useNotices } from '@/hooks/useQuery/useNotices';
+import { useUserStore } from '@/store/useUserStore';
+import { FIRST_PAGE, LIMIT_PER_PAGE } from '@/utils/constants/notices';
 
-import PetList from "../Pets/PetList";
-import Section from "../Section";
-import Loader from "../ui-kit/Loader";
-import CustomPagination from "../ui-kit/Pagination";
-import Toast from "../ui-kit/Toast";
-import CategoryTabs from "./components/CategoryTabs";
-import { addNoticeButtonStyles } from "./styles";
+import PetList from '../Pets/PetList';
+import Section from '../Section';
+import Loader from '../ui-kit/Loader';
+import CustomPagination from '../ui-kit/Pagination';
+import Toast from '../ui-kit/Toast';
+import CategoryTabs from './components/CategoryTabs';
+import { addNoticeButtonStyles } from './styles';
+import { useNavigate } from 'react-router';
+import { ROUTES } from '@/utils/constants/routes';
 
 const Notices = () => {
   const { user } = useUserStore();
+  const navigate = useNavigate();
 
   const { data: categoriesData, isLoading: isCategoryLoading } =
     useCategories();
@@ -39,7 +42,7 @@ const Notices = () => {
   // Set the first tab after categories fetched
   useEffect(() => {
     if (!activeTab && categoriesData) {
-      setActiveTab(categoriesData.data[0].id);
+      setActiveTab(categoriesData[0].id);
     }
   }, [activeTab, categoriesData]);
 
@@ -59,7 +62,8 @@ const Notices = () => {
       setOpenToast(true);
       return;
     }
-    console.log("add new notice");
+
+    navigate(ROUTES.noticeForm);
   };
 
   return (
@@ -71,14 +75,14 @@ const Notices = () => {
           looking for a home
         </Typography>
 
-        {categoriesData?.data && activeTab && (
+        {categoriesData && activeTab && (
           <>
             <Box width="100%" display="flex" justifyContent="space-between">
               {/* Category tabs */}
               <CategoryTabs
                 activeTab={activeTab}
                 handleTabChange={handleTabChange}
-                categories={categoriesData.data}
+                categories={categoriesData}
               />
 
               <Tooltip title="Add new notice">
