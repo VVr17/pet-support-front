@@ -1,25 +1,21 @@
-import { useGoogleLogin } from '@react-oauth/google';
-
+import { BASE_URL } from '@/api/config';
 import { Box, Button } from '@mui/material';
-import { getUserData } from '@/api/googleAuth';
 import GoogleIcon from '@/assets/icons/socials/google.svg?react';
 
 const GoogleLoginButton = () => {
-  const googleAuth = useGoogleLogin({
-    onSuccess: async tokenResponse => {
-      const data = await getUserData(tokenResponse.access_token);
-      console.log('user', data?.user);
-    },
-    onError: errorResponse => {
-      console.log(errorResponse);
-    },
-  });
+  const googleLogin = async () => {
+    try {
+      window.open(`${BASE_URL}/auth/google/callback`, 'self');
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <Box maxWidth={700} mx="auto">
       <Button
         variant="outlined"
-        onClick={() => googleAuth()}
+        onClick={googleLogin}
         fullWidth
         startIcon={<GoogleIcon />}
         sx={{ mb: 2, textTransform: 'initial' }}

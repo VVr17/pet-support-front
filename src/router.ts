@@ -6,6 +6,7 @@ import { ROUTES } from './utils/constants/routes';
 import PublicLayout from './layouts/PublicLayout';
 import PrivateRoute from './routes/PrivateRoute';
 import RestrictedRoute from './routes/RestrictedRoute';
+import GoogleOAuthSuccessRedirect from './pages/GoogleOAuthSuccessRedirect';
 
 export const router = createBrowserRouter([
   {
@@ -125,6 +126,17 @@ export const router = createBrowserRouter([
             },
           },
         ],
+      },
+    ],
+  },
+
+  // Successful Google Auth
+  {
+    path: '/google-oauth-success-redirect',
+    children: [
+      {
+        path: ':accessToken',
+        Component: GoogleOAuthSuccessRedirect,
       },
     ],
   },

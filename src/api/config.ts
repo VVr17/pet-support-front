@@ -1,6 +1,6 @@
-import axios from "axios";
+import axios from 'axios';
 
-const BASE_URL = "https://petly-support.up.railway.app/api";
+export const BASE_URL = 'https://petly-support.up.railway.app/api';
 
 const api = axios.create({
   baseURL: BASE_URL,
@@ -12,7 +12,7 @@ const authHeader = {
   },
 
   deleteAuthToken() {
-    api.defaults.headers.common.Authorization = "";
+    api.defaults.headers.common.Authorization = '';
   },
 };
 
