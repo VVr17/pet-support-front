@@ -1,7 +1,7 @@
-import { api, authHeader } from "./config";
+import { api, authHeader } from './config';
 
 export const logIn = async (credentials: AuthForm): Promise<LoginResponse> => {
-  const requestURL = "/auth/login";
+  const requestURL = '/auth/login';
 
   const response = await api.post(requestURL, credentials);
 
@@ -12,7 +12,7 @@ export const logIn = async (credentials: AuthForm): Promise<LoginResponse> => {
 };
 
 export const signUp = async (credentials: AuthForm): Promise<LoginResponse> => {
-  const requestURL = "/auth/signUp";
+  const requestURL = '/auth/signUp';
 
   const response = await api.post(requestURL, credentials);
 
