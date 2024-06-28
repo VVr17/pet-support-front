@@ -5,7 +5,8 @@ import GoogleIcon from '@/assets/icons/socials/google.svg?react';
 const GoogleLoginButton = () => {
   const googleLogin = async () => {
     try {
-      window.open(`${BASE_URL}/auth/google/callback`, 'self');
+      // window.open(`${BASE_URL}/auth/google/callback`, 'self');
+      window.open(`${BASE_URL}/auth/google/callback`);
     } catch (error) {
       console.log(error);
     }

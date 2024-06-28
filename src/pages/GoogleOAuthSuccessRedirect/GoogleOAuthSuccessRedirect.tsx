@@ -9,7 +9,6 @@ import { useNavigate, useParams } from 'react-router-dom';
 const GoogleOAuthSuccessRedirect = () => {
   let { accessToken } = useParams();
 
-  console.log('accessToken', accessToken);
   const navigate = useNavigate();
 
   const { refetch } = useUser();
