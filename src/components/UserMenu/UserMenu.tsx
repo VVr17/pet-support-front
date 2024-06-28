@@ -43,7 +43,8 @@ const UserMenu = () => {
     setUser(null);
     setToken(null);
     navigate(ROUTES.login);
-    queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.user] });
+    queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.user] }); // Invalidate user
+    queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.myFavorites] }); // Invalidate user's favorites
     handleCloseUserMenu();
     refetch();
   };

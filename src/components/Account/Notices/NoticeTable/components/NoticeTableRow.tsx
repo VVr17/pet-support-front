@@ -1,9 +1,14 @@
 import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
 import { IconButton, TableCell, TableRow } from '@mui/material';
 import dayjs from 'dayjs';
 import { useState } from 'react';
 
 import AlertDialog from '@/components/ui-kit/AlertDialog';
+import Toast from '@/components/ui-kit/Toast';
+import { ToastType } from '@/types/Toast';
+
+import NoticeFormDialog from '../../NoticeFormDialog';
 
 interface INoticeRowProps {
   notice: MyNoticeData;
@@ -20,6 +25,13 @@ const NoticeTableRow: React.FC<INoticeRowProps> = ({
   const { title, category, name, breed, dateOfBirth, location, price } = notice;
   const [alertIsOpened, setAlertIsOpened] = useState(false);
 
+  const [isModalOpened, setIsModalOpened] = useState(false); // Edit notice form modal
+  const [toast, setToast] = useState<ToastType | null>(null);
+
+  const toggleModal = () => {
+    setIsModalOpened(prevState => !prevState);
+  };
+
   return (
     <>
       <TableRow hover tabIndex={-1} sx={{ cursor: 'pointer' }}>
@@ -33,6 +45,11 @@ const NoticeTableRow: React.FC<INoticeRowProps> = ({
         <TableCell>{location}</TableCell>
         <TableCell>{price || '--'}</TableCell>
         <TableCell align="center">
+          {type === 'my' && (
+            <IconButton onClick={toggleModal}>
+              <EditIcon />
+            </IconButton>
+          )}
           <IconButton onClick={() => setAlertIsOpened(true)}>
             <DeleteIcon />
           </IconButton>
@@ -61,6 +78,23 @@ const NoticeTableRow: React.FC<INoticeRowProps> = ({
             : ''
         }
       />
+
+      <NoticeFormDialog
+        open={isModalOpened}
+        onClose={toggleModal}
+        noticeId={notice.id}
+        keepMounted={false}
+        setToast={setToast}
+      />
+
+      {toast && (
+        <Toast
+          open={!!toast}
+          onClose={() => setToast(null)}
+          message={toast.message}
+          severity={toast.type}
+        />
+      )}
     </>
   );
 };

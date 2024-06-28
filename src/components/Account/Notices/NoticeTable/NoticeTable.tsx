@@ -7,12 +7,12 @@ import {
 } from '@mui/material';
 import { useMemo, useState } from 'react';
 
+import { useRemoveFromFavorites } from '@/hooks/useQuery/useFavorites';
 import { useDeleteNotice } from '@/hooks/useQuery/useNotices';
 
-import { useRemoveFromFavorites } from '@/hooks/useQuery/useFavorites';
-import { getComparator } from '../../utils/getSortTableComparator';
-import Loader from '../ui-kit/Loader';
-import Toast from '../ui-kit/Toast';
+import { getComparator } from '../../../../utils/getSortTableComparator';
+import Loader from '../../../ui-kit/Loader';
+import Toast from '../../../ui-kit/Toast';
 import NoticeTableHeader from './components/NoticeTableHeader';
 import NoticeTableRow from './components/NoticeTableRow';
 import { tableStyles } from './styles';
@@ -49,6 +49,7 @@ const NoticeTable: React.FC<INoticeTableProps> = ({ notices, type }) => {
     setOrderBy(property);
   };
 
+  // Delete user's own notices
   const handleNoticeDelete = async (noticeId: string) => {
     try {
       await deleteNotice.mutateAsync(noticeId);
@@ -65,6 +66,7 @@ const NoticeTable: React.FC<INoticeTableProps> = ({ notices, type }) => {
     }
   };
 
+  // Remove notice from user's favorite collection
   const handleRemoveFromFavorites = async (noticeId: string) => {
     try {
       await removeFromFavorites.mutateAsync(noticeId);

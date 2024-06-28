@@ -1,11 +1,12 @@
 import { AlertColor, Box, Container } from '@mui/material';
 import { useEffect, useState } from 'react';
-import { SubmitHandler,useForm } from 'react-hook-form';
+import { SubmitHandler, useForm } from 'react-hook-form';
 
 import { uploadImage } from '@/helpers/uploadImage';
 import { useCategories } from '@/hooks/useQuery/useCategories';
 import { useAddNotice } from '@/hooks/useQuery/useNotices';
 import { FIRST_STEP } from '@/utils/constants/formSteps';
+import { noticeDefaultValues } from '@/utils/forms/noticeDefaultValues';
 
 import Toast from '../ui-kit/Toast';
 import { FormButtons } from './components';
@@ -13,7 +14,7 @@ import FormHeader from './components/FormHeader';
 import { formSteps } from './steps';
 import Confirmation from './steps/Confirmation';
 import { formStyles, wrapperStyles } from './styles';
-import { formConfig, noticeDefaultValues } from './utils/formConfig';
+import { formConfig } from './utils/formConfig';
 import { getTransformedData } from './utils/getTransformedData';
 import { stepFields } from './utils/stepFields';
 

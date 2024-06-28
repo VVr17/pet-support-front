@@ -10,7 +10,7 @@ import { drawerWidth } from '@/utils/constants/account';
 import AccountHeader from '../AccountHeader';
 import AccountSideBar from '../AccountSideBar';
 import Footer from '../Footer';
-import { containerStyles, mainContentStyles, wrapperStyles } from './styles';
+import { containerStyles, getMainContentStyles, wrapperStyles } from './styles';
 
 const AccountLayout = () => {
   const [desktopOpen, setDesktopOpen] = useState(false);
@@ -53,7 +53,10 @@ const AccountLayout = () => {
             handleMobileDrawerClose={handleMobileDrawerClose}
             handleDrawerTransitionEnd={() => setIsClosing(false)}
           />
-          <Box component="main" sx={mainContentStyles}>
+          <Box
+            component="main"
+            sx={getMainContentStyles(desktopOpen, drawerWidth)}
+          >
             <Suspense fallback={<Loader open={true} />}>
               <Outlet />
             </Suspense>

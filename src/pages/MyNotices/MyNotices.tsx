@@ -1,7 +1,7 @@
 import { Box, Button, Theme, Typography } from '@mui/material';
 import { useNavigate } from 'react-router';
 
-import NoticeTable from '@/components/NoticeTable';
+import NoticeTable from '@/components/Account/Notices/NoticeTable';
 import Loader from '@/components/ui-kit/Loader';
 import { useMyNotices, useUser } from '@/hooks/useQuery/useUser';
 import { ROUTES } from '@/utils/constants/routes';

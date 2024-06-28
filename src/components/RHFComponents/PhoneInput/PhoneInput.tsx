@@ -11,10 +11,11 @@ import { iconWrapperStyles, inputPropsStyles, inputStyles } from './styles';
 interface IProp {
   control: Control<any>;
   name: string;
+  label: string;
   placeholder: string;
 }
 
-const PhoneInput: React.FC<IProp> = ({ control, name, placeholder }) => {
+const PhoneInput: React.FC<IProp> = ({ control, name, label, placeholder }) => {
   return (
     <Controller
       name={name}
@@ -31,6 +32,7 @@ const PhoneInput: React.FC<IProp> = ({ control, name, placeholder }) => {
             <MuiTelInput
               {...otherFields}
               value={value}
+              label={label}
               onChange={value => {
                 onChange(value);
               }}

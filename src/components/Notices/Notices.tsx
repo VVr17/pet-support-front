@@ -42,7 +42,7 @@ const Notices = () => {
   // Set the first tab after categories fetched
   useEffect(() => {
     if (!activeTab && categoriesData) {
-      setActiveTab(categoriesData[0].id);
+      setActiveTab(categoriesData[1].id);
     }
   }, [activeTab, categoriesData]);
 

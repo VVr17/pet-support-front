@@ -31,7 +31,7 @@ export const useUpdateUser = () => {
 
 export const useMyNotices = (userId?: string) => {
   return useQuery({
-    queryKey: [QUERY_KEYS.myNotices],
+    queryKey: [QUERY_KEYS.myNotices, userId],
     queryFn: getMyNotices,
     enabled: !!userId,
   });
@@ -39,7 +39,7 @@ export const useMyNotices = (userId?: string) => {
 
 export const useMyPets = (userId?: string) => {
   return useQuery({
-    queryKey: [QUERY_KEYS.myPets],
+    queryKey: [QUERY_KEYS.myPets, userId],
     queryFn: getMyPets,
     enabled: !!userId,
   });

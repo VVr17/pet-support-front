@@ -1,8 +1,8 @@
 import { Box, Button, Theme, Typography } from '@mui/material';
 import { useState } from 'react';
 
-import MyPetsTable from '@/components/MyPets/MyPetsTable';
-import PetFormDialog from '@/components/MyPets/PetFormDialog';
+import MyPetsTable from '@/components/Account/MyPets/MyPetsTable';
+import PetFormDialog from '@/components/Account/MyPets/PetFormDialog';
 import Loader from '@/components/ui-kit/Loader';
 import { useMyPets, useUser } from '@/hooks/useQuery/useUser';
 

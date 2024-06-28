@@ -6,9 +6,9 @@ import DropdownInput from '@/components/RHFComponents/DropdownInput';
 import RangeField from '@/components/RHFComponents/RangeField';
 import { useCategories } from '@/hooks/useQuery/useCategories';
 import useResponsive from '@/hooks/useResponsive';
+import { getCategoriesOptions, sexOptions } from '@/utils/forms/selectOptions';
 
-import { FieldLabel,FormTitle } from '../components';
-import { getCategoriesOptions, sexOptions } from '../utils/selectOptions';
+import { FieldLabel, FormTitle } from '../components';
 import { getRadioGroupTestDriveStyles } from './styles';
 
 interface IProp {

@@ -5,4 +5,5 @@ export const QUERY_KEYS = {
   myNotices: 'myNotices',
   myPets: 'myPets',
   myFavorites: 'myFavorites',
+  noticeById: 'noticeById',
 };

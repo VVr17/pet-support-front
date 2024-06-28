@@ -5,10 +5,10 @@ import { ChangeEvent, createRef, useState } from 'react';
 import { Cropper, ReactCropperElement } from 'react-cropper';
 
 import { uploadFile } from '@/api/files';
+import Toast from '@/components/ui-kit/Toast';
 import { dataURItoFile } from '@/helpers/dataURItoFile';
 import { useUpdateUser, useUser } from '@/hooks/useQuery/useUser';
 
-import Toast from '../../../ui-kit/Toast';
 import { avatarStyles, cropperStyles, newImagePreviewStyles } from './styles';
 
 const AvatarUpload = () => {

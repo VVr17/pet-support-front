@@ -4,6 +4,8 @@ import { useEffect } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
 import Field from '@/components/RHFComponents/Field';
+import PhoneInput from '@/components/RHFComponents/PhoneInput';
+import { formatPhoneNumber } from '@/helpers/formatPhoneNumber';
 import { useUpdateUser, useUser } from '@/hooks/useQuery/useUser';
 
 import { formConfig } from './formConfig';
@@ -29,7 +31,9 @@ const ContactsForm = () => {
 
   // Handle submit form data
   const onSubmit: SubmitHandler<ContactsForm> = async data => {
-    await updateUser.mutateAsync(data);
+    const transformedData = { ...data, phone: formatPhoneNumber(data.phone) };
+
+    await updateUser.mutateAsync(transformedData);
     refetch();
     reset(data);
   };
@@ -57,7 +61,7 @@ const ContactsForm = () => {
               control={control}
               placeholder="Your email"
             />
-            <Field
+            <PhoneInput
               name="phone"
               label="Phone"
               control={control}

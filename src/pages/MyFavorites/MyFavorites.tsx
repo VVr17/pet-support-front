@@ -1,8 +1,7 @@
 import { Theme, Typography } from '@mui/material';
 
-import NoticeTable from '@/components/NoticeTable';
+import NoticeTable from '@/components/Account/Notices/NoticeTable';
 import Loader from '@/components/ui-kit/Loader';
-
 import { useMyFavorites } from '@/hooks/useQuery/useFavorites';
 import { useUserStore } from '@/store/useUserStore';
 

@@ -1,5 +1,6 @@
 import { Alert, AlertProps, Snackbar } from '@mui/material';
 import Grow from '@mui/material/Grow';
+import { createPortal } from 'react-dom';
 
 interface IToastProps extends AlertProps {
   open: boolean;
@@ -8,7 +9,7 @@ interface IToastProps extends AlertProps {
 }
 
 const Toast: React.FC<IToastProps> = ({ message, open, onClose, ...props }) => {
-  return (
+  return createPortal(
     <Snackbar
       anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
       open={open}
@@ -19,7 +20,8 @@ const Toast: React.FC<IToastProps> = ({ message, open, onClose, ...props }) => {
       <Alert onClose={onClose} sx={{ width: '100%' }} {...props}>
         {message}
       </Alert>
-    </Snackbar>
+    </Snackbar>,
+    document.getElementById('toast-root')!,
   );
 };
 

@@ -1,11 +1,7 @@
 import { Theme } from '@mui/material';
 
 export const inputPropsStyles = {
-  style: {
-    padding: '12px',
-    fontSize: '1.125rem',
-    fontWeight: 500,
-  },
+  style: { paddingLeft: '12px' },
 };
 
 export const inputStyles = {

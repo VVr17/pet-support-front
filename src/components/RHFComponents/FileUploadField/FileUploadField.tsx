@@ -27,12 +27,14 @@ import {
 
 interface IFileInputProps extends Omit<TextFieldProps, 'name'> {
   methods: UseFormReturn<any, unknown, undefined>;
+  fallback?: string;
 }
 
-const FileUploadField: React.FC<IFileInputProps> = ({ methods }) => {
+const FileUploadField: React.FC<IFileInputProps> = ({ methods, fallback }) => {
   const isLargeMobile = useResponsive('between', 'sm', 'md');
   const isTablet = useResponsive('between', 'md', 'lg');
   const isDesktop = useResponsive('up', 'lg');
+
   const {
     control,
     setValue,
@@ -126,7 +128,17 @@ const FileUploadField: React.FC<IFileInputProps> = ({ methods }) => {
               )}
             />
 
-            <CloudUpload fontSize={'large'} />
+            {fallback ? (
+              <Box sx={{ ...croppedImageStyles, opacity: 1 }}>
+                <CardMedia
+                  component="img"
+                  src={fallback}
+                  sx={cardMediaStyles}
+                />
+              </Box>
+            ) : (
+              <CloudUpload fontSize={'large'} />
+            )}
 
             {errors?.image?.message && (
               <ErrorMessage message={errors.image.message as string} />

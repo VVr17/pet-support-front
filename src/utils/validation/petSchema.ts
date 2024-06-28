@@ -1,21 +1,17 @@
 import * as yup from 'yup';
 
+import { onlyLettersRegEx } from './RegEx';
+
 export const petSchema = yup.object().shape({
   name: yup
     .string()
-    .matches(
-      /^[a-zA-Zа-яА-ЯіІїЇґҐ]+(?: [a-zA-Zа-яА-ЯіІїЇґҐ]+)*$/,
-      'Only letters can be accepted',
-    )
+    .matches(onlyLettersRegEx, 'Only letters can be accepted')
     .min(2, 'Name should be at least 2 characters long')
     .max(16, 'Name should be up to 16 characters long')
     .required('Pet name is required'),
   breed: yup
     .string()
-    .matches(
-      /^[a-zA-Zа-яА-ЯіІїЇґҐ]+(?: [a-zA-Zа-яА-ЯіІїЇґҐ]+)*$/,
-      'Only letters can be accepted',
-    )
+    .matches(onlyLettersRegEx, 'Only letters can be accepted')
     .min(2, 'Breed should be at least 2 characters long')
     .max(24, 'Breed should be up to 24 characters long')
     .required('Pet breed is required'),

@@ -10,8 +10,8 @@ import { useMemo, useState } from 'react';
 import Loader from '@/components/ui-kit/Loader';
 import Toast from '@/components/ui-kit/Toast';
 import { useDeletePet } from '@/hooks/useQuery/usePets';
+import { getComparator } from '@/utils/getSortTableComparator';
 
-import { getComparator } from '../../../utils/getSortTableComparator';
 import PetTableHeader from './components/PetTableHeader';
 import PetTableRow from './components/PetTableRow';
 import { tableStyles } from './styles';

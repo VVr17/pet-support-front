@@ -1,11 +1,15 @@
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import {
   AlertColor,
+  Avatar,
   Box,
   Button,
   Card,
   CardContent,
   CardMedia,
   IconButton,
+  Tooltip,
   Typography,
 } from '@mui/material';
 import { useState } from 'react';
@@ -18,8 +22,7 @@ import {
   useRemoveFromFavorites,
 } from '@/hooks/useQuery/useFavorites';
 import { useUserStore } from '@/store/useUserStore';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+
 import PetDialog from '../../PetDialog';
 import { imgStyles } from './styles';
 
@@ -30,7 +33,8 @@ interface IPetProps {
 const PetCard: React.FC<IPetProps> = ({ notice }) => {
   const { user } = useUserStore();
   const { data: favorites } = useMyFavorites(user?.id);
-  const isFavorite = !!favorites?.find(favorite => favorite.id === notice.id);
+  const isFavorite =
+    user && !!favorites?.find(favorite => favorite.id === notice.id);
 
   const addToFavorites = useAddToFavorites();
   const removeFromFavorites = useRemoveFromFavorites();
@@ -73,13 +77,24 @@ const PetCard: React.FC<IPetProps> = ({ notice }) => {
     <>
       <Card sx={{ borderRadius: 3, position: 'relative' }}>
         <Box position="absolute" top={4} right={4}>
-          <IconButton sx={{ color: 'primary.main' }} onClick={toggleIsFavorite}>
-            {isFavorite ? (
-              <FavoriteIcon color="inherit" />
-            ) : (
-              <FavoriteBorderIcon color="inherit" />
-            )}
-          </IconButton>
+          <Tooltip
+            title={!isFavorite ? 'add to favorite' : 'remove from favorite'}
+          >
+            <IconButton onClick={toggleIsFavorite}>
+              <Avatar
+                sx={{
+                  color: 'primary.main',
+                  bgcolor: 'transparent',
+                }}
+              >
+                {isFavorite ? (
+                  <FavoriteIcon color="inherit" fontSize="large" />
+                ) : (
+                  <FavoriteBorderIcon color="inherit" fontSize="large" />
+                )}
+              </Avatar>
+            </IconButton>
+          </Tooltip>
         </Box>
 
         <CardMedia component="img" src={notice.photoURL} sx={imgStyles} />
