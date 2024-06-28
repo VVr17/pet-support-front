@@ -1,6 +1,6 @@
-import { Grid } from "@mui/material";
+import { Grid } from '@mui/material';
 
-import PetCard from "./PetCard";
+import PetCard from './PetCard';
 
 interface IPetListProps {
   notices: Notice[];
@@ -8,7 +8,7 @@ interface IPetListProps {
 const PetList: React.FC<IPetListProps> = ({ notices }) => {
   return (
     <Grid container spacing={{ xs: 2, md: 4 }}>
-      {notices.map((notice) => (
+      {notices.map(notice => (
         <Grid key={notice.id} item xs={12} sm={6} lg={3}>
           <PetCard notice={notice} />
         </Grid>

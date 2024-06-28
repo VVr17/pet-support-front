@@ -102,6 +102,13 @@ export const router = createBrowserRouter([
                 },
               },
               {
+                path: ROUTES.myFavorites,
+                lazy: async () => {
+                  const MyFavorites = await import('./pages/MyFavorites');
+                  return { Component: MyFavorites.default };
+                },
+              },
+              {
                 path: ROUTES.myPets,
                 lazy: async () => {
                   const MyPets = await import('./pages/MyPets');

@@ -4,4 +4,5 @@ export const QUERY_KEYS = {
   categories: 'categories',
   myNotices: 'myNotices',
   myPets: 'myPets',
+  myFavorites: 'myFavorites',
 };

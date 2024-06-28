@@ -7,11 +7,15 @@ import AlertDialog from '@/components/ui-kit/AlertDialog';
 
 interface INoticeRowProps {
   notice: MyNoticeData;
-  handleNoticeDelete: (petId: string) => void;
+  handleNoticeDelete: (noticeId: string) => void;
+  handleRemoveFromFavorites: (noticeId: string) => void;
+  type: 'my' | 'favorite';
 }
 const NoticeTableRow: React.FC<INoticeRowProps> = ({
   notice,
   handleNoticeDelete,
+  handleRemoveFromFavorites,
+  type,
 }) => {
   const { title, category, name, breed, dateOfBirth, location, price } = notice;
   const [alertIsOpened, setAlertIsOpened] = useState(false);
@@ -39,11 +43,23 @@ const NoticeTableRow: React.FC<INoticeRowProps> = ({
         open={alertIsOpened}
         onConfirm={() => {
           setAlertIsOpened(false);
-          handleNoticeDelete(notice.id);
+          if (type === 'my') {
+            handleNoticeDelete(notice.id);
+          } else {
+            handleRemoveFromFavorites(notice.id);
+          }
         }}
         onCancel={() => setAlertIsOpened(false)}
-        title={`Do you want to delete your notice: "${notice.title}" ?`}
-        subtitle="This data will be deleted irrevocably and cannot be restored."
+        title={
+          type === 'my'
+            ? `Do you want to delete your notice "${notice.title}" ?`
+            : `Do you want to remove notice "${notice.title}" from favorites ?`
+        }
+        subtitle={
+          type === 'my'
+            ? 'This data will be deleted irrevocably and cannot be restored.'
+            : ''
+        }
       />
     </>
   );

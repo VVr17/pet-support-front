@@ -1,7 +1,7 @@
 import { Box, Button, Theme, Typography } from '@mui/material';
 import { useNavigate } from 'react-router';
 
-import MyNoticeTable from '@/components/MyNoticeTable';
+import NoticeTable from '@/components/NoticeTable';
 import Loader from '@/components/ui-kit/Loader';
 import { useMyNotices, useUser } from '@/hooks/useQuery/useUser';
 import { ROUTES } from '@/utils/constants/routes';
@@ -35,7 +35,9 @@ const MyNotices = () => {
         </Button>
       </Box>
 
-      {notices && notices.length > 0 && <MyNoticeTable notices={notices} />}
+      {notices && notices.length > 0 && (
+        <NoticeTable notices={notices} type="my" />
+      )}
 
       {notices?.length === 0 && (
         <Typography

@@ -1,3 +1,4 @@
+import FavoriteIcon from '@mui/icons-material/Favorite';
 import MailIcon from '@mui/icons-material/Mail';
 import PetsIcon from '@mui/icons-material/Pets';
 import TextSnippetIcon from '@mui/icons-material/TextSnippet';
@@ -12,6 +13,7 @@ export const ROUTES = {
 
   account: '/account',
   myNotices: '/account/notices',
+  myFavorites: '/account/favorites',
   myPets: '/account/pets',
 
   noticeForm: '/add-notice',
@@ -27,5 +29,6 @@ export const mainNavigation = [
 export const accountNavigation = [
   { label: 'Profile', href: ROUTES.account, Icon: TextSnippetIcon },
   { label: 'My Notices', href: ROUTES.myNotices, Icon: MailIcon },
+  { label: 'My Favorites', href: ROUTES.myFavorites, Icon: FavoriteIcon },
   { label: 'My Pets', href: ROUTES.myPets, Icon: PetsIcon },
 ];
