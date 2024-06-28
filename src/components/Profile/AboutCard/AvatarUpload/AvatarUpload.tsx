@@ -1,13 +1,14 @@
 import { CloudUpload } from '@mui/icons-material';
+import { LoadingButton } from '@mui/lab';
 import { AlertColor, Avatar, Box, Button, TextField } from '@mui/material';
 import { ChangeEvent, createRef, useState } from 'react';
-
 import { Cropper, ReactCropperElement } from 'react-cropper';
-import { dataURItoFile } from '@/helpers/dataURItoFile';
-import { LoadingButton } from '@mui/lab';
+
 import { uploadFile } from '@/api/files';
-import Toast from '../../../ui-kit/Toast';
+import { dataURItoFile } from '@/helpers/dataURItoFile';
 import { useUpdateUser, useUser } from '@/hooks/useQuery/useUser';
+
+import Toast from '../../../ui-kit/Toast';
 import { avatarStyles, cropperStyles, newImagePreviewStyles } from './styles';
 
 const AvatarUpload = () => {
@@ -27,7 +28,7 @@ const AvatarUpload = () => {
 
   // Checks whether there is a file and sets image to be cropped
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-    let files: FileList | null = e.target.files;
+    const files: FileList | null = e.target.files;
 
     if (!files || files.length === 0) {
       setToast({ message: 'No file selected', type: 'error' });

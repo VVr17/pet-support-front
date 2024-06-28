@@ -1,15 +1,16 @@
+import { Box, Button, Theme, Typography } from '@mui/material';
+import { useState } from 'react';
+
 import MyPetsTable from '@/components/MyPets/MyPetsTable';
 import PetFormDialog from '@/components/MyPets/PetFormDialog';
 import Loader from '@/components/ui-kit/Loader';
 import { useMyPets, useUser } from '@/hooks/useQuery/useUser';
-import { Box, Button, Typography } from '@mui/material';
-import { useState } from 'react';
 
 const MyPets = () => {
   const { data: user } = useUser();
   const { data: pets, isLoading } = useMyPets(user?.id);
 
-  const [isModalOpened, setIsModalOpened] = useState(false);
+  const [isModalOpened, setIsModalOpened] = useState(false); // Add pet form modal
 
   const toggleModal = () => {
     setIsModalOpened(prevState => !prevState);
@@ -38,7 +39,12 @@ const MyPets = () => {
       {pets && pets.length > 0 && <MyPetsTable pets={pets} />}
 
       {pets?.length === 0 && (
-        <Typography variant="h4" component="p">
+        <Typography
+          variant="h4"
+          component="p"
+          fontWeight={500}
+          color={(theme: Theme) => theme.palette.grey[600]}
+        >
           You have not added your pets yet
         </Typography>
       )}

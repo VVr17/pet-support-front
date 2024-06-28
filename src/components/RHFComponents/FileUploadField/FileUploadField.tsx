@@ -9,11 +9,13 @@ import {
 } from '@mui/material';
 import { ChangeEvent, createRef, useState } from 'react';
 import { Cropper, ReactCropperElement } from 'react-cropper';
-import { dataURItoFile } from '@/helpers/dataURItoFile';
 import { Controller, UseFormReturn } from 'react-hook-form';
 
 import Toast from '@/components/ui-kit/Toast';
+import { dataURItoFile } from '@/helpers/dataURItoFile';
 import useResponsive from '@/hooks/useResponsive';
+
+import ErrorMessage from '../ErrorMessage';
 import {
   cardMediaStyles,
   croppedImageStyles,
@@ -22,7 +24,6 @@ import {
   getCropperStyles,
   height,
 } from './styles';
-import ErrorMessage from '../ErrorMessage';
 
 interface IFileInputProps extends Omit<TextFieldProps, 'name'> {
   methods: UseFormReturn<any, unknown, undefined>;
@@ -51,7 +52,7 @@ const FileUploadField: React.FC<IFileInputProps> = ({ methods }) => {
 
   // Checks whether there is a file and sets image to be cropped
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-    let files: FileList | null = e.target.files;
+    const files: FileList | null = e.target.files;
 
     if (!files || files.length === 0) {
       setToast({ message: 'No file selected', type: 'error' });
@@ -166,6 +167,7 @@ const FileUploadField: React.FC<IFileInputProps> = ({ methods }) => {
           </Box>
         </Box>
 
+        {/* After image selected add buttons to crop or remove image */}
         {image && (
           <Box
             display="flex"

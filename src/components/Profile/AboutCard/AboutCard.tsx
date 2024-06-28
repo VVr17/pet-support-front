@@ -1,6 +1,8 @@
 import { Paper, Typography } from '@mui/material';
-import AboutForm from './AboutForm';
+
 import { useUser } from '@/hooks/useQuery/useUser';
+
+import AboutForm from './AboutForm';
 import AvatarUpload from './AvatarUpload';
 import { wrapperStyles } from './styles';
 

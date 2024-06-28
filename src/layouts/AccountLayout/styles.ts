@@ -9,3 +9,8 @@ export const containerStyles = {
   display: 'flex',
   height: '100%',
 };
+
+export const mainContentStyles = {
+  flexGrow: 1,
+  p: { xs: 0, md: 3 },
+};

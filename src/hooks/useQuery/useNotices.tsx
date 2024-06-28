@@ -1,6 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
-import { fetchNotices, postNotice } from '@/api/notices';
+import { deleteNotice, fetchNotices, postNotice } from '@/api/notices';
 import { DEFAULT_PER_PAGE, FIRST_PAGE } from '@/utils/constants/notices';
 
 import { QUERY_KEYS } from './queryKeys';
@@ -29,6 +29,25 @@ export const useAddNotice = () => {
     mutationFn: postNotice,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.notices] });
+      queryClient.invalidateQueries({
+        queryKey: [QUERY_KEYS.myNotices],
+      });
+    },
+  });
+};
+
+export const useDeleteNotice = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: deleteNotice,
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: [QUERY_KEYS.notices],
+      });
+      queryClient.invalidateQueries({
+        queryKey: [QUERY_KEYS.myNotices],
+      });
     },
   });
 };

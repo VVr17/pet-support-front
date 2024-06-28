@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import Close from '@mui/icons-material/Close';
 import {
   AppBar,
   Box,
@@ -7,13 +7,14 @@ import {
   Toolbar,
   Typography,
 } from '@mui/material';
-import { scroller } from 'react-scroll';
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router';
+import { scroller } from 'react-scroll';
 
-import Close from '@mui/icons-material/Close';
+import Logo from '@/components/ui-kit/Logo';
+
 import ProgressBar from './ProgressBar';
 import { appBarStyles, getToolbarStyles } from './styles';
-import Logo from '@/components/ui-kit/Logo';
 
 interface IProps {
   activeStep: number;
@@ -55,7 +56,7 @@ const FormHeader: React.FC<IProps> = ({ activeStep, totalSteps }) => {
                 component="p"
                 fontSize={{ xs: '1rem', md: '1.125rem', lg: '1.25rem' }}
                 fontWeight={700}
-                sx={{ minWidth: 96 }}
+                sx={{ minWidth: { sm: 96 } }}
               >
                 <Typography
                   color="text.accent"
@@ -87,8 +88,10 @@ const FormHeader: React.FC<IProps> = ({ activeStep, totalSteps }) => {
               <Button
                 onClick={handleBack}
                 endIcon={<Close />}
-                color="inherit"
-                sx={{ fontSize: { xs: '1rem', md: '1.125rem' } }}
+                sx={{
+                  fontSize: { xs: '1rem', md: '1.125rem' },
+                  color: 'text.primary',
+                }}
               >
                 Cancel
               </Button>

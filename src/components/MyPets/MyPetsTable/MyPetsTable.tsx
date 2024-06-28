@@ -1,19 +1,21 @@
 import {
+  AlertColor,
+  Paper,
   Table,
   TableBody,
   TableContainer,
-  Paper,
-  AlertColor,
 } from '@mui/material';
 import { useMemo, useState } from 'react';
-import { getRows } from './utils/getRows';
+
+import Loader from '@/components/ui-kit/Loader';
+import Toast from '@/components/ui-kit/Toast';
+import { useDeletePet } from '@/hooks/useQuery/usePets';
+
 import { getComparator } from '../../../utils/getSortTableComparator';
 import PetTableHeader from './components/PetTableHeader';
 import PetTableRow from './components/PetTableRow';
 import { tableStyles } from './styles';
-import Toast from '@/components/ui-kit/Toast';
-import { useDeletePet } from '@/hooks/useQuery/usePets';
-import Loader from '@/components/ui-kit/Loader';
+import { getRows } from './utils/getRows';
 
 interface IMyPetTableProps {
   pets: Pet[];
@@ -48,7 +50,7 @@ const MyPetsTable: React.FC<IMyPetTableProps> = ({ pets }) => {
       await deletePet.mutateAsync(petId);
       // If response is successful, go to the final confirmation step after form submit
       setToast({
-        message: 'Pet has been added deleted',
+        message: 'Pet has been deleted',
         type: 'success',
       });
     } catch (error) {

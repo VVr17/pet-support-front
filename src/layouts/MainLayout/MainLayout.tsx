@@ -15,6 +15,7 @@ const MainLayout = () => {
     const checkToken = async () => {
       const storedToken = localStorage.getItem(JWT_TOKEN_KEY);
 
+      // If there is stored Token, parse token and fetch user
       if (storedToken) {
         const storedData = JSON.parse(storedToken);
         const token = storedData.state.token;
@@ -33,7 +34,6 @@ const MainLayout = () => {
         setUser(user.data);
       } catch (error) {
         // If there is no User data (in case there is not Token or it is expired) delete Auth token from Axios Config and Local Storage
-        console.error('Token is invalid or expired', error);
         localStorage.removeItem(JWT_TOKEN_KEY); // Remove token from Local Storage
         authHeader.deleteAuthToken(); // Delete Auth token from axios headers
         setUser(null);

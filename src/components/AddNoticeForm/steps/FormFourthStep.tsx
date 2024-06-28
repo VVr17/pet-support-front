@@ -1,7 +1,8 @@
 import { UseFormReturn } from 'react-hook-form';
 
-import { FormTitle } from '../components';
 import TextArea from '@/components/RHFComponents/TextArea';
+
+import { FormTitle } from '../components';
 
 interface IProp {
   methods: UseFormReturn<NoticeForm, unknown, undefined>;

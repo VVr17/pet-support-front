@@ -7,8 +7,8 @@ import {
   DialogContent,
   DialogProps,
   DialogTitle,
-  Typography,
   IconButton,
+  Typography,
   useMediaQuery,
   useTheme,
 } from '@mui/material';

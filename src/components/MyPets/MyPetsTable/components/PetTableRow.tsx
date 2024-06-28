@@ -1,7 +1,8 @@
+import DeleteIcon from '@mui/icons-material/Delete';
 import { IconButton, TableCell, TableRow } from '@mui/material';
 import dayjs from 'dayjs';
-import DeleteIcon from '@mui/icons-material/Delete';
 import { useState } from 'react';
+
 import AlertDialog from '@/components/ui-kit/AlertDialog';
 
 interface IPetRowProps {
@@ -33,7 +34,7 @@ const PetTableRow: React.FC<IPetRowProps> = ({ pet, handlePetDelete }) => {
           handlePetDelete(pet.id);
         }}
         onCancel={() => setAlertIsOpened(false)}
-        title={`Do you want to delete you pet "${pet.name}" data?`}
+        title={`Do you want to delete your pet "${pet.name}" data?`}
         subtitle="This data will be deleted irrevocably and cannot be restored."
       />
     </>

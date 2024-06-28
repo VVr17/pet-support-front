@@ -1,12 +1,13 @@
-import * as React from 'react';
 import {
   Button,
   Dialog,
-  DialogContent,
   DialogActions,
+  DialogContent,
   DialogContentText,
   DialogTitle,
 } from '@mui/material';
+import * as React from 'react';
+
 import { dialogStyles } from './styles';
 
 interface IAlertDialogProps {

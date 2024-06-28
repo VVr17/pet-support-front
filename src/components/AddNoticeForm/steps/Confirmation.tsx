@@ -1,22 +1,15 @@
 import { Box, Button, Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
 
-import { ConfirmationCard, FormTitle } from '../components';
 import Logo from '@/components/ui-kit/Logo';
 import { noticeConfirmation } from '@/utils/staticData/noticeConfirmation';
 
+import { ConfirmationCard, FormTitle } from '../components';
+import { confirmationWrapper } from './styles';
+
 const Confirmation = () => {
   return (
-    <Box
-      maxWidth={662}
-      mx="auto"
-      sx={{
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'space-between',
-        flexGrow: 1,
-      }}
-    >
+    <Box maxWidth={662} mx="auto" sx={confirmationWrapper}>
       <Box mb={10}>
         {/* Logo */}
         <Box mb={9.75} textAlign="center" display={{ xs: 'none', md: 'block' }}>

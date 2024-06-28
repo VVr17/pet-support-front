@@ -33,6 +33,7 @@ const LookingHome = () => {
 
   const isLoading = categoriesLoading || noticesLoading;
 
+  // Render bullets for Slider
   const renderPaginationBullets = (_index: number, className: string) => {
     return `<div class="${className}"><div class="bullet-line"></div></div>`;
   };
@@ -70,6 +71,7 @@ const LookingHome = () => {
           centeredSlides={true}
           slidesPerView="auto"
         >
+          {/* Slides */}
           {categoriesData &&
             noticesData?.data &&
             noticesData?.data.map(notice => (

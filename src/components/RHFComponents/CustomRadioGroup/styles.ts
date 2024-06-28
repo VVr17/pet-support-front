@@ -2,7 +2,7 @@ export const radioGroupStyles = {
   '& .MuiFormControlLabel-root': {
     paddingY: { xs: 1.5, md: 1.75 },
     paddingX: 2,
-    marginX: '0px',
+    marginX: 0,
     borderRadius: 3,
     '& .MuiRadio-root': {
       padding: 0,

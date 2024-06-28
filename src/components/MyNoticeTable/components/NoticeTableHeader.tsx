@@ -1,11 +1,12 @@
 import {
+  Box,
   TableCell,
   TableHead,
   TableRow,
   TableSortLabel,
-  Box,
 } from '@mui/material';
 import { visuallyHidden } from '@mui/utils';
+
 import { headCells } from '../utils/headCells';
 
 interface INoticeHeaderProps {
@@ -46,6 +47,7 @@ const NoticeTableHeader = (props: INoticeHeaderProps) => {
             </TableSortLabel>
           </TableCell>
         ))}
+        <TableCell></TableCell>
       </TableRow>
     </TableHead>
   );

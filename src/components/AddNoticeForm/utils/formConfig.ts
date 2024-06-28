@@ -1,8 +1,8 @@
-import { Resolver, ValidationMode } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { noticeSchema } from '@/utils/validation/noticeSchema';
-
 import dayjs from 'dayjs';
+import { Resolver, ValidationMode } from 'react-hook-form';
+
+import { noticeSchema } from '@/utils/validation/noticeSchema';
 
 export const noticeDefaultValues = {
   // First step

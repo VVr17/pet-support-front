@@ -1,6 +1,8 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { QUERY_KEYS } from './queryKeys';
+
 import { deletePet, postPet } from '@/api/pets';
+
+import { QUERY_KEYS } from './queryKeys';
 
 export const useAddPet = () => {
   const queryClient = useQueryClient();

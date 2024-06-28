@@ -7,17 +7,19 @@ import { useLocation, useNavigate } from 'react-router';
 import { logIn, signUp } from '@/api/auth';
 import Field from '@/components/RHFComponents/Field';
 import Toast from '@/components/ui-kit/Toast';
+import { useUser } from '@/hooks/useQuery/useUser';
 import { useUserStore } from '@/store/useUserStore';
 import { ROUTES } from '@/utils/constants/routes';
 
-import { logInButtonStyles } from './styles';
 import { formConfig } from './formConfig';
+import { logInButtonStyles } from './styles';
 
 const AuthForm = () => {
   const { pathname } = useLocation();
   const navigate = useNavigate();
 
   const { setUser, setToken } = useUserStore();
+  const { refetch } = useUser();
 
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -37,9 +39,12 @@ const AuthForm = () => {
         response = await signUp(data);
       }
 
+      // Set token and user
       setToken(response.access_token);
       setUser(response.data);
-      navigate(ROUTES.account);
+
+      await refetch(); // Refetch current user data
+      navigate(ROUTES.account); // Navigate to account
       setIsLoading(false);
       reset();
     } catch (error) {

@@ -1,8 +1,8 @@
 import { FormControl, RadioGroup } from '@mui/material';
-
-import CustomRadio from './components/CustomRadio';
 import { Controller } from 'react-hook-form';
+
 import ErrorMessage from '../ErrorMessage';
+import CustomRadio from './components/CustomRadio';
 import { radioGroupStyles } from './styles';
 import { CustomRadioCroupProps } from './types';
 

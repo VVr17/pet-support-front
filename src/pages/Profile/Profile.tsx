@@ -1,7 +1,7 @@
 import { Grid } from '@mui/material';
 
-import ContactsForm from '@/components/Profile/ContactsForm';
 import AboutCard from '@/components/Profile/AboutCard';
+import ContactsForm from '@/components/Profile/ContactsForm';
 
 const Profile = () => {
   return (

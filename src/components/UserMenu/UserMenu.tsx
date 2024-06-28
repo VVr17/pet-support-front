@@ -7,18 +7,21 @@ import {
   Tooltip,
   Typography,
 } from '@mui/material';
+import { useQueryClient } from '@tanstack/react-query';
 import { useState } from 'react';
 import { useNavigate } from 'react-router';
 
 import { authHeader } from '@/api/config';
 import fallbackAvatarUrl from '@/assets/images/avatar.jpg';
+import { QUERY_KEYS } from '@/hooks/useQuery/queryKeys';
+import { useUser } from '@/hooks/useQuery/useUser';
 import { useUserStore } from '@/store/useUserStore';
 import { ROUTES } from '@/utils/constants/routes';
-import { useUser } from '@/hooks/useQuery/useUser';
 
 const UserMenu = () => {
+  const queryClient = useQueryClient();
   const { setUser, setToken } = useUserStore();
-  const { data: user } = useUser();
+  const { data: user, refetch } = useUser();
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
   const navigate = useNavigate();
 
@@ -40,7 +43,9 @@ const UserMenu = () => {
     setUser(null);
     setToken(null);
     navigate(ROUTES.login);
+    queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.user] });
     handleCloseUserMenu();
+    refetch();
   };
 
   return (

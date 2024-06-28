@@ -1,3 +1,4 @@
+import CloseIcon from '@mui/icons-material/Close';
 import {
   Dialog,
   DialogContent,
@@ -5,9 +6,9 @@ import {
   DialogTitle,
   IconButton,
 } from '@mui/material';
-import CloseIcon from '@mui/icons-material/Close';
-import { dialogStyles, iconButtonStyles } from './styles';
+
 import AddPetForm from '../AddPetForm';
+import { dialogStyles, iconButtonStyles } from './styles';
 
 interface IPetFormDialogProps extends DialogProps {
   onClose: () => void;

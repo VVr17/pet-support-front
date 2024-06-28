@@ -1,17 +1,16 @@
-import { Container } from '@mui/material';
-import { Box } from '@mui/material';
+import { Box, Container } from '@mui/material';
 import CssBaseline from '@mui/material/CssBaseline';
 import Divider from '@mui/material/Divider';
-import { Suspense } from 'react';
-import { useState } from 'react';
+import { Suspense, useState } from 'react';
 import { Outlet } from 'react-router';
 
+import Loader from '@/components/ui-kit/Loader';
 import { drawerWidth } from '@/utils/constants/account';
 
 import AccountHeader from '../AccountHeader';
 import AccountSideBar from '../AccountSideBar';
 import Footer from '../Footer';
-import { containerStyles, wrapperStyles } from './styles';
+import { containerStyles, mainContentStyles, wrapperStyles } from './styles';
 
 const AccountLayout = () => {
   const [desktopOpen, setDesktopOpen] = useState(false);
@@ -36,6 +35,7 @@ const AccountLayout = () => {
   return (
     <>
       <CssBaseline />
+
       <AccountHeader
         drawerWidth={drawerWidth}
         desktopOpen={desktopOpen}
@@ -43,6 +43,7 @@ const AccountLayout = () => {
         toggleDesktopDrawer={toggleDesktopDrawer}
       />
       <Divider sx={{ display: { xs: 'none', md: 'block' } }} />
+
       <Box bgcolor="background.secondary" sx={wrapperStyles}>
         <Container sx={containerStyles} maxWidth="xl">
           <AccountSideBar
@@ -52,19 +53,14 @@ const AccountLayout = () => {
             handleMobileDrawerClose={handleMobileDrawerClose}
             handleDrawerTransitionEnd={() => setIsClosing(false)}
           />
-          <Box
-            component="main"
-            sx={{
-              flexGrow: 1,
-              p: { xs: 0, md: 3 },
-            }}
-          >
-            <Suspense fallback={<div>Loading...</div>}>
+          <Box component="main" sx={mainContentStyles}>
+            <Suspense fallback={<Loader open={true} />}>
               <Outlet />
             </Suspense>
           </Box>
         </Container>
       </Box>
+
       <Footer />
     </>
   );

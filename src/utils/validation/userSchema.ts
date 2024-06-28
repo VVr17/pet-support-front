@@ -1,4 +1,5 @@
 import * as yup from 'yup';
+
 import { emailRegEx } from './RegEx';
 
 export const userAboutSchema = yup.object().shape({

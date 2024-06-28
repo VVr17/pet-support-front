@@ -1,14 +1,15 @@
-import { UseFormReturn } from 'react-hook-form';
 import { Box } from '@mui/material';
+import { UseFormReturn } from 'react-hook-form';
 
-import { FormTitle, FieldLabel } from '../components';
+import CustomRadioGroup from '@/components/RHFComponents/CustomRadioGroup';
 import DropdownInput from '@/components/RHFComponents/DropdownInput';
 import RangeField from '@/components/RHFComponents/RangeField';
-import CustomRadioGroup from '@/components/RHFComponents/CustomRadioGroup';
-import { getRadioGroupTestDriveStyles } from './styles';
-import useResponsive from '@/hooks/useResponsive';
 import { useCategories } from '@/hooks/useQuery/useCategories';
+import useResponsive from '@/hooks/useResponsive';
+
+import { FieldLabel,FormTitle } from '../components';
 import { getCategoriesOptions, sexOptions } from '../utils/selectOptions';
+import { getRadioGroupTestDriveStyles } from './styles';
 
 interface IProp {
   methods: UseFormReturn<NoticeForm, unknown, undefined>;

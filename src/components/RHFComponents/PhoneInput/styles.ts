@@ -1,5 +1,13 @@
 import { Theme } from '@mui/material';
 
+export const inputPropsStyles = {
+  style: {
+    padding: '12px',
+    fontSize: '1.125rem',
+    fontWeight: 500,
+  },
+};
+
 export const inputStyles = {
   '& .MuiTouchRipple-root': {
     display: 'none',
@@ -46,4 +54,12 @@ export const inputStyles = {
     height: '100%',
     objectFit: 'cover',
   },
+};
+
+export const iconWrapperStyles = {
+  top: '50%',
+  left: '32px',
+  transform: 'translateY(-50%)',
+  zIndex: 1,
+  pointerEvents: 'none',
 };

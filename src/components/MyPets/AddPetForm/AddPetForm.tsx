@@ -1,19 +1,18 @@
-import { formConfig } from './utils/formConfig';
 import { LoadingButton } from '@mui/lab';
 import { AlertColor, Box, Button, Theme } from '@mui/material';
-
+import { useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
-import Field from '@/components/RHFComponents/Field';
-import Toast from '@/components/ui-kit/Toast';
-
-import { useState } from 'react';
 import DatePickerField from '@/components/RHFComponents/DatePickerField';
+import Field from '@/components/RHFComponents/Field';
 import FileUploadField from '@/components/RHFComponents/FileUploadField';
 import TextArea from '@/components/RHFComponents/TextArea';
-import { getTransformedData } from './utils/getTransformedData';
+import Toast from '@/components/ui-kit/Toast';
 import { uploadImage } from '@/helpers/uploadImage';
 import { useAddPet } from '@/hooks/useQuery/usePets';
+
+import { formConfig } from './utils/formConfig';
+import { getTransformedData } from './utils/getTransformedData';
 
 interface IPetFormProps {
   onClose: () => void;
@@ -44,7 +43,6 @@ const AddPetForm: React.FC<IPetFormProps> = ({ onClose }) => {
       }
 
       const transformedData = getTransformedData(data, imageUrl);
-
       await addPet.mutateAsync(transformedData);
 
       // If response is successful, go to the final confirmation step after form submit

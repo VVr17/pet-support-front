@@ -14,12 +14,12 @@ export const fallbackStyles = {
 };
 
 export const cropperWrapperStyles = {
-  width: '100%',
-  height,
   position: 'absolute',
-  zIndex: 20,
   left: '50%',
   top: '50%',
+  zIndex: 20,
+  width: '100%',
+  height,
   transform: 'translate(-50%, -50%)',
   cursor: 'pointer',
 };

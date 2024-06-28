@@ -8,7 +8,7 @@ module.exports = {
   ],
   ignorePatterns: ['dist', '.eslintrc.cjs'],
   parser: '@typescript-eslint/parser',
-  plugins: ['react-refresh', "import", "simple-import-sort"],
+  plugins: ['react-refresh', 'import', 'simple-import-sort'],
   rules: {
     'react-refresh/only-export-components': [
       'warn',
@@ -16,10 +16,15 @@ module.exports = {
     ],
     'simple-import-sort/imports': 'error',
     'simple-import-sort/exports': 'error',
+
+    '@typescript-eslint/no-explicit-any': 'error',
+    '@typescript-eslint/no-unused-vars': 'error',
+    'no-console': 'warn',
+    'prefer-const': 'warn',
   },
   settings: {
     'import/resolver': {
-      'typescript': {}
-    }
-  }
-}
+      typescript: {},
+    },
+  },
+};

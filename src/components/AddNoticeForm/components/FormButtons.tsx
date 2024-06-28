@@ -1,5 +1,5 @@
 import { LoadingButton } from '@mui/lab';
-import { Box, Button, useTheme } from '@mui/material';
+import { Box, Button, Theme } from '@mui/material';
 
 interface IProps {
   handleNext: () => void;
@@ -16,8 +16,6 @@ const FormButtons: React.FC<IProps> = ({
   handleBack,
   isLoading,
 }) => {
-  const theme = useTheme();
-
   return (
     <Box
       width="100%"
@@ -31,7 +29,7 @@ const FormButtons: React.FC<IProps> = ({
         fullWidth
         sx={{
           color: 'text.primary',
-          borderColor: theme.palette.grey[200],
+          borderColor: (theme: Theme) => theme.palette.grey[200],
           display:
             activeStep > 1 && activeStep <= totalSteps ? 'block' : 'none',
         }}

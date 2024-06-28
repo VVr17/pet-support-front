@@ -1,12 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React from 'react';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import { Box, FormControl } from '@mui/material';
-import { Control, Controller } from 'react-hook-form';
 import { MuiTelInput } from 'mui-tel-input';
+import React from 'react';
+import { Control, Controller } from 'react-hook-form';
 
 import ErrorMessage from '../ErrorMessage';
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import { inputStyles } from './styles';
+import { iconWrapperStyles, inputPropsStyles, inputStyles } from './styles';
 
 interface IProp {
   control: Control<any>;
@@ -37,23 +37,11 @@ const PhoneInput: React.FC<IProp> = ({ control, name, placeholder }) => {
               defaultCountry="US"
               sx={inputStyles}
               placeholder={placeholder}
-              inputProps={{
-                style: {
-                  padding: '12px',
-                  fontSize: '1.125rem',
-                  fontWeight: 500,
-                },
-              }}
+              inputProps={inputPropsStyles}
             />
             <Box
               position="absolute"
-              sx={{
-                top: '50%',
-                left: '32px',
-                transform: 'translateY(-50%)',
-                zIndex: 1,
-                pointerEvents: 'none',
-              }}
+              sx={iconWrapperStyles}
               width={24}
               height={24}
             >

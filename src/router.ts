@@ -2,11 +2,11 @@ import { createBrowserRouter } from 'react-router-dom';
 
 import AccountLayout from './layouts/AccountLayout';
 import MainLayout from './layouts/MainLayout';
-import { ROUTES } from './utils/constants/routes';
 import PublicLayout from './layouts/PublicLayout';
+import GoogleOAuthSuccessRedirect from './pages/GoogleOAuthSuccessRedirect';
 import PrivateRoute from './routes/PrivateRoute';
 import RestrictedRoute from './routes/RestrictedRoute';
-import GoogleOAuthSuccessRedirect from './pages/GoogleOAuthSuccessRedirect';
+import { ROUTES } from './utils/constants/routes';
 
 export const router = createBrowserRouter([
   {

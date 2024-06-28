@@ -1,9 +1,9 @@
-import { Grid, Typography } from "@mui/material";
+import { Grid, Typography } from '@mui/material';
 
-import { shelters } from "@/utils/partners";
+import { shelters } from '@/utils/staticData/partners';
 
-import Section from "../Section";
-import PartnerCard from "./PartnerCard";
+import Section from '../Section';
+import PartnerCard from './PartnerCard';
 
 const OurPartners = () => {
   return (

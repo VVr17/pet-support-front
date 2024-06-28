@@ -7,26 +7,26 @@ export const avatarStyles = {
 };
 
 export const cropperStyles = {
+  position: 'absolute',
+  left: '50%',
+  top: '50%',
   width: 80,
   height: 80,
   opacity: 0,
   pointerEvents: 'none',
-  position: 'absolute',
   zIndex: 20,
-  left: '50%',
-  top: '50%',
   transform: 'translate(-50%, -50%)',
   cursor: 'pointer',
 };
 
 export const newImagePreviewStyles = {
+  position: 'absolute',
+  left: '50%',
+  top: '50%',
   width: 80,
   height: 80,
   pointerEvents: 'none',
-  position: 'absolute',
   zIndex: 20,
-  left: '50%',
-  top: '50%',
   transform: 'translate(-50%, -50%)',
   cursor: 'pointer',
 };

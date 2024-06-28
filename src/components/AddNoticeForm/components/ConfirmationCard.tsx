@@ -1,4 +1,5 @@
 import { Avatar, Box, Typography } from '@mui/material';
+
 import { confirmationCardStyles } from './styles';
 
 interface IProp {

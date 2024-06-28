@@ -1,11 +1,14 @@
+import DoneIcon from '@mui/icons-material/Done';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { FormControl, MenuItem } from '@mui/material';
 import Select from '@mui/material/Select';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import { DropdownInputProps } from './types';
-import DoneIcon from '@mui/icons-material/Done';
-import useResponsive from '@/hooks/useResponsive';
 import { Controller } from 'react-hook-form';
+
+import useResponsive from '@/hooks/useResponsive';
+
 import ErrorMessage from '../ErrorMessage';
+import { getSelectStyles, menuStyles } from './styles';
+import { DropdownInputProps } from './types';
 
 const DropdownInput = <T extends string | number>({
   name,
@@ -15,66 +18,6 @@ const DropdownInput = <T extends string | number>({
   CustomIcon,
 }: DropdownInputProps<T>) => {
   const isMobile = useResponsive('down', 'md');
-
-  const menuStyles = {
-    PaperProps: {
-      sx: {
-        border: `1px solid #EAEFFC`,
-        borderRadius: 3,
-        boxShadow: 'none',
-        maxHeight: 210,
-        overflowY: 'scroll',
-        transform: 'translateY(4px) !important',
-
-        '& .MuiList-root': {
-          padding: 0,
-
-          '& .MuiMenuItem-root': {
-            justifyContent: 'space-between',
-            padding: '10px 16px',
-            ':hover': {
-              backgroundColor: '#EAEFFC',
-            },
-            '&.Mui-selected': {
-              backgroundColor: 'white',
-              ':hover': {
-                backgroundColor: '#EAEFFC',
-              },
-            },
-          },
-        },
-
-        '&::-webkit-scrollbar': {
-          width: '6px',
-          backgroundColor: '#f5f5f5',
-        },
-        '&::-webkit-scrollbar-track': {
-          background: '#fff',
-        },
-        '&::-webkit-scrollbar-thumb': {
-          backgroundColor: 'lightgray',
-          borderRadius: '20px',
-        },
-        '&::-webkit-scrollbar-thumb:hover': {
-          background: 'gray',
-          cursor: 'pointer',
-        },
-      },
-    },
-  };
-
-  const styles = {
-    '& fieldset': {
-      borderColor: '#e5e5e5',
-      borderRadius: 3,
-    },
-    '& input': {
-      borderRadius: 3,
-    },
-
-    fontSize: `${isMobile ? '1rem' : '1.125rem'}`,
-    fontWeight: 500,
-  };
 
   const getRenderValue = (selected: T) =>
     options.find(opt => opt.value === selected)?.label || placeholder;
@@ -93,7 +36,7 @@ const DropdownInput = <T extends string | number>({
               displayEmpty
               fullWidth
               renderValue={getRenderValue}
-              sx={styles}
+              sx={getSelectStyles(isMobile)}
               value={value || ''}
               MenuProps={menuStyles}
             >

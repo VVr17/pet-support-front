@@ -1,10 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { Box,FormControl, Slider, TextField, Typography } from '@mui/material';
 import React from 'react';
 import { Control, Controller } from 'react-hook-form';
-import { FormControl, TextField, Slider, Typography, Box } from '@mui/material';
+
+import useResponsive from '@/hooks/useResponsive';
 
 import ErrorMessage from '../ErrorMessage';
-import useResponsive from '@/hooks/useResponsive';
 import { inputStyles } from './styles';
 
 interface IProp {
