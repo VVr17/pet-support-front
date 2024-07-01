@@ -1,5 +1,5 @@
 import { LoadingButton } from '@mui/lab';
-import { Box, Button, Theme } from '@mui/material';
+import { Box, Button, Grid, Theme } from '@mui/material';
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
@@ -14,9 +14,14 @@ import Loader from '@/components/ui-kit/Loader';
 import { uploadImage } from '@/helpers/uploadImage';
 import { useCategories } from '@/hooks/useQuery/useCategories';
 import { useNoticeDetails, useUpdateNotice } from '@/hooks/useQuery/useNotices';
+import { useSpecies } from '@/hooks/useQuery/useSpecies';
 import useResponsive from '@/hooks/useResponsive';
 import { ToastType } from '@/types/Toast';
-import { getCategoriesOptions, sexOptions } from '@/utils/forms/selectOptions';
+import {
+  getCategoriesOptions,
+  getSpeciesOptions,
+  sexOptions,
+} from '@/utils/forms/selectOptions';
 
 import FieldLabel from './FieldLabel';
 import { getRadioGroupTestDriveStyles } from './styles';
@@ -39,6 +44,10 @@ const UpdateNoticeForm: React.FC<INoticeFormProps> = ({
     useNoticeDetails(noticeId);
   const { data: categories } = useCategories();
   const categoryOptions = getCategoriesOptions(categories);
+
+  const { data: species } = useSpecies();
+  const speciesOptions = getSpeciesOptions(species);
+
   const [isLoading, setIsLoading] = useState(false);
 
   const updateNotice = useUpdateNotice();
@@ -146,7 +155,6 @@ const UpdateNoticeForm: React.FC<INoticeFormProps> = ({
           name="dateOfBirth"
           label="Date of birth"
           control={control}
-          placeholder="Your pet date of birth"
         />
 
         <Field
@@ -160,15 +168,28 @@ const UpdateNoticeForm: React.FC<INoticeFormProps> = ({
           <FieldLabel label="Choose sex" mb={0.5} />
           <CustomRadioGroup name="sex" control={control} options={sexOptions} />
         </Box>
-        <Box>
-          <FieldLabel label="Select category" mb={0.5} />
-          <DropdownInput
-            name="categoryId"
-            control={control}
-            placeholder="Choose category"
-            options={categoryOptions}
-          />
-        </Box>
+
+        <Grid container spacing={{ xs: 2, md: 3 }}>
+          <Grid item xs={12} md={6}>
+            <FieldLabel label="Select category" mb={1} />
+            <DropdownInput
+              name="categoryId"
+              control={control}
+              placeholder="Choose category"
+              options={categoryOptions}
+            />
+          </Grid>
+
+          <Grid item xs={12} md={6}>
+            <FieldLabel label="Select species" mb={1} />
+            <DropdownInput
+              name="speciesId"
+              control={control}
+              placeholder="Choose species"
+              options={speciesOptions}
+            />
+          </Grid>
+        </Grid>
 
         <Box display={IsForSell ? 'block' : 'none'}>
           <FieldLabel label="Price" mb={0.5} />

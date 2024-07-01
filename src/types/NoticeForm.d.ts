@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 interface NoticeForm {
   // First step
   title: string;
@@ -8,6 +9,7 @@ interface NoticeForm {
   // Second step
   sex: Sex;
   categoryId: string;
+  speciesId: string;
   price: number | null;
 
   // Third step
@@ -31,4 +33,5 @@ interface INoticeData {
   comments: string;
   price: number | null;
   categoryId: string;
+  speciesId: string;
 }

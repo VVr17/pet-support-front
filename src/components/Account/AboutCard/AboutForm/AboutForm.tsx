@@ -81,12 +81,7 @@ const AboutForm = () => {
             control={control}
             placeholder="Your name"
           />
-          <DatePickerField
-            name="birthday"
-            label="Birthday"
-            control={control}
-            placeholder="Your birthday"
-          />
+          <DatePickerField name="birthday" label="Birthday" control={control} />
         </Box>
 
         <Box display="flex" gap={2} mt={5}>

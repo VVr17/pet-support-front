@@ -48,7 +48,6 @@ const FormFirstStep: React.FC<IProp> = ({ methods: { control } }) => {
           name="dateOfBirth"
           label="Date of birth"
           control={control}
-          placeholder="Your pet date of birth"
         />
         <Field
           name="location"

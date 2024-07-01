@@ -5,6 +5,7 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { uploadImage } from '@/helpers/uploadImage';
 import { useCategories } from '@/hooks/useQuery/useCategories';
 import { useAddNotice } from '@/hooks/useQuery/useNotices';
+import { useSpecies } from '@/hooks/useQuery/useSpecies';
 import { FIRST_STEP } from '@/utils/constants/formSteps';
 import { noticeDefaultValues } from '@/utils/forms/noticeDefaultValues';
 
@@ -20,6 +21,7 @@ import { stepFields } from './utils/stepFields';
 
 const AddNoticeForm = () => {
   const { data: categories } = useCategories();
+  const { data: species } = useSpecies();
   const [activeStep, setActiveStep] = useState(FIRST_STEP);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -35,10 +37,14 @@ const AddNoticeForm = () => {
   const { handleSubmit, trigger, reset } = methods;
 
   useEffect(() => {
-    if (categories) {
-      reset({ ...noticeDefaultValues, categoryId: categories[1].id });
+    if (categories && species) {
+      reset({
+        ...noticeDefaultValues,
+        categoryId: categories[1].id,
+        speciesId: species[0].id,
+      });
     }
-  }, [categories]);
+  }, [categories, species, reset]);
 
   // Checks whether current step fields are valid and go to the next step
   const handleNext = async () => {

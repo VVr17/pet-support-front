@@ -97,7 +97,6 @@ const AddPetForm: React.FC<IPetFormProps> = ({ onClose }) => {
           name="dateOfBirth"
           label="Date of birth"
           control={control}
-          placeholder="Your pet date of birth"
         />
 
         <FileUploadField methods={methods} />

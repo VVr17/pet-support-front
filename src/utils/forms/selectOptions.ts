@@ -13,6 +13,21 @@ export const getCategoriesOptions = (categories?: Category[]) => {
     : [];
 };
 
+/**
+ * Transforms an array of species objects into an array of options for a select input.
+ *
+ * @param species - An optional array of species objects.
+ * @returns An array of options with `value` and `label` properties.
+ */
+export const getSpeciesOptions = (species?: Species[]) => {
+  return species
+    ? species.map(species => ({
+        value: species.id,
+        label: species.titleEn,
+      }))
+    : [];
+};
+
 export const sexOptions = [
   { value: 0, label: 'Male' },
   { value: 1, label: 'Female' },

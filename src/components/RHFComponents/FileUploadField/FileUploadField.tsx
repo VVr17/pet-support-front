@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { CloudUpload } from '@mui/icons-material';
 import {
   AlertColor,

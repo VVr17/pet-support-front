@@ -1,12 +1,17 @@
-import { Box } from '@mui/material';
+import { Box, Grid } from '@mui/material';
 import { UseFormReturn } from 'react-hook-form';
 
 import CustomRadioGroup from '@/components/RHFComponents/CustomRadioGroup';
 import DropdownInput from '@/components/RHFComponents/DropdownInput';
 import RangeField from '@/components/RHFComponents/RangeField';
 import { useCategories } from '@/hooks/useQuery/useCategories';
+import { useSpecies } from '@/hooks/useQuery/useSpecies';
 import useResponsive from '@/hooks/useResponsive';
-import { getCategoriesOptions, sexOptions } from '@/utils/forms/selectOptions';
+import {
+  getCategoriesOptions,
+  getSpeciesOptions,
+  sexOptions,
+} from '@/utils/forms/selectOptions';
 
 import { FieldLabel, FormTitle } from '../components';
 import { getRadioGroupTestDriveStyles } from './styles';
@@ -21,6 +26,9 @@ const FormSecondStep: React.FC<IProp> = ({ methods: { control, watch } }) => {
   const IsForSell =
     categories?.find(({ slug }) => slug === 'sell')?.id === watch('categoryId');
 
+  const { data: species } = useSpecies();
+  const speciesOptions = getSpeciesOptions(species);
+
   const isMobile = useResponsive('down', 'sm');
 
   return (
@@ -32,21 +40,33 @@ const FormSecondStep: React.FC<IProp> = ({ methods: { control, watch } }) => {
       />
       <Box display="flex" gap={4} flexDirection="column">
         <Box sx={getRadioGroupTestDriveStyles(isMobile)}>
-          <FieldLabel label="Choose sex" mb={{ xs: 1, md: 2 }} />
+          <FieldLabel label="Choose sex" mb={1} />
           <CustomRadioGroup name="sex" control={control} options={sexOptions} />
         </Box>
-        <Box>
-          <FieldLabel label="Select category" mb={{ xs: 1, md: 2 }} />
-          <DropdownInput
-            name="categoryId"
-            control={control}
-            placeholder="Choose category"
-            options={categoryOptions}
-          />
-        </Box>
+        <Grid container spacing={{ xs: 2, md: 3 }}>
+          <Grid item xs={12} md={6}>
+            <FieldLabel label="Select category" mb={1} />
+            <DropdownInput
+              name="categoryId"
+              control={control}
+              placeholder="Choose category"
+              options={categoryOptions}
+            />
+          </Grid>
+
+          <Grid item xs={12} md={6}>
+            <FieldLabel label="Select species" mb={1} />
+            <DropdownInput
+              name="speciesId"
+              control={control}
+              placeholder="Choose species"
+              options={speciesOptions}
+            />
+          </Grid>
+        </Grid>
 
         <Box display={IsForSell ? 'block' : 'none'}>
-          <FieldLabel label="Price" mb={{ xs: 1, md: 2 }} />
+          <FieldLabel label="Price" mb={1} />
           <RangeField
             name="price"
             control={control}

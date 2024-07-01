@@ -15,6 +15,7 @@ interface Notice {
   comments: string;
   price: number;
   category: Category;
+  species: Species;
   Owner: Owner;
 }
 

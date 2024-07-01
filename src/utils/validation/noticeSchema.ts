@@ -43,6 +43,7 @@ const baseSchema = {
   price: yup.number().nullable(),
 
   categoryId: yup.string().required('Category is required'),
+  speciesId: yup.string().required('Species is required'),
 
   // Fourth step
   comments: yup

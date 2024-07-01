@@ -1,4 +1,5 @@
-import { Control } from "react-hook-form";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { Control } from 'react-hook-form';
 
 export type CustomRadioGroupOption = {
   value: number;

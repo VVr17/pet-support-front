@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { FormControl } from '@mui/material';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import {
@@ -15,14 +16,12 @@ interface DatePickerFieldProps
   extends Omit<DesktopDatePickerProps<any>, 'name' | 'value' | 'onChange'> {
   control: Control<any>;
   name: string;
-  placeholder: string;
   error?: FieldError;
 }
 
 const DatePickerField: React.FC<DatePickerFieldProps> = ({
   control,
   name,
-  placeholder,
   error,
   ...props
 }) => {

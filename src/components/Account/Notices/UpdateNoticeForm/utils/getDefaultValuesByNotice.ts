@@ -15,6 +15,7 @@ export const getDefaultValuesByNotice = (notice: Notice) => {
     dateOfBirth,
     sex,
     category,
+    species,
     price,
     comments,
   } = notice;
@@ -27,6 +28,7 @@ export const getDefaultValuesByNotice = (notice: Notice) => {
     location,
     sex: (sex === 'male' ? 0 : 1) as Sex,
     categoryId: category.id,
+    speciesId: species.id,
     price: price ? price : 0,
     image: '',
     comments,
