@@ -36,7 +36,7 @@ const PhoneInput: React.FC<IProp> = ({ control, name, label, placeholder }) => {
               onChange={value => {
                 onChange(value);
               }}
-              defaultCountry="US"
+              defaultCountry="UA"
               sx={inputStyles}
               placeholder={placeholder}
               inputProps={inputPropsStyles}

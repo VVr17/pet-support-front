@@ -1,5 +1,11 @@
 import { api } from './config';
 
+/**
+ * Posts a new pet to the server.
+ *
+ * @param petData - The data of the pet to post.
+ * @returns A promise that resolves to the response data of the posted pet.
+ */
 export const postPet = async (petData: IPetData) => {
   const requestURL = `/pets`;
 
@@ -7,6 +13,12 @@ export const postPet = async (petData: IPetData) => {
   return response.data;
 };
 
+/**
+ * Deletes a pet by its ID.
+ *
+ * @param petId - The ID of the pet to delete.
+ * @returns A promise that resolves to the response data of the deleted pet.
+ */
 export const deletePet = async (petId: string) => {
   const requestURL = `/pets/${petId}`;
 

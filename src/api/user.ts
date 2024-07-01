@@ -1,6 +1,11 @@
 import { api } from './config';
 
 // ------------- Current user -------------
+/**
+ * Fetches the current user's data.
+ *
+ * @returns A promise that resolves to the current user's data.
+ */
 export const getCurrentUser = async (): Promise<User> => {
   const requestURL = `/users/me`;
 
@@ -8,6 +13,12 @@ export const getCurrentUser = async (): Promise<User> => {
   return response.data.data;
 };
 
+/**
+ * Updates the current user's data.
+ *
+ * @param userData - The updated data for the current user.
+ * @returns A promise that resolves to the response data.
+ */
 export const updateUserData = async (userData: Partial<User>) => {
   const requestURL = `/users/me`;
 
@@ -16,6 +27,12 @@ export const updateUserData = async (userData: Partial<User>) => {
 };
 
 // ------------ User's notices ------------------
+
+/**
+ * Fetches the current user's notices.
+ *
+ * @returns A promise that resolves to an array of the user's notices.
+ */
 export const getMyNotices = async (): Promise<Notice[]> => {
   const requestURL = `/users/me/notices`;
 
@@ -24,6 +41,11 @@ export const getMyNotices = async (): Promise<Notice[]> => {
 };
 
 // ---------- User's pets ------------------------
+/**
+ * Fetches the current user's pets.
+ *
+ * @returns A promise that resolves to an array of the user's pets.
+ */
 export const getMyPets = async (): Promise<Pet[]> => {
   const requestURL = `/users/me/pets`;
 
@@ -32,6 +54,11 @@ export const getMyPets = async (): Promise<Pet[]> => {
 };
 
 // ---------- Favorite notices ----------------
+/**
+ * Fetches the current user's favorite notices.
+ *
+ * @returns A promise that resolves to an array of the user's favorite notices.
+ */
 export const getMyFavoriteNotices = async (): Promise<Notice[]> => {
   const requestURL = `/users/me/favorites`;
 
@@ -39,6 +66,12 @@ export const getMyFavoriteNotices = async (): Promise<Notice[]> => {
   return response.data.data;
 };
 
+/**
+ * Adds a notice to the user's favorites.
+ *
+ * @param noticeId - The ID of the notice to add to favorites.
+ * @returns A promise that resolves to the response data.
+ */
 export const addToFavorites = async (noticeId: string) => {
   const requestURL = `/users/me/favorites/${noticeId}`;
 
@@ -46,6 +79,12 @@ export const addToFavorites = async (noticeId: string) => {
   return response.data;
 };
 
+/**
+ * Removes a notice from the user's favorites.
+ *
+ * @param noticeId - The ID of the notice to remove from favorites.
+ * @returns A promise that resolves to the response data.
+ */
 export const removeFromFavorites = async (noticeId: string) => {
   const requestURL = `/users/me/favorites/${noticeId}`;
 
