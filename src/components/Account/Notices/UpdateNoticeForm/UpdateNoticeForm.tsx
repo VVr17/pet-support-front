@@ -18,9 +18,9 @@ import { useSpecies } from '@/hooks/useQuery/useSpecies';
 import useResponsive from '@/hooks/useResponsive';
 import { ToastType } from '@/types/Toast';
 import {
+  genderOptions,
   getCategoriesOptions,
   getSpeciesOptions,
-  sexOptions,
 } from '@/utils/forms/selectOptions';
 
 import FieldLabel from './FieldLabel';
@@ -73,7 +73,7 @@ const UpdateNoticeForm: React.FC<INoticeFormProps> = ({
 
       reset(noticeFormData);
     }
-  }, [notice]);
+  }, [notice, reset]);
 
   // Handle submit form data
   const onSubmit: SubmitHandler<NoticeForm> = async data => {
@@ -166,7 +166,11 @@ const UpdateNoticeForm: React.FC<INoticeFormProps> = ({
 
         <Box sx={getRadioGroupTestDriveStyles(isMobile)}>
           <FieldLabel label="Choose sex" mb={0.5} />
-          <CustomRadioGroup name="sex" control={control} options={sexOptions} />
+          <CustomRadioGroup
+            name="sex"
+            control={control}
+            options={genderOptions}
+          />
         </Box>
 
         <Grid container spacing={{ xs: 2, md: 3 }}>

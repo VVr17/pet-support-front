@@ -21,7 +21,7 @@ export const getRows = (notice: Notice) => {
     { key: 'Breed', value: notice.breed },
     { key: 'Location', value: notice.location },
     { key: 'Sex', value: notice.sex },
-    { key: 'Price', value: notice.price ? `$${notice.price}` : '------' },
+    { key: 'Price', value: notice.price ? `UAH ${notice.price}` : '------' },
     { key: 'Email', value: notice.Owner.email },
     { key: 'Phone', value: notice.Owner.phone },
   ];

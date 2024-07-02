@@ -13,7 +13,11 @@ import PetCard from '@/components/Pets/PetList/PetCard';
 import Section from '@/components/Section';
 import { useCategories } from '@/hooks/useQuery/useCategories';
 import { useNotices } from '@/hooks/useQuery/useNotices';
-import { FIRST_PAGE, MAX_SHOWN_NOTICES } from '@/utils/constants/notices';
+import {
+  defaultSort,
+  FIRST_PAGE,
+  MAX_SHOWN_NOTICES,
+} from '@/utils/constants/notices';
 import { ROUTES } from '@/utils/constants/routes';
 
 import { navButtonStyles, paginationStyles } from './styles';
@@ -29,6 +33,7 @@ const LookingHome = () => {
     )?.id,
     page: FIRST_PAGE,
     limit: MAX_SHOWN_NOTICES,
+    ...defaultSort,
   });
 
   const isLoading = categoriesLoading || noticesLoading;
@@ -116,7 +121,7 @@ const LookingHome = () => {
       <Button
         variant="contained"
         component={Link}
-        to={ROUTES.pets}
+        to={`${ROUTES.pets}?category=`}
         size="large"
         sx={{ width: 300, maxWidth: '100%' }}
       >

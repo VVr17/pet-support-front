@@ -15,15 +15,25 @@ export const useNotices = ({
   categoryId,
   page = FIRST_PAGE,
   limit = DEFAULT_PER_PAGE,
-}: {
-  categoryId: string | undefined | null;
-  page?: number;
-  limit?: number;
-}) => {
+  ...rest
+}: UseNoticeRequestParams) => {
   return useQuery({
-    queryKey: [QUERY_KEYS.notices, categoryId, page],
+    queryKey: [
+      QUERY_KEYS.notices,
+      categoryId,
+      page,
+      limit,
+      rest.sort,
+      rest.sortType,
+      rest.sex,
+      rest.species,
+      rest.priceMin,
+      rest.priceMax,
+    ],
     queryFn: () =>
-      categoryId ? fetchNotices(categoryId, page, limit) : undefined,
+      categoryId
+        ? fetchNotices({ categoryId, page, limit, ...rest })
+        : undefined,
     enabled: !!categoryId, // Enables only when category id provided
   });
 };

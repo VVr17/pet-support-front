@@ -1,13 +1,25 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import AddIcon from '@mui/icons-material/Add';
+import FilterAltIcon from '@mui/icons-material/FilterAlt';
 import { Box, IconButton, Tooltip, Typography } from '@mui/material';
 import { ChangeEvent, SyntheticEvent, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
+import { useSearchParams } from 'react-router-dom';
 
+import { retrieveSearchParams } from '@/helpers/searchParams/retrieveSearchParams';
+import { updateSearchParams } from '@/helpers/searchParams/updateSearchParams';
 import { useCategories } from '@/hooks/useQuery/useCategories';
 import { useNotices } from '@/hooks/useQuery/useNotices';
+import { useSpecies } from '@/hooks/useQuery/useSpecies';
 import { useUserStore } from '@/store/useUserStore';
-import { FIRST_PAGE, LIMIT_PER_PAGE } from '@/utils/constants/notices';
+import {
+  defaultFilter,
+  defaultSort,
+  FIRST_PAGE,
+  LIMIT_PER_PAGE,
+} from '@/utils/constants/notices';
 import { ROUTES } from '@/utils/constants/routes';
+import { getNoticeFilterValues } from '@/utils/getNoticeFilterValues';
 
 import PetList from '../Pets/PetList';
 import Section from '../Section';
@@ -15,23 +27,38 @@ import AlertDialog from '../ui-kit/AlertDialog';
 import Loader from '../ui-kit/Loader';
 import CustomPagination from '../ui-kit/Pagination';
 import CategoryTabs from './components/CategoryTabs';
+import FilterDrawer from './components/FilterDrawer';
+import SortMenu from './components/SortMenu';
 import { addNoticeButtonStyles } from './styles';
 
 const Notices = () => {
   const { user } = useUserStore();
-  const navigate = useNavigate();
 
+  // Router to get and set search params
+  const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+
+  const [alertIsOpened, setAlertIsOpened] = useState(false);
+  const [filterOpen, setFilterOpen] = useState(false);
+
+  // Query data state
+  const [page, setPage] = useState(FIRST_PAGE);
+  const [activeCategory, setActiveCategory] = useState<string | null>(null);
+  const [filter, setFilter] = useState<NoticeFilter>(defaultFilter);
+  const [sort, setSort] = useState<Sort>(defaultSort);
+
+  // Query requests
   const { data: categoriesData, isLoading: isCategoryLoading } =
     useCategories();
-
-  const [activeTab, setActiveTab] = useState<string | null>(null);
-  const [page, setPage] = useState(FIRST_PAGE);
-  const [alertIsOpened, setAlertIsOpened] = useState(false);
-
+  const { data: species } = useSpecies();
   const { data: noticesData, isLoading: isNoticeLoading } = useNotices({
-    categoryId: activeTab,
+    categoryId: categoriesData?.find(
+      category => category.slug === activeCategory,
+    )?.id,
     page,
     limit: LIMIT_PER_PAGE,
+    ...sort,
+    ...filter,
   });
   const isLoading = isCategoryLoading || isNoticeLoading;
 
@@ -39,22 +66,59 @@ const Notices = () => {
     ? Math.ceil(noticesData?.total / LIMIT_PER_PAGE)
     : FIRST_PAGE;
 
-  // Set the first tab after categories fetched
+  const toggleDrawer = () => {
+    setFilterOpen(prevState => !prevState);
+  };
+
+  //Set the first tab after categories fetched
   useEffect(() => {
-    if (!activeTab && categoriesData) {
-      setActiveTab(categoriesData[1].id);
+    if (!activeCategory && categoriesData) {
+      const updatedQuery = updateSearchParams({
+        searchParams,
+        searchType: 'category',
+        category: categoriesData?.[1].slug,
+      });
+      navigate(updatedQuery);
     }
-  }, [activeTab, categoriesData]);
+  }, [activeCategory, categoriesData, navigate, searchParams]);
+
+  // Gets search params from URL and updates products according to search params
+  useEffect(() => {
+    const search = retrieveSearchParams(searchParams);
+    const { page, category } = search;
+
+    const { priceMax, priceMin, sex, sort, sortType, speciesIds } =
+      getNoticeFilterValues(search, species);
+
+    setPage(page);
+    setActiveCategory(category as string);
+    setFilter({
+      sex,
+      species: speciesIds,
+      priceMin,
+      priceMax,
+    });
+    setSort({ sort, sortType });
+  }, [searchParams, categoriesData, navigate, species]);
 
   // Category tabs handler
   const handleTabChange = (_event: SyntheticEvent, newValue: string) => {
-    setActiveTab(newValue);
-    setPage(FIRST_PAGE);
+    const updatedQuery = updateSearchParams({
+      searchParams,
+      searchType: 'category',
+      category: newValue,
+    });
+    navigate(updatedQuery);
   };
 
-  // Page handler
-  const handlePageChange = (_event: ChangeEvent<unknown>, value: number) => {
-    setPage(value);
+  // Update page in URL search params on page change
+  const handlePageChange = (_event: ChangeEvent<unknown>, newPage: number) => {
+    const updatedQuery = updateSearchParams({
+      searchParams,
+      searchType: 'pagination',
+      page: newPage,
+    });
+    navigate(updatedQuery);
   };
 
   const handleAddNotice = () => {
@@ -75,24 +139,44 @@ const Notices = () => {
           looking for a home
         </Typography>
 
-        {categoriesData && activeTab && (
+        {categoriesData && activeCategory && (
           <>
-            <Box width="100%" display="flex" justifyContent="space-between">
+            <Box
+              width="100%"
+              display="flex"
+              justifyContent="space-between"
+              flexDirection={{ xs: 'column', sm: 'row' }}
+              gap={2}
+              sx={{ mb: 2 }}
+            >
               {/* Category tabs */}
               <CategoryTabs
-                activeTab={activeTab}
+                activeTab={activeCategory}
                 handleTabChange={handleTabChange}
                 categories={categoriesData}
               />
 
-              <Tooltip title="Add new notice">
-                <IconButton
-                  onClick={handleAddNotice}
-                  sx={addNoticeButtonStyles}
-                >
-                  <AddIcon color="secondary" />
-                </IconButton>
-              </Tooltip>
+              <Box display="flex" gap={2} alignContent="center">
+                <Tooltip title="Add new notice">
+                  <IconButton
+                    onClick={handleAddNotice}
+                    sx={addNoticeButtonStyles}
+                  >
+                    <AddIcon color="secondary" />
+                  </IconButton>
+                </Tooltip>
+
+                <SortMenu activeCategory={activeCategory} />
+
+                <Tooltip title="Filter">
+                  <IconButton
+                    onClick={toggleDrawer}
+                    sx={{ width: 40, height: 40 }}
+                  >
+                    <FilterAltIcon color="secondary" />
+                  </IconButton>
+                </Tooltip>
+              </Box>
             </Box>
 
             {/* Notices list */}
@@ -123,6 +207,8 @@ const Notices = () => {
         onCancel={() => setAlertIsOpened(false)}
         title={`Please, log in to add new notice. Go to log in page" ?`}
       />
+
+      <FilterDrawer open={filterOpen} toggleDrawer={toggleDrawer} />
     </>
   );
 };

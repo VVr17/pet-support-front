@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /**
  * Compares two values of type T based on a specified property for descending order.
  *

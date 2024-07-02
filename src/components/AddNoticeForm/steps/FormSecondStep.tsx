@@ -8,9 +8,9 @@ import { useCategories } from '@/hooks/useQuery/useCategories';
 import { useSpecies } from '@/hooks/useQuery/useSpecies';
 import useResponsive from '@/hooks/useResponsive';
 import {
+  genderOptions,
   getCategoriesOptions,
   getSpeciesOptions,
-  sexOptions,
 } from '@/utils/forms/selectOptions';
 
 import { FieldLabel, FormTitle } from '../components';
@@ -41,7 +41,11 @@ const FormSecondStep: React.FC<IProp> = ({ methods: { control, watch } }) => {
       <Box display="flex" gap={4} flexDirection="column">
         <Box sx={getRadioGroupTestDriveStyles(isMobile)}>
           <FieldLabel label="Choose sex" mb={1} />
-          <CustomRadioGroup name="sex" control={control} options={sexOptions} />
+          <CustomRadioGroup
+            name="sex"
+            control={control}
+            options={genderOptions}
+          />
         </Box>
         <Grid container spacing={{ xs: 2, md: 3 }}>
           <Grid item xs={12} md={6}>

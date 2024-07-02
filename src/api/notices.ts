@@ -1,21 +1,53 @@
 import { api } from './config';
 
 /**
- * Fetches notices from the server based on the given category, page, and limit.
+ * Fetches notices from the server based on the given parameters.
  *
  * @param categoryId - The ID of the category to fetch notices for.
  * @param page - The page number to fetch.
  * @param limit - The number of notices per page.
+ * @param sort - The sorting parameter.
+ * @param sortType - The sorting order, either 'ASC' or 'DESC'.
+ * @param sex - An optional array of sex filters ('male' or 'female').
+ * @param species - An optional array of species filters.
+ * @param priceMin - An optional minimum price filter.
+ * @param priceMax - An optional maximum price filter.
  * @returns A promise that resolves to the response containing the notices.
  */
-export const fetchNotices = async (
-  categoryId: string,
-  page: number,
-  limit: number,
-): Promise<NoticesResponse> => {
-  const requestURL = `notices?category=${categoryId}&page=${page}&limit=${limit}`;
+export const fetchNotices = async ({
+  categoryId,
+  page,
+  limit,
+  sort,
+  sortType,
+  sex,
+  species,
+  priceMin,
+  priceMax,
+}: NoticeRequestParams): Promise<NoticesResponse> => {
+  const params: Record<string, string | number | string[]> = {
+    category: categoryId as string,
+    page,
+    limit,
+    sort,
+    sortType,
+  };
 
-  const response = await api.get(requestURL);
+  // Add optional parameters only if they have values
+  if (sex) {
+    params.sex = sex;
+  }
+  if (species) {
+    params.species = species;
+  }
+  if (priceMin) {
+    params.priceMin = priceMin;
+  }
+  if (priceMax) {
+    params.priceMax = priceMax;
+  }
+
+  const response = await api.get('notices', { params });
   return response.data;
 };
 

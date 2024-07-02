@@ -1,10 +1,16 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { FormControl, RadioGroup } from '@mui/material';
-import { Controller } from 'react-hook-form';
+import { Control, Controller } from 'react-hook-form';
 
 import ErrorMessage from '../ErrorMessage';
-import CustomRadio from './components/CustomRadio';
+import CustomRadio from './CustomRadio';
 import { radioGroupStyles } from './styles';
-import { CustomRadioCroupProps } from './types';
+
+type CustomRadioCroupProps = {
+  options: SelectOption[];
+  control: Control<any>;
+  name: string;
+};
 
 const CustomRadioGroup = ({
   options,
@@ -27,7 +33,7 @@ const CustomRadioGroup = ({
             <RadioGroup
               {...other}
               value={value}
-              onChange={(_, value) => onChange(parseInt(value))}
+              onChange={(_, value) => onChange(value)}
               sx={radioGroupStyles}
             >
               {options.map(opt => (

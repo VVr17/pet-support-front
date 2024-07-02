@@ -26,7 +26,7 @@ export const getDefaultValuesByNotice = (notice: Notice) => {
     breed,
     dateOfBirth: dayjs(dateOfBirth),
     location,
-    sex: (sex === 'male' ? 0 : 1) as Sex,
+    sex: sex as GenderType,
     categoryId: category.id,
     speciesId: species.id,
     price: price ? price : 0,

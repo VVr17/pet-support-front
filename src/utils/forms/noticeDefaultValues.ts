@@ -7,7 +7,7 @@ export const noticeDefaultValues = {
   location: '',
 
   // Second step
-  sex: 0 as Sex,
+  sex: 'male' as GenderType,
   categoryId: '',
   speciesId: '',
   price: 0,

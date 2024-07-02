@@ -28,7 +28,7 @@ export const getSpeciesOptions = (species?: Species[]) => {
     : [];
 };
 
-export const sexOptions = [
-  { value: 0, label: 'Male' },
-  { value: 1, label: 'Female' },
+export const genderOptions = [
+  { value: 'male', label: 'Male' },
+  { value: 'female', label: 'Female' },
 ];
