@@ -51,7 +51,11 @@ const Notices = () => {
   const { data: categoriesData, isLoading: isCategoryLoading } =
     useCategories();
   const { data: species } = useSpecies();
-  const { data: noticesData, isLoading: isNoticeLoading } = useNotices({
+  const {
+    data: noticesData,
+    isLoading: isNoticeLoading,
+    isFetched,
+  } = useNotices({
     category: categoriesData?.find(category => category.slug === activeCategory)
       ?.id,
     page,
@@ -154,7 +158,12 @@ const Notices = () => {
                 categories={categoriesData}
               />
 
-              <Box display="flex" gap={2} alignContent="center">
+              <Box
+                display="flex"
+                gap={2}
+                alignItems="center"
+                justifyContent="center"
+              >
                 <Tooltip title="Add new notice">
                   <IconButton
                     onClick={handleAddNotice}
@@ -180,6 +189,12 @@ const Notices = () => {
             {/* Notices list */}
             {noticesData?.data && noticesData?.data.length > 0 && (
               <PetList notices={noticesData?.data} />
+            )}
+
+            {noticesData?.data.length === 0 && isFetched && (
+              <Typography textAlign="center">
+                Nothing found on your request. Try to change filter options
+              </Typography>
             )}
 
             {/* Pagination */}
