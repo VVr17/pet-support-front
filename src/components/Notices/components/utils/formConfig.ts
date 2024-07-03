@@ -6,7 +6,7 @@ import { noticeFilterSchema } from '@/utils/validation/noticeFilterSchema';
 
 export const defaultValues = {
   species: [],
-  sex: [],
+  gender: [],
   price: [defaultPriceRange.minPrice, defaultPriceRange.maxPrice],
 };
 

@@ -7,7 +7,7 @@ interface NoticeForm {
   dateOfBirth: Dayjs;
 
   // Second step
-  sex: GenderType;
+  gender: GenderType;
   categoryId: string;
   speciesId: string;
   price: number | null;
@@ -25,7 +25,7 @@ interface INoticeData {
   name: string;
   photoURL: string;
   breed: string;
-  sex: string;
+  gender: string;
   dateOfBirth: string;
   location: string;
   comments: string;

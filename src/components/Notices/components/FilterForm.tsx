@@ -13,6 +13,7 @@ import { ROUTES } from '@/utils/constants/routes';
 import { genderOptions, getSpeciesOptions } from '@/utils/forms/selectOptions';
 
 import { formConfig } from './utils/formConfig';
+import { getDefaultValuesByParams } from './utils/getDefaultValuesByParams';
 
 interface IFilterFormProps {
   toggleDrawer: () => void;
@@ -35,21 +36,10 @@ const FilterForm: React.FC<IFilterFormProps> = ({ toggleDrawer }) => {
   useEffect(() => {
     const search = retrieveSearchParams(searchParams);
 
+    const filterDefaultValues = getDefaultValuesByParams(search, species);
     setActiveCategory(search.category as string);
 
-    const sex = search.sex as unknown as GenderType[];
-    const speciesSlugs = (search.species
-      ? search.species
-      : []) as unknown as string[];
-    const speciesData = speciesSlugs.map(
-      item => species?.find(species => species.slug === item)?.id,
-    );
-
-    reset({
-      sex,
-      species: speciesData,
-      price: [+search.priceMin, +search.priceMax],
-    });
+    reset(filterDefaultValues);
   }, [searchParams, reset, species]);
 
   // Handle submit form data
@@ -58,15 +48,17 @@ const FilterForm: React.FC<IFilterFormProps> = ({ toggleDrawer }) => {
       item => species?.find(species => species.id === item)?.slug,
     );
 
+    const dataToUpdate = {
+      gender: data.gender,
+      species: speciesData,
+      priceMin: data.price[0],
+      priceMax: data.price[1],
+    };
+
     const updatedQuery = updateSearchParams({
       searchParams,
       searchType: 'filter',
-      dataToUpdate: {
-        sex: data.sex,
-        species: speciesData,
-        priceMin: data.price[0],
-        priceMax: data.price[1],
-      },
+      dataToUpdate,
     });
     navigate(updatedQuery);
     toggleDrawer();
@@ -100,9 +92,9 @@ const FilterForm: React.FC<IFilterFormProps> = ({ toggleDrawer }) => {
         )}
 
         <CheckboxGroup
-          name="sex"
-          label="Sex"
-          placeholder="Choose sex"
+          name="gender"
+          label="gender"
+          placeholder="Choose gender"
           control={control}
           options={genderOptions as SelectOption[]}
         />
@@ -129,7 +121,7 @@ const FilterForm: React.FC<IFilterFormProps> = ({ toggleDrawer }) => {
           size="large"
           onClick={resetFilter}
         >
-          Cancel
+          Reset filter
         </Button>
       </Box>
     </Box>

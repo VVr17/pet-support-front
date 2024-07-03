@@ -40,9 +40,9 @@ const FormSecondStep: React.FC<IProp> = ({ methods: { control, watch } }) => {
       />
       <Box display="flex" gap={4} flexDirection="column">
         <Box sx={getRadioGroupTestDriveStyles(isMobile)}>
-          <FieldLabel label="Choose sex" mb={1} />
+          <FieldLabel label="Choose gender" mb={1} />
           <CustomRadioGroup
-            name="sex"
+            name="gender"
             control={control}
             options={genderOptions}
           />

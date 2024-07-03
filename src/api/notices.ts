@@ -3,50 +3,20 @@ import { api } from './config';
 /**
  * Fetches notices from the server based on the given parameters.
  *
- * @param categoryId - The ID of the category to fetch notices for.
- * @param page - The page number to fetch.
- * @param limit - The number of notices per page.
- * @param sort - The sorting parameter.
- * @param sortType - The sorting order, either 'ASC' or 'DESC'.
- * @param sex - An optional array of sex filters ('male' or 'female').
- * @param species - An optional array of species filters.
- * @param priceMin - An optional minimum price filter.
- * @param priceMax - An optional maximum price filter.
+ * @param params.category - The ID of the category to fetch notices for.
+ * @param params.page - The page number to fetch.
+ * @param params.limit - The number of notices per page.
+ * @param params.sort - The sorting parameter.
+ * @param params.sortType - The sorting order, either 'ASC' or 'DESC'.
+ * @param params.gender - An optional array of gender filters ('male' or 'female').
+ * @param params.species - An optional array of species filters.
+ * @param params.priceMin - An optional minimum price filter.
+ * @param params.priceMax - An optional maximum price filter.
  * @returns A promise that resolves to the response containing the notices.
  */
-export const fetchNotices = async ({
-  categoryId,
-  page,
-  limit,
-  sort,
-  sortType,
-  sex,
-  species,
-  priceMin,
-  priceMax,
-}: NoticeRequestParams): Promise<NoticesResponse> => {
-  const params: Record<string, string | number | string[]> = {
-    category: categoryId as string,
-    page,
-    limit,
-    sort,
-    sortType,
-  };
-
-  // Add optional parameters only if they have values
-  if (sex) {
-    params.sex = sex;
-  }
-  if (species) {
-    params.species = species;
-  }
-  if (priceMin) {
-    params.priceMin = priceMin;
-  }
-  if (priceMax) {
-    params.priceMax = priceMax;
-  }
-
+export const fetchNotices = async (
+  params: NoticeRequestParams,
+): Promise<NoticesResponse> => {
   const response = await api.get('notices', { params });
   return response.data;
 };

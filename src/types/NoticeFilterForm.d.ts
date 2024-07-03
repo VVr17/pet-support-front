@@ -1,5 +1,5 @@
 interface NoticeFilterForm {
   species: string[];
-  sex: GenderType[];
+  gender: GenderType[];
   price: number[];
 }

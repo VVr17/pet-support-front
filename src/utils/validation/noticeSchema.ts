@@ -35,7 +35,7 @@ const baseSchema = {
     .required('Location is required'),
 
   // Second step
-  sex: yup.string().required('Sex is required'),
+  gender: yup.string().required('Gender is required'),
   price: yup.number().nullable(),
 
   categoryId: yup.string().required('Category is required'),

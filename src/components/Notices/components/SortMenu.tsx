@@ -8,13 +8,16 @@ import {
   Tooltip,
   Typography,
 } from '@mui/material';
-import { useEffect, useState } from 'react';
+import { MouseEvent, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
 import { useSearchParams } from 'react-router-dom';
 
 import { retrieveSearchParams } from '@/helpers/searchParams/retrieveSearchParams';
 import { updateSearchParams } from '@/helpers/searchParams/updateSearchParams';
+import { defaultSort } from '@/utils/constants/notices';
 import { getSortTypes } from '@/utils/getSortTypes';
+
+import { menuItemStyles, sortMenuWrapperStyles } from './styles';
 
 interface ISortMenuProps {
   activeCategory: string;
@@ -26,21 +29,18 @@ const SortMenu: React.FC<ISortMenuProps> = ({ activeCategory }) => {
 
   const [anchorElMenu, setAnchorElMenu] = useState<null | HTMLElement>(null);
 
-  const [currentSort, setCurrentSort] = useState<Sort>({
-    sort: '',
-    sortType: 'DESC',
-  });
+  const [currentSort, setCurrentSort] = useState<Sort>(defaultSort);
 
   // Gets search params from URL and updates products according to search params
   useEffect(() => {
     const search = retrieveSearchParams(searchParams);
-    const sort = search.sort as unknown as string;
-    const sortType = search.sortType as unknown as SortType;
+    const sort = search.sort as string;
+    const sortType = search.sortType as SortType;
 
     setCurrentSort({ sort, sortType });
   }, [searchParams]);
 
-  const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
+  const handleOpenUserMenu = (event: MouseEvent<HTMLElement>) => {
     setAnchorElMenu(event.currentTarget);
   };
 
@@ -64,14 +64,7 @@ const SortMenu: React.FC<ISortMenuProps> = ({ activeCategory }) => {
   };
 
   return (
-    <Box
-      sx={{
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        height: 'fit-content',
-      }}
-    >
+    <Box sx={sortMenuWrapperStyles}>
       <Tooltip title="Open sort menu">
         <IconButton
           aria-label="sort menu"
@@ -84,7 +77,7 @@ const SortMenu: React.FC<ISortMenuProps> = ({ activeCategory }) => {
 
       <Menu
         sx={{ mt: '45px' }}
-        id="menu-appbar"
+        id="sort-menu"
         anchorEl={anchorElMenu}
         anchorOrigin={{
           vertical: 'top',
@@ -99,11 +92,7 @@ const SortMenu: React.FC<ISortMenuProps> = ({ activeCategory }) => {
         onClose={handleCloseUserMenu}
       >
         {sortTypes.map(({ id, label, sort, sortType }) => (
-          <MenuItem
-            key={id}
-            onClick={() => handleSort(id)}
-            sx={{ display: 'flex', gap: 2, justifyContent: 'space-between' }}
-          >
+          <MenuItem key={id} onClick={() => handleSort(id)} sx={menuItemStyles}>
             <Typography
               color={
                 currentSort.sort === sort && currentSort.sortType === sortType

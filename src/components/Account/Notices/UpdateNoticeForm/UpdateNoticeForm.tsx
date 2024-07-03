@@ -165,9 +165,9 @@ const UpdateNoticeForm: React.FC<INoticeFormProps> = ({
         />
 
         <Box sx={getRadioGroupTestDriveStyles(isMobile)}>
-          <FieldLabel label="Choose sex" mb={0.5} />
+          <FieldLabel label="Choose gender" mb={0.5} />
           <CustomRadioGroup
-            name="sex"
+            name="gender"
             control={control}
             options={genderOptions}
           />

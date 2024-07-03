@@ -52,9 +52,8 @@ const Notices = () => {
     useCategories();
   const { data: species } = useSpecies();
   const { data: noticesData, isLoading: isNoticeLoading } = useNotices({
-    categoryId: categoriesData?.find(
-      category => category.slug === activeCategory,
-    )?.id,
+    category: categoriesData?.find(category => category.slug === activeCategory)
+      ?.id,
     page,
     limit: LIMIT_PER_PAGE,
     ...sort,
@@ -86,14 +85,13 @@ const Notices = () => {
   useEffect(() => {
     const search = retrieveSearchParams(searchParams);
     const { page, category } = search;
-
-    const { priceMax, priceMin, sex, sort, sortType, speciesIds } =
+    const { priceMax, priceMin, gender, sort, sortType, speciesIds } =
       getNoticeFilterValues(search, species);
 
     setPage(page);
     setActiveCategory(category as string);
     setFilter({
-      sex,
+      gender,
       species: speciesIds,
       priceMin,
       priceMax,

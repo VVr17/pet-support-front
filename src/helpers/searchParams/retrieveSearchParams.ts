@@ -3,6 +3,7 @@ import {
   filterQueryFields,
   FIRST_PAGE,
 } from '@/utils/constants/notices';
+import { PARAMS } from '@/utils/constants/params';
 
 /**
  * Retrieve search parameters from a URLSearchParams object and return an search query object.
@@ -14,12 +15,16 @@ export const retrieveSearchParams = (
   searchParams: URLSearchParams,
 ): SearchQuery => {
   const searchQuery: SearchQuery = {
-    page: +(searchParams?.get('page') || FIRST_PAGE),
-    category: searchParams.get('category') || '',
-    priceMin: +(searchParams?.get('priceMin') || defaultPriceRange.minPrice),
-    priceMax: +(searchParams?.get('priceMax') || defaultPriceRange.maxPrice),
-    sort: searchParams.get('sort') || 'createdAt',
-    sortType: (searchParams.get('sortType') || 'DESC') as SortType,
+    page: +(searchParams?.get(PARAMS.page) || FIRST_PAGE),
+    category: searchParams.get(PARAMS.category) || '',
+    priceMin: +(
+      searchParams?.get(PARAMS.priceMin) || defaultPriceRange.minPrice
+    ),
+    priceMax: +(
+      searchParams?.get(PARAMS.priceMax) || defaultPriceRange.maxPrice
+    ),
+    sort: searchParams.get(PARAMS.sort) || 'createdAt',
+    sortType: (searchParams.get(PARAMS.sortType) || 'DESC') as SortType,
   };
 
   filterQueryFields.forEach(key => {

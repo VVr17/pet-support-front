@@ -9,7 +9,7 @@ interface Notice {
   photoURL: string;
   name: string;
   breed: string;
-  sex: string;
+  gender: string;
   dateOfBirth: string;
   location: string;
   comments: string;

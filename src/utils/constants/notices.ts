@@ -1,11 +1,13 @@
+import { PARAMS } from './params';
+
 export const FIRST_PAGE = 1;
 export const DEFAULT_PER_PAGE = 10;
 export const LIMIT_PER_PAGE = 8;
 export const MAX_SHOWN_NOTICES = 8;
 
-export const numericQueryFields: QueryFieldName[] = ['priceMin', 'priceMax'];
-export const sortQueryFields: QueryFieldName[] = ['sort', 'sortType'];
-export const filterQueryFields: QueryFieldName[] = ['species', 'sex'];
+export const numericQueryFields = [PARAMS.priceMin, PARAMS.priceMax];
+export const sortQueryFields = [PARAMS.sort, PARAMS.sortType];
+export const filterQueryFields = [PARAMS.species, PARAMS.gender];
 
 export const defaultPriceRange = {
   minPrice: 0,
@@ -18,7 +20,7 @@ export const defaultSort: Sort = {
 };
 
 export const defaultFilter: NoticeFilter = {
-  sex: [],
+  gender: [],
   species: [],
   priceMin: null,
   priceMax: null,

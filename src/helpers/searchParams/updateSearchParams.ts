@@ -5,6 +5,7 @@ import {
   filterQueryFields,
   sortQueryFields,
 } from '@/utils/constants/notices';
+import { PARAMS } from '@/utils/constants/params';
 
 /**
  * Update search parameters based on the provided search type, data to update and page number.
@@ -31,9 +32,9 @@ export const updateSearchParams = ({
 
   // Update or remove the 'page' parameter based on the search type.
   if (searchType === 'pagination' && page) {
-    updateStringParam(currentSearchParams, 'page', page.toString()); // Update page
+    updateStringParam(currentSearchParams, PARAMS.page, page.toString()); // Update page
   } else {
-    currentSearchParams.delete('page'); // Drop the page param if filter params have been changed
+    currentSearchParams.delete(PARAMS.page); // Drop the page param if filter params have been changed
   }
 
   // Update sort params
@@ -60,12 +61,12 @@ export const updateSearchParams = ({
 
   // Update category
   if (searchType === 'category' && category) {
-    updateStringParam(currentSearchParams, 'category', category);
+    updateStringParam(currentSearchParams, PARAMS.category, category);
 
     // If category is not "Sell" remove price search params
     if (category !== 'sell') {
-      currentSearchParams.delete('priceMin');
-      currentSearchParams.delete('priceMax');
+      currentSearchParams.delete(PARAMS.priceMin);
+      currentSearchParams.delete(PARAMS.priceMax);
     }
   }
 
@@ -76,11 +77,19 @@ export const updateSearchParams = ({
     });
 
     if (dataToUpdate.priceMin !== defaultPriceRange.minPrice) {
-      updateStringParam(currentSearchParams, 'priceMin', dataToUpdate.priceMin);
+      updateStringParam(
+        currentSearchParams,
+        PARAMS.priceMin,
+        dataToUpdate.priceMin,
+      );
     }
 
     if (dataToUpdate.priceMax !== defaultPriceRange.maxPrice) {
-      updateStringParam(currentSearchParams, 'priceMax', dataToUpdate.priceMax);
+      updateStringParam(
+        currentSearchParams,
+        PARAMS.priceMax,
+        dataToUpdate.priceMax,
+      );
     }
   }
 

@@ -28,7 +28,7 @@ const LookingHome = () => {
   const { data: categoriesData, isLoading: categoriesLoading } =
     useCategories();
   const { data: noticesData, isLoading: noticesLoading } = useNotices({
-    categoryId: categoriesData?.find(
+    category: categoriesData?.find(
       category => category.slug === 'in-good-hands',
     )?.id,
     page: FIRST_PAGE,

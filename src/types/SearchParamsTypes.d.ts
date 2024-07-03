@@ -1,12 +1,14 @@
-type QueryFieldName =
+type ParamsType =
   | 'category'
   | 'species'
   | 'priceMin'
   | 'priceMax'
-  | 'sex'
+  | 'gender'
   | 'search'
   | 'sort'
-  | 'sortType';
+  | 'sortType'
+  | 'page'
+  | 'limit';
 
 interface Sort {
   sort: string;
@@ -14,7 +16,7 @@ interface Sort {
 }
 
 interface NoticeFilter {
-  sex: GenderType[];
+  gender: GenderType[];
   species: string[];
   priceMin: number | null;
   priceMax: number | null;
@@ -35,24 +37,24 @@ interface SearchParams {
 }
 
 interface NoticeRequestParams {
-  categoryId: string | null;
+  category: string | null;
   page: number;
   limit: number;
   sort: string;
   sortType: SortType;
-  sex?: GenderType[];
+  gender?: GenderType[];
   species?: string[];
   priceMin?: number | null;
   priceMax?: number | null;
 }
 
 interface UseNoticeRequestParams {
-  categoryId: string | undefined | null;
+  category: string | undefined | null;
   page?: number;
   limit?: number;
   sort: string;
   sortType: SortType;
-  sex?: GenderType[];
+  gender?: GenderType[];
   species?: string[];
   priceMin?: number | null;
   priceMax?: number | null;
