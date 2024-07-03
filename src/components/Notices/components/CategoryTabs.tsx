@@ -1,5 +1,5 @@
-import { Tab, Tabs } from "@mui/material";
-import { SyntheticEvent } from "react";
+import { Tab, Tabs } from '@mui/material';
+import { SyntheticEvent } from 'react';
 
 interface ICategoryTabsPRops {
   categories: Category[];
@@ -21,10 +21,9 @@ const CategoryTabs: React.FC<ICategoryTabsPRops> = ({
       scrollButtons="auto"
       aria-label="category tabs"
       variant="scrollable"
-      sx={{ mb: 4 }}
     >
-      {categories.map((category) => (
-        <Tab key={category.id} value={category.id} label={category.titleEn} />
+      {categories.map(category => (
+        <Tab key={category.id} value={category.slug} label={category.titleEn} />
       ))}
     </Tabs>
   );

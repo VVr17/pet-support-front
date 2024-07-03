@@ -1,13 +1,10 @@
 import { FormControlLabel, Radio, Typography, useTheme } from '@mui/material';
 
-import { CustomRadioProps } from '../types';
+type CustomRadioProps = SelectOption & {
+  checked: boolean;
+};
 
-const CustomRadio = ({
-  label,
-  value,
-  description,
-  checked,
-}: CustomRadioProps) => {
+const CustomRadio = ({ label, value, checked }: CustomRadioProps) => {
   const theme = useTheme();
   return (
     <FormControlLabel
@@ -18,14 +15,7 @@ const CustomRadio = ({
       }}
       value={value}
       control={<Radio sx={{ color: '#E4DED9' }} />}
-      label={
-        <>
-          <Typography component="span">{label}</Typography>
-          {description ? (
-            <Typography component="span">{description}</Typography>
-          ) : null}
-        </>
-      }
+      label={<Typography component="span">{label}</Typography>}
     />
   );
 };

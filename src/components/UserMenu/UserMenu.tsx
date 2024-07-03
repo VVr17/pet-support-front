@@ -50,48 +50,46 @@ const UserMenu = () => {
   };
 
   return (
-    <>
-      <Box
-        sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
-      >
-        <Tooltip title="Open user menu">
-          <IconButton
-            aria-label="user menu"
-            onClick={handleOpenUserMenu}
-            sx={{ p: 0 }}
-          >
-            <Avatar
-              alt="Avatar"
-              src={user?.photoURL ? user?.photoURL : fallbackAvatarUrl}
-            />
-          </IconButton>
-        </Tooltip>
-        <Menu
-          sx={{ mt: '45px' }}
-          id="menu-appbar"
-          anchorEl={anchorElUser}
-          anchorOrigin={{
-            vertical: 'top',
-            horizontal: 'right',
-          }}
-          keepMounted
-          transformOrigin={{
-            vertical: 'top',
-            horizontal: 'right',
-          }}
-          open={Boolean(anchorElUser)}
-          onClose={handleCloseUserMenu}
+    <Box
+      sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
+    >
+      <Tooltip title="Open user menu">
+        <IconButton
+          aria-label="user menu"
+          onClick={handleOpenUserMenu}
+          sx={{ p: 0 }}
         >
-          <MenuItem onClick={handleOpenAccount}>
-            <Typography textAlign="center">Account</Typography>
-          </MenuItem>
+          <Avatar
+            alt="Avatar"
+            src={user?.photoURL ? user?.photoURL : fallbackAvatarUrl}
+          />
+        </IconButton>
+      </Tooltip>
+      <Menu
+        sx={{ mt: '45px' }}
+        id="menu-appbar"
+        anchorEl={anchorElUser}
+        anchorOrigin={{
+          vertical: 'top',
+          horizontal: 'right',
+        }}
+        keepMounted
+        transformOrigin={{
+          vertical: 'top',
+          horizontal: 'right',
+        }}
+        open={Boolean(anchorElUser)}
+        onClose={handleCloseUserMenu}
+      >
+        <MenuItem onClick={handleOpenAccount}>
+          <Typography textAlign="center">Account</Typography>
+        </MenuItem>
 
-          <MenuItem onClick={signOut}>
-            <Typography textAlign="center">Sign Out</Typography>
-          </MenuItem>
-        </Menu>
-      </Box>
-    </>
+        <MenuItem onClick={signOut}>
+          <Typography textAlign="center">Sign Out</Typography>
+        </MenuItem>
+      </Menu>
+    </Box>
   );
 };
 

@@ -9,12 +9,11 @@ import dayjs from 'dayjs';
  * @returns The transformed notice data.
  */
 export const getTransformedData = (data: NoticeForm, imageUrl: string) => {
-  const { image, dateOfBirth, sex, price, ...rest } = data;
+  const { image, dateOfBirth, price, ...rest } = data;
 
   const transformedNoticeData: Partial<INoticeData> = {
     ...rest,
     photoURL: imageUrl,
-    sex: sex === 0 ? 'male' : 'female',
     dateOfBirth: dayjs(dateOfBirth).toISOString(),
     price: price ? price : null,
   };

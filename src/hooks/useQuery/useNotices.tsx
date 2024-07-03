@@ -12,19 +12,29 @@ import { DEFAULT_PER_PAGE, FIRST_PAGE } from '@/utils/constants/notices';
 import { QUERY_KEYS } from './queryKeys';
 
 export const useNotices = ({
-  categoryId,
+  category,
   page = FIRST_PAGE,
   limit = DEFAULT_PER_PAGE,
-}: {
-  categoryId: string | undefined | null;
-  page?: number;
-  limit?: number;
-}) => {
+  ...restParams
+}: UseNoticeRequestParams) => {
   return useQuery({
-    queryKey: [QUERY_KEYS.notices, categoryId, page],
+    queryKey: [
+      QUERY_KEYS.notices,
+      category,
+      page,
+      limit,
+      restParams.sort,
+      restParams.sortType,
+      restParams.gender,
+      restParams.species,
+      restParams.priceMin,
+      restParams.priceMax,
+    ],
     queryFn: () =>
-      categoryId ? fetchNotices(categoryId, page, limit) : undefined,
-    enabled: !!categoryId, // Enables only when category id provided
+      category
+        ? fetchNotices({ category, page, limit, ...restParams })
+        : undefined,
+    enabled: !!category, // Enables only when category id provided
   });
 };
 
