@@ -28,7 +28,7 @@ const FilterDrawer = ({
           right: 0,
           boxSizing: 'border-box',
           width: '100%',
-          maxWidth: 300,
+          maxWidth: 340,
           pt: 6,
           pb: 5,
           px: 2,

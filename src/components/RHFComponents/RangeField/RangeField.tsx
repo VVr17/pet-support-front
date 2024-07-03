@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Box,FormControl, Slider, TextField, Typography } from '@mui/material';
+import { Box, FormControl, Slider, TextField, Typography } from '@mui/material';
 import React from 'react';
 import { Control, Controller } from 'react-hook-form';
 

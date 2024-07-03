@@ -110,17 +110,19 @@ const DoubleRangeField: React.FC<IProp> = ({
             />
           </Box>
 
-          <Slider
-            {...field}
-            valueLabelDisplay="auto"
-            value={[
-              field.value[0] ? field.value[0] : 0,
-              field.value[1] ? field.value[1] : 0,
-            ]}
-            min={minRange}
-            max={maxRange}
-            sx={{ padding: '14px 0 !important' }}
-          />
+          <Box width="90%" mx="auto">
+            <Slider
+              {...field}
+              valueLabelDisplay="auto"
+              value={[
+                field.value[0] ? field.value[0] : 0,
+                field.value[1] ? field.value[1] : 0,
+              ]}
+              min={minRange}
+              max={maxRange}
+              sx={{ padding: '14px 0 !important' }}
+            />
+          </Box>
 
           <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 1 }}>
             <Typography variant="body1" color="text.secondary">
