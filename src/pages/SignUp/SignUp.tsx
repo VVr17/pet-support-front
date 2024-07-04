@@ -1,9 +1,10 @@
-import { Link as MUILink, Typography } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Link as MUILink, Typography } from '@mui/material';
+import { Link } from 'react-router-dom';
 
-import AuthForm from "@/components/Auth/AuthForm";
-import Section from "@/components/Section";
-import { ROUTES } from "@/utils/constants/routes";
+import AuthForm from '@/components/Auth/AuthForm';
+import GoogleLogin from '@/components/Auth/GoogleLogin';
+import Section from '@/components/Section';
+import { ROUTES } from '@/utils/constants/routes';
 
 const SignUp = () => {
   return (
@@ -16,13 +17,15 @@ const SignUp = () => {
       </Typography>
       <AuthForm />
 
+      <GoogleLogin />
+
       <Typography textAlign="center">
-        Already have an account?{" "}
+        Already have an account?{' '}
         <MUILink
           component={Link}
           to={ROUTES.login}
           underline="hover"
-          sx={{ color: "info.main" }}
+          sx={{ color: 'info.main' }}
         >
           Login
         </MUILink>

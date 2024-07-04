@@ -1,12 +1,12 @@
-import { Button, Typography } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Button, Typography } from '@mui/material';
+import { Link } from 'react-router-dom';
 
-import Section from "@/components/Section";
-import { ROUTES } from "@/utils/constants/routes";
+import Section from '@/components/Section';
+import { ROUTES } from '@/utils/constants/routes';
 
 const JoinUs = () => {
   return (
-    <Section textAlign="center">
+    <Section textAlign="center" bgcolor="background.secondary">
       <Typography variant="h2" mb={5}>
         Join Us
       </Typography>
@@ -27,7 +27,7 @@ const JoinUs = () => {
         component={Link}
         to={ROUTES.login}
         size="large"
-        sx={{ width: 300, maxWidth: "100%" }}
+        sx={{ width: 300, maxWidth: '100%' }}
       >
         Join Us
       </Button>
