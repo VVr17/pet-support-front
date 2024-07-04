@@ -1,6 +1,6 @@
 import { Grid, Typography } from '@mui/material';
 
-import { shelters } from '@/utils/staticData/partners';
+import { partners } from '@/utils/staticData/partners';
 
 import Section from '../Section';
 import PartnerCard from './PartnerCard';
@@ -11,8 +11,9 @@ const OurPartners = () => {
       <Typography variant="h2" textAlign="center" mb={5}>
         Our Partners
       </Typography>
+
       <Grid container spacing={3}>
-        {shelters.map((shelter, index) => (
+        {partners.map((shelter, index) => (
           <Grid item xs={12} sm={6} md={4} key={index}>
             <PartnerCard partner={shelter} />
           </Grid>

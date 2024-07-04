@@ -1,15 +1,8 @@
 export const cardStyles = {
-  height: '100%',
-  display: 'flex',
-  flexDirection: 'column',
-  justifyContent: 'space-between',
-  bgcolor: '#faf5f0',
-};
+  boxSizing: 'border-box',
+  bgcolor: '#f7f8fa',
 
-export const cardContentStyles = {
+  borderRadius: '20px',
+  padding: { xs: 2, md: 3, lg: 4 },
   height: '100%',
-  p: 3,
-  display: 'flex',
-  flexDirection: 'column',
-  justifyContent: 'space-between',
 };
