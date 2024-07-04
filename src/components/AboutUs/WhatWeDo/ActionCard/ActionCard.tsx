@@ -1,5 +1,5 @@
+import { CardMedia, Typography } from '@mui/material';
 import React from 'react';
-import { Typography, CardMedia } from '@mui/material';
 
 interface IProps {
   title: string;
@@ -7,7 +7,7 @@ interface IProps {
   iconUrl: string;
 }
 
-const AboutCard: React.FC<IProps> = ({ title, description, iconUrl }) => {
+const ActionCard: React.FC<IProps> = ({ title, description, iconUrl }) => {
   return (
     <>
       <CardMedia
@@ -36,4 +36,4 @@ const AboutCard: React.FC<IProps> = ({ title, description, iconUrl }) => {
   );
 };
 
-export default AboutCard;
+export default ActionCard;
