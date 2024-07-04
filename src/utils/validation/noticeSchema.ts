@@ -73,7 +73,7 @@ export const updateNoticeSchema = yup.object().shape({
     .mixed()
     .test('fileFormat', 'Unsupported file format. Add image file', value => {
       if (!value) {
-        return true; // Необов'язкове поле
+        return true; // not required field
       }
 
       const formValue = value as { type: string };

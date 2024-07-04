@@ -1,29 +1,48 @@
 import { LoadingButton } from '@mui/lab';
 import { AlertColor, Box, Button, Theme } from '@mui/material';
-import { useState } from 'react';
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
 import DatePickerField from '@/components/RHFComponents/DatePickerField';
 import Field from '@/components/RHFComponents/Field';
 import FileUploadField from '@/components/RHFComponents/FileUploadField';
 import TextArea from '@/components/RHFComponents/TextArea';
+import Loader from '@/components/ui-kit/Loader';
 import Toast from '@/components/ui-kit/Toast';
 import { uploadImage } from '@/helpers/uploadImage';
-import { useAddPet } from '@/hooks/useQuery/usePets';
+import {
+  useAddPet,
+  usePetDetails,
+  useUpdatePet,
+} from '@/hooks/useQuery/usePets';
+import { ToastType } from '@/types/Toast';
 
-import { formConfig } from './utils/formConfig';
+import { getFormConfig } from './utils/formConfig';
+import { getDefaultValuesByPet } from './utils/getDefaultValuesByPet';
 import { getTransformedData } from './utils/getTransformedData';
 
 interface IPetFormProps {
   onClose: () => void;
+  petId?: string;
+  setToast?: Dispatch<SetStateAction<ToastType | null>>;
 }
 
-const AddPetForm: React.FC<IPetFormProps> = ({ onClose }) => {
+const PetForm: React.FC<IPetFormProps> = ({ onClose, petId }) => {
+  const { data: pet, isLoading: petIsLoading } = usePetDetails(
+    petId ? petId : null,
+  );
+
   // Form control using React Hook Form
-  const methods = useForm<PetForm>(formConfig);
-  const { handleSubmit, control, reset } = methods;
+  const methods = useForm<PetForm>(getFormConfig(petId));
+  const {
+    handleSubmit,
+    control,
+    reset,
+    formState: { isDirty },
+  } = methods;
 
   const addPet = useAddPet();
+  const updatePet = useUpdatePet();
   const [isLoading, setIsLoading] = useState(false);
 
   const [toast, setToast] = useState<{
@@ -31,26 +50,57 @@ const AddPetForm: React.FC<IPetFormProps> = ({ onClose }) => {
     type: AlertColor;
   } | null>(null);
 
+  useEffect(() => {
+    if (pet) {
+      const petFormData = getDefaultValuesByPet(pet);
+      reset(petFormData);
+    }
+  }, [pet, reset]);
+
   // Handle submit form data
   const onSubmit: SubmitHandler<PetForm> = async data => {
     setIsLoading(true);
     try {
-      const imageUrl = await uploadImage(data.image);
+      let imageUrl = pet?.photoURL; // Initial image Url
+
+      if (data.image) {
+        imageUrl = await uploadImage(data.image);
+      }
 
       if (!imageUrl) {
         setIsLoading(false);
+        setToast({
+          message:
+            'Something went wrong during image upload. Please, try again later',
+          type: 'error',
+        });
         return;
       }
 
       const transformedData = getTransformedData(data, imageUrl);
-      await addPet.mutateAsync(transformedData);
 
-      // If response is successful, go to the final confirmation step after form submit
-      setToast({
-        message: 'Pet has been added successfully',
-        type: 'success',
-      });
-      reset();
+      // If there is pet, update its data, otherwise create new pet
+      if (pet?.id) {
+        await updatePet.mutateAsync({
+          petId: pet.id,
+          petData: transformedData,
+        });
+
+        setToast({
+          message: 'Pet has been updated successfully',
+          type: 'success',
+        });
+      } else {
+        await addPet.mutateAsync(transformedData);
+        setToast({
+          message: 'Pet has been added successfully',
+          type: 'success',
+        });
+      }
+
+      if (!pet?.id) {
+        reset();
+      }
       onClose();
     } catch (error) {
       setToast({
@@ -99,7 +149,7 @@ const AddPetForm: React.FC<IPetFormProps> = ({ onClose }) => {
           control={control}
         />
 
-        <FileUploadField methods={methods} />
+        <FileUploadField methods={methods} fallback={pet?.photoURL} />
 
         <TextArea
           name="comments"
@@ -123,7 +173,10 @@ const AddPetForm: React.FC<IPetFormProps> = ({ onClose }) => {
               color: 'text.primary',
               borderColor: (theme: Theme) => theme.palette.grey[200],
             }}
-            onClick={onClose}
+            onClick={() => {
+              onClose();
+              reset();
+            }}
           >
             Cancel
           </Button>
@@ -136,6 +189,7 @@ const AddPetForm: React.FC<IPetFormProps> = ({ onClose }) => {
             loadingPosition="start"
             startIcon={<></>}
             fullWidth
+            disabled={!isDirty}
           >
             Submit
           </LoadingButton>
@@ -150,8 +204,10 @@ const AddPetForm: React.FC<IPetFormProps> = ({ onClose }) => {
           severity={toast.type}
         />
       )}
+
+      <Loader open={petIsLoading} />
     </>
   );
 };
 
-export default AddPetForm;
+export default PetForm;

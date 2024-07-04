@@ -4,7 +4,6 @@ interface Pet {
   photoURL: string;
   name: string;
   breed: string;
-  gender: string;
   dateOfBirth: string;
   comments: string;
   Owner: Owner;

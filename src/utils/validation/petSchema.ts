@@ -2,7 +2,7 @@ import * as yup from 'yup';
 
 import { onlyLettersRegEx } from './RegEx';
 
-export const petSchema = yup.object().shape({
+const baseSchema = {
   name: yup
     .string()
     .matches(onlyLettersRegEx, 'Only letters can be accepted')
@@ -16,6 +16,16 @@ export const petSchema = yup.object().shape({
     .max(24, 'Breed should be up to 24 characters long')
     .required('Pet breed is required'),
   dateOfBirth: yup.date().required('Date of birth is required'),
+
+  comments: yup
+    .string()
+    .min(8, 'Comments should be at least 8 characters long')
+    .max(200, 'Comments should be up to 200 characters long')
+    .required('Comments are required'),
+};
+
+export const createPetSchema = yup.object().shape({
+  ...baseSchema,
   image: yup
     .mixed()
     .test('fileFormat', 'Unsupported file format. Add image file', value => {
@@ -28,9 +38,19 @@ export const petSchema = yup.object().shape({
       return supportedFormats.includes(formValue.type);
     })
     .required('Pet image is required'),
-  comments: yup
-    .string()
-    .min(8, 'Comments should be at least 8 characters long')
-    .max(200, 'Comments should be up to 200 characters long')
-    .required('Comments are required'),
+});
+
+export const updatePetSchema = yup.object().shape({
+  ...baseSchema,
+  image: yup
+    .mixed()
+    .test('fileFormat', 'Unsupported file format. Add image file', value => {
+      if (!value) {
+        return true; // not required field
+      }
+
+      const formValue = value as { type: string };
+      const supportedFormats = ['image/jpeg', 'image/jpg', 'image/png'];
+      return supportedFormats.includes(formValue.type);
+    }),
 });

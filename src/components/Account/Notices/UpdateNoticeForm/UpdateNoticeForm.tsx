@@ -246,7 +246,7 @@ const UpdateNoticeForm: React.FC<INoticeFormProps> = ({
             fullWidth
             disabled={!isDirty}
           >
-            Submit
+            Update changes
           </LoadingButton>
         </Box>
       </Box>

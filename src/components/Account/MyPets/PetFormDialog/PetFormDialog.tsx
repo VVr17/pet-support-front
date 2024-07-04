@@ -1,41 +1,27 @@
-import CloseIcon from '@mui/icons-material/Close';
-import {
-  Dialog,
-  DialogContent,
-  DialogProps,
-  DialogTitle,
-  IconButton,
-} from '@mui/material';
+import { DialogProps } from '@mui/material';
+import { Dispatch, SetStateAction } from 'react';
 
-import AddPetForm from '../AddPetForm';
-import { dialogStyles, iconButtonStyles } from './styles';
+import FullScreenDialog from '@/components/ui-kit/FullScreenDialog/FullScreenDialog';
+import { ToastType } from '@/types/Toast';
+
+import PetForm from '../PetForm';
 
 interface IPetFormDialogProps extends DialogProps {
   onClose: () => void;
+  petId?: string;
+  setToast?: Dispatch<SetStateAction<ToastType | null>>;
 }
 
 const PetFormDialog: React.FC<IPetFormDialogProps> = ({
   onClose,
+  petId,
+  setToast,
   ...other
 }) => {
   return (
-    <Dialog
-      aria-labelledby="pet form dialog"
-      fullScreen={true}
-      onClose={onClose}
-      {...other}
-      sx={dialogStyles}
-    >
-      <DialogTitle sx={{ m: 0, p: 2 }} textAlign="center">
-        Add your pet
-      </DialogTitle>
-      <IconButton aria-label="close" onClick={onClose} sx={iconButtonStyles}>
-        <CloseIcon />
-      </IconButton>
-      <DialogContent dividers>
-        <AddPetForm onClose={onClose} />
-      </DialogContent>
-    </Dialog>
+    <FullScreenDialog onClose={onClose} title="Add your pet" {...other}>
+      <PetForm onClose={onClose} petId={petId} setToast={setToast} />
+    </FullScreenDialog>
   );
 };
 

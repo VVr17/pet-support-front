@@ -19,7 +19,7 @@ const WhatWeDo = () => {
 
       <Grid container spacing={{ xs: 3, lg: 7.5 }}>
         {whatWeDoData.map(({ title, description, iconUrl }, index) => (
-          <Grid item xs={12} md={4} key={index}>
+          <Grid item xs={12} sm={6} md={4} key={index}>
             <ActionCard
               title={title}
               description={description}
